@@ -1,3 +1,12 @@
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -16,6 +25,11 @@ module.exports = async (req, res) => {
       error: "Missing RESEND_API_KEY environment variable.",
     });
   }
+
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeProject = escapeHtml(project || "Not provided");
+  const safeDetails = escapeHtml(details).replace(/\n/g, "<br>");
 
   try {
     const response = await fetch("https://api.resend.com/emails", {
@@ -37,6 +51,33 @@ module.exports = async (req, res) => {
           "Project details:",
           details,
         ].join("\n"),
+        html: `
+          <div style="font-family: Arial, sans-serif; background:#f4f8fb; padding:24px;">
+            <div style="max-width:640px; margin:0 auto; background:white; border-radius:16px; padding:24px; border:1px solid #dbe7f0;">
+              <h1 style="margin:0 0 16px; color:#12324a;">New Website Consult Request</h1>
+              <p style="margin:0 0 12px; color:#4b6980;">A new lead came in from your website.</p>
+
+              <table style="width:100%; border-collapse:collapse; margin-top:20px;">
+                <tr>
+                  <td style="padding:10px; font-weight:bold; color:#12324a;">Name</td>
+                  <td style="padding:10px; color:#4b6980;">${safeName}</td>
+                </tr>
+                <tr>
+                  <td style="padding:10px; font-weight:bold; color:#12324a;">Email</td>
+                  <td style="padding:10px; color:#4b6980;">${safeEmail}</td>
+                </tr>
+                <tr>
+                  <td style="padding:10px; font-weight:bold; color:#12324a;">Project</td>
+                  <td style="padding:10px; color:#4b6980;">${safeProject}</td>
+                </tr>
+                <tr>
+                  <td style="padding:10px; font-weight:bold; color:#12324a; vertical-align:top;">Details</td>
+                  <td style="padding:10px; color:#4b6980;">${safeDetails}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        `,
       }),
     });
 
