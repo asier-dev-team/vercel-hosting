@@ -3,102 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Builder Service</title>
+  <title>Asier Innovation | Website Design and Launch Support</title>
   <style>
     :root {
-      --bg-top: #7fcff4;
-      --bg-bottom: #e9f8ff;
-      --ink: #12324a;
-      --muted: #4b6980;
-      --panel: rgba(255, 255, 255, 0.88);
-      --line: rgba(18, 50, 74, 0.12);
-      --brand-deep: #0f4c81;
-      --brand-mid: #247bb4;
-      --brand-soft: #dff4ff;
+      --bg-top: #f6f8fb;
+      --bg-bottom: #e8edf5;
+      --bg-grid: rgba(15, 23, 42, 0.05);
+      --ink: #0f172a;
+      --muted: #5c6678;
+      --panel: rgba(255, 255, 255, 0.72);
+      --panel-strong: rgba(255, 255, 255, 0.88);
+      --line: rgba(15, 23, 42, 0.08);
+      --brand-deep: #0b1220;
+      --brand-mid: #1f5fff;
+      --brand-soft: rgba(31, 95, 255, 0.1);
+      --glow: rgba(115, 198, 255, 0.32);
+      --shadow-xl: 0 30px 80px rgba(15, 23, 42, 0.12);
+      --shadow-lg: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --header-offset: 6rem;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--header-offset);
+    }
+
     body {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.65), transparent 28%),
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 24%),
+        radial-gradient(circle at 85% 12%, var(--glow), transparent 24%),
         linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
       color: var(--ink);
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      width: 22rem;
+      height: 22rem;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.55;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      top: 4rem;
+      right: -6rem;
+      background: rgba(151, 215, 255, 0.55);
+    }
+
+    body::after {
+      bottom: 8rem;
+      left: -8rem;
+      background: rgba(173, 184, 255, 0.28);
     }
 
     .banner {
-      background: linear-gradient(90deg, var(--brand-deep) 0%, var(--brand-mid) 100%);
-      color: #f7fbff;
-      text-align: center;
-      padding: 1rem;
-      font-size: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      width: min(1120px, calc(100% - 2rem));
+      margin: 1rem auto 0;
+      padding: 0.9rem 1.25rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(18px);
+      color: var(--brand-deep);
+      font-size: 0.82rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      box-shadow: 0 6px 22px rgba(15, 76, 129, 0.2);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+      text-align: center;
     }
 
     .page-shell {
       width: min(1120px, calc(100% - 2rem));
       margin: 0 auto;
-      padding: 2rem 0 3rem;
+      padding: 1.25rem 0 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-shell::before {
+      content: "";
+      position: absolute;
+      inset: 1.5rem 0 auto;
+      height: 28rem;
+      border-radius: 40px;
+      background:
+        linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.6;
+      pointer-events: none;
     }
 
     main {
-      padding: 2.2rem;
+      padding: 2rem;
       background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: 0 24px 60px rgba(18, 50, 74, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      border-radius: 38px;
+      box-shadow: var(--shadow-xl);
+      backdrop-filter: blur(24px);
     }
 
     h1 {
       margin-top: 0;
-      margin-bottom: 1rem;
-      font-size: clamp(2.3rem, 5vw, 4.5rem);
-      line-height: 0.98;
-      letter-spacing: -0.04em;
+      margin-bottom: 1.1rem;
+      font-size: clamp(2.6rem, 5vw, 5.1rem);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      max-width: 11ch;
     }
 
     p {
-      font-size: 1.02rem;
-      line-height: 1.6;
+      font-size: 1rem;
+      line-height: 1.7;
       color: var(--muted);
     }
 
     .hero {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
-      gap: 2rem;
+      gap: 1.5rem;
       align-items: center;
-      margin-bottom: 2.75rem;
+      margin-bottom: 3rem;
+      padding: 1rem;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.35) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.62);
     }
 
     .hero-copy {
       text-align: left;
+      padding: 1.1rem;
     }
 
     .eyebrow {
       display: inline-block;
       margin-bottom: 1rem;
-      padding: 0.45rem 0.75rem;
+      padding: 0.45rem 0.8rem;
       border-radius: 999px;
-      background: var(--brand-soft);
-      color: var(--brand-deep);
-      font-family: "Trebuchet MS", Arial, sans-serif;
-      font-size: 0.82rem;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--brand-mid);
+      font-size: 0.76rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      border: 1px solid rgba(31, 95, 255, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
     .hero-copy p {
-      max-width: 560px;
+      max-width: 590px;
       margin: 0 0 1rem;
     }
 
@@ -114,22 +190,23 @@
       display: inline-block;
       padding: 0.95rem 1.45rem;
       border-radius: 999px;
-      font-family: "Trebuchet MS", Arial, sans-serif;
       font-weight: 700;
       text-decoration: none;
-      transition: transform 180ms ease, box-shadow 180ms ease;
+      letter-spacing: -0.01em;
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
     }
 
     .cta {
-      background: var(--brand-deep);
+      background: linear-gradient(180deg, #141d31 0%, #0b1220 100%);
       color: #f7fbff;
-      box-shadow: 0 10px 22px rgba(15, 76, 129, 0.22);
+      box-shadow: 0 14px 28px rgba(11, 18, 32, 0.18);
     }
 
     .secondary {
-      border: 1px solid var(--line);
+      border: 1px solid rgba(15, 23, 42, 0.1);
       background: rgba(255, 255, 255, 0.7);
       color: var(--ink);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
     }
 
     .cta:hover,
@@ -137,19 +214,25 @@
       transform: translateY(-2px);
     }
 
+    .cta:hover {
+      box-shadow: 0 16px 34px rgba(11, 18, 32, 0.24);
+    }
+
     .hero-panel {
-      padding: 1.5rem;
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(15, 76, 129, 0.96) 0%, rgba(36, 123, 180, 0.92) 100%);
+      padding: 1.4rem;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(12, 18, 32, 0.92) 0%, rgba(20, 31, 56, 0.88) 100%);
       color: #f7fbff;
-      box-shadow: 0 22px 36px rgba(18, 50, 74, 0.18);
+      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .hero-panel h2 {
       margin-top: 0;
       margin-bottom: 1rem;
       font-size: 1.35rem;
-      font-family: "Trebuchet MS", Arial, sans-serif;
+      letter-spacing: -0.03em;
     }
 
     .hero-panel p {
@@ -161,41 +244,46 @@
       display: flex;
       justify-content: space-between;
       gap: 1rem;
-      padding: 0.8rem 0;
+      padding: 0.95rem 0;
       border-top: 1px solid rgba(255, 255, 255, 0.18);
-      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: 0.96rem;
+    }
+
+    .stat strong {
+      text-align: right;
     }
 
     .section-title {
       margin: 0 0 0.5rem;
-      font-size: 1.7rem;
-      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: -0.04em;
     }
 
     .section-lead {
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 0 1.5rem;
     }
 
     .services {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.1rem;
+      gap: 1rem;
       margin: 1.25rem 0 2.25rem;
     }
 
     .card {
-      padding: 1.4rem;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid var(--line);
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      background: var(--panel-strong);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: var(--shadow-lg);
     }
 
     .card h2 {
       margin-top: 0;
       font-size: 1.2rem;
-      font-family: "Trebuchet MS", Arial, sans-serif;
       color: var(--ink);
+      letter-spacing: -0.03em;
     }
 
     .process {
@@ -205,25 +293,76 @@
     }
 
     .section-block {
-      margin-top: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.1rem;
+      margin-top: 1.25rem;
+    }
+
+    .package {
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 247, 252, 0.82) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .package-tag {
+      display: inline-block;
+      margin-bottom: 0.9rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(31, 95, 255, 0.08);
+      color: var(--brand-mid);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .package h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .package-price {
+      margin: 0 0 0.9rem;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--brand-mid);
+    }
+
+    .package-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+
+    .package-list li + li {
+      margin-top: 0.45rem;
     }
 
     .step {
       padding: 1.25rem;
-      border-radius: 20px;
-      background: rgba(223, 244, 255, 0.72);
-      border: 1px solid rgba(36, 123, 180, 0.14);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow-lg);
     }
 
     .step-number {
       display: inline-block;
       margin-bottom: 0.85rem;
-      font-family: "Trebuchet MS", Arial, sans-serif;
       font-size: 0.85rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--brand-deep);
+      color: var(--brand-mid);
     }
 
     .consult {
@@ -233,9 +372,10 @@
       align-items: start;
       margin-top: 2.5rem;
       padding: 1.5rem;
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(223, 244, 255, 0.78) 100%);
-      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(242, 246, 252, 0.78) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-lg);
     }
 
     .consult-copy {
@@ -252,15 +392,15 @@
       display: grid;
       gap: 0.9rem;
       padding: 1.25rem;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.86);
-      border: 1px solid rgba(18, 50, 74, 0.1);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
     }
 
     .consult-form label {
       display: grid;
       gap: 0.4rem;
-      font-family: "Trebuchet MS", Arial, sans-serif;
       font-size: 0.92rem;
       font-weight: 700;
       color: var(--ink);
@@ -270,10 +410,19 @@
     .consult-form textarea {
       width: 100%;
       padding: 0.85rem 0.95rem;
-      border: 1px solid rgba(18, 50, 74, 0.16);
-      border-radius: 14px;
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      border-radius: 16px;
       font: inherit;
       color: var(--ink);
+      background: rgba(248, 250, 252, 0.9);
+      transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+    }
+
+    .consult-form input:focus,
+    .consult-form textarea:focus {
+      outline: none;
+      border-color: rgba(31, 95, 255, 0.35);
+      box-shadow: 0 0 0 4px rgba(31, 95, 255, 0.1);
       background: #fff;
     }
 
@@ -290,7 +439,6 @@
     .form-status {
       min-height: 1.4rem;
       margin: 0;
-      font-family: "Trebuchet MS", Arial, sans-serif;
       font-size: 0.94rem;
       font-weight: 700;
     }
@@ -303,45 +451,151 @@
       color: #14643e;
     }
 
-    .footer-note {
+    .site-footer {
       margin-top: 2.5rem;
-      text-align: center;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--brand-deep);
-      font-family: "Trebuchet MS", Arial, sans-serif;
+      padding: 1.5rem;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(11, 18, 32, 0.94) 0%, rgba(17, 27, 48, 0.92) 100%);
+      color: #f7fbff;
+      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    @media (max-width: 860px) {
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 1rem;
+    }
+
+    .footer-card h2,
+    .footer-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      color: #f7fbff;
+      letter-spacing: -0.03em;
+    }
+
+    .footer-card p,
+    .footer-card li {
+      color: rgba(247, 251, 255, 0.86);
+    }
+
+    .footer-card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    .footer-link {
+      color: #f7fbff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer-meta {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.92rem;
+      color: rgba(247, 251, 255, 0.82);
+    }
+
+    @media (max-width: 1080px) {
+      :root {
+        --header-offset: 5.5rem;
+      }
+
+      .page-shell::before {
+        height: 20rem;
+      }
+
       .hero {
         grid-template-columns: 1fr;
       }
 
+      .hero-copy,
+      .hero-panel {
+        max-width: none;
+      }
+
       .services,
+      .packages,
+      .process {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      :root {
+        --header-offset: 5rem;
+      }
+
+      .hero {
+        padding: 0.75rem;
+      }
+
+      .services,
+      .packages,
       .process,
-      .consult {
+      .consult,
+      .footer-grid {
         grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding: 0.75rem;
+      }
+
+      .section-block {
+        margin-top: 2.4rem;
+      }
+
+      .site-footer,
+      .consult,
+      .card,
+      .package,
+      .step {
+        border-radius: 22px;
       }
     }
 
     @media (max-width: 640px) {
+      :root {
+        --header-offset: 0;
+      }
+
+      body::before,
+      body::after,
+      .page-shell::before {
+        display: none;
+      }
+
       .page-shell {
         width: min(100% - 1rem, 1120px);
         padding: 1rem 0 2rem;
       }
 
       .banner {
-        font-size: 0.8rem;
-        padding: 0.85rem 0.75rem;
+        position: static;
+        width: min(100% - 1rem, 1120px);
+        font-size: 0.72rem;
+        padding: 0.8rem 0.9rem;
+        letter-spacing: 0.1em;
+        line-height: 1.4;
       }
 
       main {
-        padding: 1.4rem;
-        border-radius: 22px;
+        padding: 1.2rem;
+        border-radius: 24px;
       }
 
       h1 {
-        font-size: 2.25rem;
+        font-size: 2.45rem;
+        max-width: none;
+        line-height: 0.95;
       }
 
       p {
@@ -358,8 +612,23 @@
         text-align: center;
       }
 
+      .eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+      }
+
       .hero-panel {
         padding: 1.2rem;
+      }
+
+      .stat {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .stat strong {
+        text-align: left;
       }
 
       .consult {
@@ -369,11 +638,46 @@
       .consult-form {
         padding: 1rem;
       }
+
+      .consult-form input,
+      .consult-form textarea {
+        font-size: 16px;
+      }
+
+      .site-footer {
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .banner {
+        font-size: 0.68rem;
+      }
+
+      h1 {
+        font-size: 2.1rem;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+      }
+
+      .hero,
+      .consult,
+      .site-footer {
+        padding: 0.9rem;
+      }
+
+      .hero-copy,
+      .consult-copy,
+      .consult-form {
+        padding: 0.85rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="banner">The home on innovation</div>
+  <div class="banner">Asier Innovation • Digital Launch Studio</div>
   <div class="page-shell">
     <main>
       <section class="hero">
@@ -424,6 +728,43 @@
         </div>
       </section>
 
+      <section class="section-block" id="pricing-and-inclusions">
+        <h2 class="section-title">What is included and how projects are scoped</h2>
+        <p class="section-lead">The exact price depends on what your business needs, but every project is structured around clear deliverables, practical launch support, and a scope that matches your stage of growth.</p>
+        <div class="packages">
+          <article class="package">
+            <span class="package-tag">Launch Scope</span>
+            <h3>Starter site package</h3>
+            <p class="package-price">Entry-level investment, scoped after a consult.</p>
+            <ul class="package-list">
+              <li>Core homepage and service-focused page structure</li>
+              <li>Clean copy direction and polished visual styling</li>
+              <li>Mobile-friendly layout and launch-ready setup</li>
+            </ul>
+          </article>
+          <article class="package">
+            <span class="package-tag">Business Growth</span>
+            <h3>Expanded business website</h3>
+            <p class="package-price">Custom quote based on content, pages, and features.</p>
+            <ul class="package-list">
+              <li>Multi-page structure for services, about, and contact flow</li>
+              <li>Stronger conversion sections and clearer visitor pathways</li>
+              <li>Flexible foundation for future tools and integrations</li>
+            </ul>
+          </article>
+          <article class="package">
+            <span class="package-tag">Tailored Build</span>
+            <h3>Custom design direction</h3>
+            <p class="package-price">Priced by scope for businesses with specific needs.</p>
+            <ul class="package-list">
+              <li>Brand-led layout decisions and more tailored presentation</li>
+              <li>Planning for booking flows, lead capture, or automation</li>
+              <li>Launch support with room for phased expansion afterward</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
       <section class="section-block">
         <h2 class="section-title">Simple process, strong result</h2>
         <div class="process">
@@ -454,7 +795,6 @@
             <li>Business type and website goals</li>
             <li>Project notes before the consult</li>
           </ul>
-          <p>Right now this is a front-end form only. To make it send submissions somewhere, you would connect it to a service like Formspree, Tally, Netlify Forms, or a custom backend/API route.</p>
         </div>
         <form class="consult-form" id="consultForm">
           <label>
@@ -478,7 +818,29 @@
         </form>
       </section>
 
-      <p class="footer-note">An Asier Innovation offering</p>
+      <footer class="site-footer">
+        <div class="footer-grid">
+          <section class="footer-card">
+            <h2>Asier Innovation</h2>
+            <p>Website design and launch support for businesses that need a stronger, more credible online presence without unnecessary complexity.</p>
+          </section>
+          <section class="footer-card">
+            <h3>Contact</h3>
+            <p><a class="footer-link" href="mailto:your@email.com">your@email.com</a></p>
+            <p>Phone number available on request</p>
+            <p>Consult replies typically sent within a business day.</p>
+          </section>
+          <section class="footer-card">
+            <h3>What clients can expect</h3>
+            <ul>
+              <li>Clear scope before work begins</li>
+              <li>Professional communication throughout the project</li>
+              <li>Launch support and next-step guidance</li>
+            </ul>
+          </section>
+        </div>
+        <p class="footer-meta">An Asier Innovation offering. Project scope, timeline, and pricing are confirmed after the initial consult.</p>
+      </footer>
     </main>
   </div>
   <script>
