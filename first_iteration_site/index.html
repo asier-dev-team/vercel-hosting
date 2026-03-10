@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>First Hosted Site</title>
+  <title>Website Builder Service</title>
   <style>
     :root {
       --bg-top: #7fcff4;
@@ -204,6 +204,10 @@
       gap: 1rem;
     }
 
+    .section-block {
+      margin-top: 2.5rem;
+    }
+
     .step {
       padding: 1.25rem;
       border-radius: 20px;
@@ -222,6 +226,83 @@
       color: var(--brand-deep);
     }
 
+    .consult {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 1.25rem;
+      align-items: start;
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(223, 244, 255, 0.78) 100%);
+      border: 1px solid var(--line);
+    }
+
+    .consult-copy {
+      padding-right: 0.5rem;
+    }
+
+    .consult-copy ul {
+      margin: 1rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+
+    .consult-form {
+      display: grid;
+      gap: 0.9rem;
+      padding: 1.25rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(18, 50, 74, 0.1);
+    }
+
+    .consult-form label {
+      display: grid;
+      gap: 0.4rem;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .consult-form input,
+    .consult-form textarea {
+      width: 100%;
+      padding: 0.85rem 0.95rem;
+      border: 1px solid rgba(18, 50, 74, 0.16);
+      border-radius: 14px;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .consult-form textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .consult-form button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .form-status {
+      min-height: 1.4rem;
+      margin: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .form-status.is-error {
+      color: #a12626;
+    }
+
+    .form-status.is-success {
+      color: #14643e;
+    }
+
     .footer-note {
       margin-top: 2.5rem;
       text-align: center;
@@ -237,7 +318,8 @@
       }
 
       .services,
-      .process {
+      .process,
+      .consult {
         grid-template-columns: 1fr;
       }
     }
@@ -279,6 +361,14 @@
       .hero-panel {
         padding: 1.2rem;
       }
+
+      .consult {
+        padding: 1.1rem;
+      }
+
+      .consult-form {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
@@ -291,10 +381,10 @@
           <span class="eyebrow">Website Design and Launch Support</span>
           <h1>Professional websites for businesses that want to look established from day one.</h1>
           <p>We create polished, trustworthy websites for founders, service businesses, and local brands that need a stronger online presence without a drawn-out build process.</p>
-          <p>Clear structure, modern design, and room to grow so your website works as a real business asset, not just a placeholder.</p>
+          <p>Clear structure, modern design, and room to grow so your website works as a real business asset that helps people trust you faster.</p>
           <div class="hero-actions">
-            <a class="cta" href="#">Book a website consult</a>
-            <a class="secondary" href="#">View service options</a>
+            <a class="cta" href="#consult-form">Book a website consult</a>
+            <a class="secondary" href="#service-options">View service options</a>
           </div>
         </div>
         <aside class="hero-panel">
@@ -315,9 +405,9 @@
         </aside>
       </section>
 
-      <section>
+      <section id="service-options" class="section-block">
         <h2 class="section-title">Services designed for launch and credibility</h2>
-        <p class="section-lead">Whether you need a first website or a cleaner upgrade, the goal is the same: help your business look trustworthy, easy to understand, and ready for customers.</p>
+        <p class="section-lead">Whether you need a first website or a cleaner upgrade, the goal is the same: help your business look trustworthy, easy to understand, and ready to turn visitors into customers.</p>
         <div class="services">
           <article class="card">
             <h2>Starter Business Sites</h2>
@@ -334,7 +424,7 @@
         </div>
       </section>
 
-      <section>
+      <section class="section-block">
         <h2 class="section-title">Simple process, strong result</h2>
         <div class="process">
           <article class="step">
@@ -355,8 +445,87 @@
         </div>
       </section>
 
+      <section class="consult" id="consult-form">
+        <div class="consult-copy">
+          <h2 class="section-title">Book a website consult</h2>
+          <p class="section-lead">This form is the next step if you want to turn interest into real client conversations. It can collect the key details you need before a call.</p>
+          <ul>
+            <li>Name and contact details</li>
+            <li>Business type and website goals</li>
+            <li>Project notes before the consult</li>
+          </ul>
+          <p>Right now this is a front-end form only. To make it send submissions somewhere, you would connect it to a service like Formspree, Tally, Netlify Forms, or a custom backend/API route.</p>
+        </div>
+        <form class="consult-form" id="consultForm">
+          <label>
+            Full name
+            <input type="text" name="name" placeholder="Your name" required />
+          </label>
+          <label>
+            Email address
+            <input type="email" name="email" placeholder="name@example.com" required />
+          </label>
+          <label>
+            What do you need?
+            <input type="text" name="project" placeholder="New site, redesign, landing page, etc." />
+          </label>
+          <label>
+            Project details
+            <textarea name="details" placeholder="Tell us a bit about your business and what you want your website to do." required></textarea>
+          </label>
+          <button class="cta" type="submit">Request consult</button>
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+        </form>
+      </section>
+
       <p class="footer-note">An Asier Innovation offering</p>
     </main>
   </div>
+  <script>
+    const consultForm = document.getElementById("consultForm");
+    const formStatus = document.getElementById("formStatus");
+
+    consultForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const submitButton = consultForm.querySelector("button[type='submit']");
+      const formData = new FormData(consultForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      formStatus.textContent = "Sending your request...";
+      formStatus.className = "form-status";
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+
+      try {
+        const response = await fetch("/api/send-consult", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const contentType = response.headers.get("content-type") || "";
+        const data = contentType.includes("application/json")
+          ? await response.json()
+          : { error: "Consult form endpoint is not available in this environment yet." };
+
+        if (!response.ok) {
+          throw new Error(data.error || "We could not send your request.");
+        }
+
+        consultForm.reset();
+        formStatus.textContent = "Consult request sent successfully.";
+        formStatus.className = "form-status is-success";
+      } catch (error) {
+        formStatus.textContent = error.message || "Something went wrong. Please try again.";
+        formStatus.className = "form-status is-error";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Request consult";
+      }
+    });
+  </script>
 </body>
 </html>
