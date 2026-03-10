@@ -6,17 +6,48 @@
   <title>First Hosted Site</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Trebuchet MS", Arial, sans-serif;
       margin: 0;
-      display: grid;
-      place-items: center;
       min-height: 100vh;
-      background: #f5f7fb;
-      color: #1f2937;
+      background: linear-gradient(180deg, #87ceeb 0%, #bfe8ff 100%);
+      color: #12324a;
+    }
+
+    .banner {
+      background: linear-gradient(90deg, #0f4c81 0%, #1f7ab8 100%);
+      color: #f7fbff;
+      text-align: center;
+      padding: 1.25rem 1rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 18px rgba(15, 76, 129, 0.22);
+    }
+
+    main {
+      max-width: 720px;
+      margin: 4rem auto;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(18, 50, 74, 0.18);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2.4rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
+  <div class="banner">The home on innovation</div>
   <main>
     <h1>This is my first hosted site</h1>
     <p>Simple update from a new branch.</p>
