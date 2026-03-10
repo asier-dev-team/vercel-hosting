@@ -1,21 +1,3 @@
-const fs = require("fs");
-const path = require("path");
-
-function readApiKey() {
-  if (process.env.RESEND_API_KEY) {
-    return process.env.RESEND_API_KEY;
-  }
-
-  try {
-    const configPath = path.join(process.cwd(), "config.yaml");
-    const file = fs.readFileSync(configPath, "utf8");
-    const match = file.match(/api_key:\s*["']?([^"'\n]+)["']?/);
-    return match ? match[1].trim() : "";
-  } catch {
-    return "";
-  }
-}
-
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -28,9 +10,11 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Name, email, and project details are required." });
   }
 
-  const apiKey = readApiKey();
+  const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: "Missing Resend API key." });
+    return res.status(500).json({
+      error: "Missing RESEND_API_KEY environment variable.",
+    });
   }
 
   try {
