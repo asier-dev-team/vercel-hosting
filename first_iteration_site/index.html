@@ -3,891 +3,1026 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asier Innovation | Website Design and Launch Support</title>
+  <title>Asier Innovation — Professional Website Design &amp; Launch</title>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg-top: #f6f8fb;
-      --bg-bottom: #e8edf5;
-      --bg-grid: rgba(15, 23, 42, 0.05);
-      --ink: #0f172a;
-      --muted: #5c6678;
-      --panel: rgba(255, 255, 255, 0.72);
-      --panel-strong: rgba(255, 255, 255, 0.88);
-      --line: rgba(15, 23, 42, 0.08);
-      --brand-deep: #0b1220;
-      --brand-mid: #1f5fff;
-      --brand-soft: rgba(31, 95, 255, 0.1);
-      --glow: rgba(115, 198, 255, 0.32);
-      --shadow-xl: 0 30px 80px rgba(15, 23, 42, 0.12);
-      --shadow-lg: 0 18px 40px rgba(15, 23, 42, 0.08);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --header-offset: 6rem;
+      --text:       #1d1d1f;
+      --text-2:     #6e6e73;
+      --text-3:     #aeaeb2;
+      --bg:         #ffffff;
+      --bg-2:       #f5f5f7;
+      --accent:     #0071e3;
+      --accent-dk:  #0062c4;
+      --ink:        #000000;
+      --border:     rgba(0,0,0,0.08);
+      --border-med: rgba(0,0,0,0.12);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: var(--header-offset);
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 24%),
-        radial-gradient(circle at 85% 12%, var(--glow), transparent 24%),
-        linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
-      color: var(--ink);
-      position: relative;
-      overflow-x: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
 
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      inset: auto;
-      width: 22rem;
-      height: 22rem;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.55;
-      pointer-events: none;
-      z-index: 0;
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: background 0.4s ease, border-color 0.4s ease;
     }
-
-    body::before {
-      top: 4rem;
-      right: -6rem;
-      background: rgba(151, 215, 255, 0.55);
+    .nav.is-light {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom-color: rgba(0,0,0,0.1);
     }
-
-    body::after {
-      bottom: 8rem;
-      left: -8rem;
-      background: rgba(173, 184, 255, 0.28);
+    .nav-logo {
+      font-size: 0.92rem; font-weight: 700; letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.88); text-decoration: none;
+      transition: color 0.4s;
     }
+    .nav.is-light .nav-logo { color: var(--ink); }
 
-    .banner {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      width: min(1120px, calc(100% - 2rem));
-      margin: 1rem auto 0;
-      padding: 0.9rem 1.25rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      background: rgba(255, 255, 255, 0.58);
-      backdrop-filter: blur(18px);
-      color: var(--brand-deep);
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
-      text-align: center;
+    .nav-links {
+      display: flex; gap: 2.2rem; list-style: none; align-items: center;
+      position: absolute; left: 50%; transform: translateX(-50%);
     }
-
-    .page-shell {
-      width: min(1120px, calc(100% - 2rem));
-      margin: 0 auto;
-      padding: 1.25rem 0 3rem;
-      position: relative;
-      z-index: 1;
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.01em;
+      color: rgba(255,255,255,0.6); text-decoration: none;
+      transition: color 0.2s;
     }
+    .nav-links a:hover { color: rgba(255,255,255,0.95); }
+    .nav.is-light .nav-links a { color: var(--text-2); }
+    .nav.is-light .nav-links a:hover { color: var(--text); }
 
-    .page-shell::before {
-      content: "";
-      position: absolute;
-      inset: 1.5rem 0 auto;
-      height: 28rem;
-      border-radius: 40px;
-      background:
-        linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-      background-size: 34px 34px;
-      opacity: 0.6;
-      pointer-events: none;
+    .nav-cta {
+      font-size: 0.8rem; font-weight: 600;
+      color: rgba(255,255,255,0.6); text-decoration: none;
+      transition: color 0.4s;
     }
+    .nav-cta:hover { color: #fff; }
+    .nav.is-light .nav-cta { color: var(--accent); }
+    .nav.is-light .nav-cta:hover { color: var(--accent-dk); }
 
-    main {
-      padding: 2rem;
-      background: var(--panel);
-      border: 1px solid rgba(255, 255, 255, 0.78);
-      border-radius: 38px;
-      box-shadow: var(--shadow-xl);
-      backdrop-filter: blur(24px);
-    }
+    /* ─── LAYOUT ─── */
+    .wrap        { width: min(1100px, calc(100% - 3rem)); margin: 0 auto; }
+    .wrap-narrow { width: min(820px,  calc(100% - 3rem)); margin: 0 auto; }
 
-    h1 {
-      margin-top: 0;
-      margin-bottom: 1.1rem;
-      font-size: clamp(2.6rem, 5vw, 5.1rem);
-      line-height: 0.9;
-      letter-spacing: -0.06em;
-      max-width: 11ch;
-    }
-
-    p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
+    /* ─── HERO ─── */
     .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 1.5rem;
-      align-items: center;
-      margin-bottom: 3rem;
-      padding: 1rem;
-      border-radius: var(--radius-xl);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.35) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.62);
+      position: relative;
+      min-height: 100svh;
+      background: #000;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 9rem 2rem 7rem;
     }
 
-    .hero-copy {
-      text-align: left;
-      padding: 1.1rem;
+    /* Aurora blobs */
+    .aurora { position: absolute; inset: 0; pointer-events: none; }
+    .a1, .a2, .a3, .a4 {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); pointer-events: none;
+    }
+    .a1 {
+      width: 60vw; height: 60vw;
+      background: radial-gradient(circle, rgba(50,92,255,0.2) 0%, transparent 70%);
+      top: -18%; left: -12%;
+      animation: af1 16s ease-in-out infinite;
+    }
+    .a2 {
+      width: 50vw; height: 50vw;
+      background: radial-gradient(circle, rgba(6,182,212,0.16) 0%, transparent 70%);
+      top: 10%; right: -14%;
+      animation: af2 20s ease-in-out infinite;
+    }
+    .a3 {
+      width: 42vw; height: 42vw;
+      background: radial-gradient(circle, rgba(124,58,237,0.14) 0%, transparent 70%);
+      bottom: -8%; left: 28%;
+      animation: af3 24s ease-in-out infinite;
+    }
+    .a4 {
+      width: 30vw; height: 30vw;
+      background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%);
+      top: 38%; right: 22%;
+      animation: af4 18s ease-in-out infinite;
+    }
+    @keyframes af1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(4%,3%) scale(1.05)} 66%{transform:translate(-2%,5%) scale(0.97)} }
+    @keyframes af2 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(-5%,2%) scale(1.06)} 70%{transform:translate(3%,-4%) scale(0.96)} }
+    @keyframes af3 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(3%,-5%) scale(1.05)} 70%{transform:translate(-4%,2%) scale(0.98)} }
+    @keyframes af4 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-4%,5%) scale(1.09)} }
+
+    /* Subtle dot grid overlay */
+    .hero-grid-overlay {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
     }
 
-    .eyebrow {
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
       display: inline-block;
-      margin-bottom: 1rem;
-      padding: 0.45rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      color: var(--brand-mid);
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      border: 1px solid rgba(31, 95, 255, 0.12);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 2rem;
     }
 
-    .hero-copy p {
-      max-width: 590px;
-      margin: 0 0 1rem;
+    .hero h1 {
+      font-size: clamp(2.8rem, 7.5vw, 6.8rem);
+      font-weight: 700; letter-spacing: -0.055em; line-height: 1.02;
+      color: #f5f5f7;
+      max-width: 14ch; margin: 0 auto 1.75rem;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(135deg, #60a5fa 0%, #c084fc 45%, #34d399 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      margin-top: 1.5rem;
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(255,255,255,0.5); line-height: 1.7; font-weight: 400;
+      max-width: 46ch; margin: 0 auto 2.75rem;
     }
 
-    .cta,
-    .secondary {
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block; padding: 0.88rem 2.2rem;
+      background: #fff; color: #000;
+      border-radius: 980px; text-decoration: none;
+      font-size: 0.9rem; font-weight: 600; letter-spacing: -0.01em;
+      transition: all 0.22s;
+    }
+    .btn-primary:hover { background: #e8e8ed; transform: scale(1.02); }
+
+    .btn-ghost {
+      display: inline-block; padding: 0.88rem 2.2rem;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.86);
+      border-radius: 980px; text-decoration: none;
+      font-size: 0.9rem; font-weight: 600; letter-spacing: -0.01em;
+      backdrop-filter: blur(12px);
+      transition: all 0.22s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.1); }
+
+    .hero-scroll-cue {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.45rem;
+      color: rgba(255,255,255,0.28);
+      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+      animation: cue 2.2s ease-in-out infinite;
+    }
+    .hero-scroll-cue svg { width: 15px; height: 15px; }
+    @keyframes cue { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(5px)} }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar { background: var(--bg-2); border-bottom: 1px solid var(--border); }
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-cell {
+      padding: 2.25rem 1.75rem; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num { display: block; font-size: 2.1rem; font-weight: 700; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 0.2rem; }
+    .stat-lbl { font-size: 0.8rem; color: var(--text-2); font-weight: 500; }
+
+    /* ─── SECTION SHARED ─── */
+    .sec { padding: 7rem 0; }
+    .sec-sm { padding: 5.5rem 0; }
+    .chip {
       display: inline-block;
-      padding: 0.95rem 1.45rem;
-      border-radius: 999px;
-      font-weight: 700;
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .sec-h {
+      font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1.07; color: var(--ink);
+    }
+    .sec-p {
+      font-size: 1.05rem; color: var(--text-2); line-height: 1.72; margin-top: 1rem;
     }
 
-    .cta {
-      background: linear-gradient(180deg, #141d31 0%, #0b1220 100%);
-      color: #f7fbff;
-      box-shadow: 0 14px 28px rgba(11, 18, 32, 0.18);
+    /* ─── SERVICES ─── */
+    .services-sec { background: var(--bg); }
+    .services-intro {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: end; margin-bottom: 3.5rem;
     }
+    .services-intro .sec-p { max-width: 48ch; }
 
-    .secondary {
-      border: 1px solid rgba(15, 23, 42, 0.1);
-      background: rgba(255, 255, 255, 0.7);
-      color: var(--ink);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px; background: var(--border);
+      border: 1.5px solid var(--border); border-radius: 20px; overflow: hidden;
     }
+    .svc-card { background: var(--bg); padding: 2.25rem 2rem; transition: background 0.2s; }
+    .svc-card:hover { background: var(--bg-2); }
+    .svc-n { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; color: var(--text-3); display: block; margin-bottom: 1.5rem; }
+    .svc-icon { margin-bottom: 1.25rem; }
+    .svc-icon svg { width: 28px; height: 28px; display: block; }
+    .svc-card h3 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.5rem; }
+    .svc-card p { font-size: 0.875rem; color: var(--text-2); line-height: 1.75; }
 
-    .cta:hover,
-    .secondary:hover {
-      transform: translateY(-2px);
+    /* ─── SHOWCASE ─── */
+    .showcase-sec { background: #000; padding: 7rem 0; }
+    .showcase-sec .chip { color: rgba(255,255,255,0.38); }
+    .showcase-sec .sec-h { color: #f5f5f7; }
+    .showcase-sec .sec-p { color: rgba(255,255,255,0.45); max-width: 50ch; }
+    .showcase-head { margin-bottom: 3.5rem; }
+
+    .showcase-stage {
+      display: grid; grid-template-columns: 48px 1fr 48px;
+      gap: 1.25rem; align-items: center;
     }
-
-    .cta:hover {
-      box-shadow: 0 16px 34px rgba(11, 18, 32, 0.24);
+    .sc-nav {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.65); font-size: 1.4rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; backdrop-filter: blur(10px);
     }
+    .sc-nav:hover { background: rgba(255,255,255,0.14); color: #fff; }
+    .sc-nav-row { display: contents; }
 
-    .hero-panel {
-      padding: 1.4rem;
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(12, 18, 32, 0.92) 0%, rgba(20, 31, 56, 0.88) 100%);
-      color: #f7fbff;
-      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .showcase-window {
+      border-radius: 18px; overflow: hidden;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7);
+      transition: opacity 0.05s linear, transform 0.05s linear;
     }
+    .showcase-window.is-transitioning { opacity: 0.8; transform: scale(0.997); }
 
-    .hero-panel h2 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      font-size: 1.35rem;
-      letter-spacing: -0.03em;
+    /* Browser chrome bar */
+    .sc-chrome {
+      background: #1c1c1e;
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 0.9rem;
     }
-
-    .hero-panel p {
-      margin: 0 0 0.9rem;
-      color: rgba(247, 251, 255, 0.86);
+    .sc-dots { display: flex; gap: 6px; }
+    .sc-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .sc-dot-r { background: #ff5f57; }
+    .sc-dot-y { background: #febc2e; }
+    .sc-dot-g { background: #28c840; }
+    .sc-url-bar {
+      flex: 1; height: 24px; background: rgba(255,255,255,0.06);
+      border-radius: 5px; display: flex; align-items: center; padding: 0 0.75rem;
     }
+    .sc-url-text { font-size: 0.68rem; color: rgba(255,255,255,0.28); font-family: ui-monospace, monospace; }
 
-    .stat {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.95rem 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.18);
-      font-size: 0.96rem;
+    .sc-frame { position: relative; height: 460px; overflow: hidden; background: #fff; }
+
+    .showcase-preview {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: 0;
+      opacity: 0; pointer-events: none;
+      transform: scale(0.985);
+      transition: opacity 0.05s linear, transform 0.05s linear;
     }
+    .showcase-preview.is-active { opacity: 1; pointer-events: auto; transform: scale(1); }
+    .showcase-window.is-transitioning .showcase-preview.is-active { opacity: 0; transform: scale(0.98); }
 
-    .stat strong {
-      text-align: right;
+    .showcase-loading {
+      position: absolute; inset: 0; z-index: 5;
+      display: grid; place-items: center;
+      background: #0a0a0a;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.05s linear;
     }
-
-    .section-title {
-      margin: 0 0 0.5rem;
-      font-size: 1.9rem;
-      letter-spacing: -0.04em;
+    .showcase-window.is-loading .showcase-loading { opacity: 1; }
+    .showcase-loading span {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.65rem 1.1rem; border-radius: 999px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 600;
     }
-
-    .section-lead {
-      max-width: 720px;
-      margin: 0 0 1.5rem;
+    .showcase-loading span::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      animation: sc-pulse 1.2s infinite ease-out;
     }
+    @keyframes sc-pulse { 0%{box-shadow:0 0 0 0 rgba(0,113,227,0.5)} 100%{box-shadow:0 0 0 10px rgba(0,113,227,0)} }
 
-    .services {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin: 1.25rem 0 2.25rem;
+    .sc-info {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 1.75rem; flex-wrap: wrap; gap: 1rem;
     }
-
-    .card {
-      padding: 1.5rem;
-      border-radius: var(--radius-lg);
-      background: var(--panel-strong);
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      box-shadow: var(--shadow-lg);
+    .sc-info-left { flex: 1 1 28rem; }
+    .sc-meta {
+      display: inline-block; padding: 0.22rem 0.7rem; border-radius: 999px;
+      background: rgba(0,113,227,0.14); color: var(--accent);
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 0.5rem;
     }
-
-    .card h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      color: var(--ink);
-      letter-spacing: -0.03em;
+    .sc-title { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.025em; color: #f5f5f7; margin-bottom: 0.35rem; }
+    .sc-copy { font-size: 0.86rem; color: rgba(255,255,255,0.45); line-height: 1.65; }
+    .sc-info-right { display: flex; align-items: center; gap: 1.25rem; }
+    .sc-dots-row { display: flex; gap: 6px; align-items: center; }
+    .showcase-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      padding: 0; border: 0; background: rgba(255,255,255,0.18);
+      cursor: pointer; transition: all 0.25s;
     }
-
-    .process {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
+    .showcase-dot.is-active { background: #fff; width: 22px; border-radius: 4px; }
+    .sc-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      color: var(--accent); text-decoration: none;
+      font-size: 0.84rem; font-weight: 600; white-space: nowrap;
     }
+    .sc-link:hover { text-decoration: underline; }
+    .sc-link::after { content: ' ↗'; }
 
-    .section-block {
-      margin-top: 3rem;
+    /* ─── PROCESS ─── */
+    .process-sec { background: var(--bg-2); }
+    .process-head { text-align: center; margin-bottom: 3.5rem; }
+    .process-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px; background: var(--border);
+      border: 1.5px solid var(--border); border-radius: 20px; overflow: hidden;
     }
-
-    .packages {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.1rem;
-      margin-top: 1.25rem;
+    .proc-step { background: var(--bg-2); padding: 2.5rem 2rem; position: relative; }
+    .proc-n {
+      font-size: 3.8rem; font-weight: 700; letter-spacing: -0.07em;
+      color: #e5e5ea; line-height: 1; margin-bottom: 1.5rem; display: block;
     }
+    .proc-step h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 0.6rem; }
+    .proc-step p { font-size: 0.875rem; color: var(--text-2); line-height: 1.8; }
+    .proc-arrow { position: absolute; top: 2.85rem; right: -0.6rem; z-index: 1; color: #d1d1d6; font-size: 1rem; }
+    .proc-step:last-child .proc-arrow { display: none; }
 
-    .package {
-      padding: 1.5rem;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 247, 252, 0.82) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.74);
-      box-shadow: var(--shadow-lg);
+    /* ─── PRICING ─── */
+    .pricing-sec { background: var(--bg); }
+    .pricing-head { text-align: center; margin-bottom: 3.5rem; }
+    .pricing-head .sec-p { max-width: 48ch; margin: 1rem auto 0; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .price-card {
+      background: var(--bg-2); border-radius: 20px; padding: 2.25rem 2rem;
+      border: 1.5px solid transparent;
+      transition: all 0.25s;
     }
-
-    .package-tag {
-      display: inline-block;
-      margin-bottom: 0.9rem;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(31, 95, 255, 0.08);
-      color: var(--brand-mid);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    .price-card:hover { border-color: var(--border-med); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
+    .price-card.featured {
+      background: var(--ink); border-color: transparent;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.22);
+      transform: scale(1.025);
     }
-
-    .package h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.2rem;
-      letter-spacing: -0.03em;
+    .price-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); display: block; margin-bottom: 1.25rem; }
+    .price-card.featured .price-tag { color: rgba(255,255,255,0.4); }
+    .price-card h3 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 0.5rem; }
+    .price-card.featured h3 { color: #f5f5f7; }
+    .price-scope { font-size: 0.875rem; color: var(--text-2); margin-bottom: 1.75rem; line-height: 1.65; }
+    .price-card.featured .price-scope { color: rgba(255,255,255,0.48); }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; }
+    .price-list li {
+      display: flex; align-items: flex-start; gap: 0.65rem;
+      font-size: 0.875rem; color: var(--text-2); line-height: 1.5;
     }
-
-    .package-price {
-      margin: 0 0 0.9rem;
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--brand-mid);
+    .price-card.featured .price-list li { color: rgba(255,255,255,0.62); }
+    .price-list li::before {
+      content: '';
+      flex-shrink: 0; margin-top: 2px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: rgba(0,113,227,0.1)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%230071e3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center/10px no-repeat;
     }
-
-    .package-list {
-      margin: 0;
-      padding-left: 1.1rem;
-      color: var(--muted);
+    .price-card.featured .price-list li::before {
+      background: rgba(255,255,255,0.1)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%23fff' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center/10px no-repeat;
     }
-
-    .package-list li + li {
-      margin-top: 0.45rem;
+    .btn-price {
+      display: block; text-align: center;
+      padding: 0.8rem 1.5rem; border-radius: 980px;
+      text-decoration: none; font-size: 0.9rem; font-weight: 600; letter-spacing: -0.01em;
+      transition: all 0.2s;
     }
+    .btn-price-soft { background: rgba(0,0,0,0.07); color: var(--ink); }
+    .btn-price-soft:hover { background: rgba(0,0,0,0.12); }
+    .btn-price-white { background: #fff; color: #000; }
+    .btn-price-white:hover { background: #e8e8ed; }
 
-    .step {
-      padding: 1.25rem;
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.76);
-      box-shadow: var(--shadow-lg);
+    /* ─── CTA STRIP ─── */
+    .cta-strip {
+      background: #000; padding: 7rem 0;
+      text-align: center; position: relative; overflow: hidden;
     }
-
-    .step-number {
-      display: inline-block;
-      margin-bottom: 0.85rem;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--brand-mid);
+    .cta-strip .aurora { opacity: 0.65; }
+    .cta-strip-inner { position: relative; z-index: 1; }
+    .cta-strip h2 {
+      font-size: clamp(2.2rem, 5vw, 4.5rem); font-weight: 700;
+      letter-spacing: -0.055em; line-height: 1.05; color: #f5f5f7;
+      max-width: 18ch; margin: 0 auto 1.25rem;
     }
+    .cta-strip p { color: rgba(255,255,255,0.48); font-size: 1.05rem; margin-bottom: 2.5rem; }
 
-    .consult {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 1.25rem;
-      align-items: start;
-      margin-top: 2.5rem;
-      padding: 1.5rem;
-      border-radius: var(--radius-xl);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(242, 246, 252, 0.78) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.78);
-      box-shadow: var(--shadow-lg);
+    /* ─── CONTACT ─── */
+    .contact-sec { background: var(--bg-2); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: start; }
+    .contact-lhs h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 700; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 1rem; }
+    .contact-lhs p { font-size: 0.95rem; color: var(--text-2); line-height: 1.78; }
+    .contact-details { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.1rem; }
+    .cd { display: flex; gap: 1rem; align-items: flex-start; }
+    .cd-i {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: rgba(0,113,227,0.1); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--accent); font-size: 0.88rem;
     }
+    .cd-t strong { display: block; font-size: 0.875rem; font-weight: 700; color: var(--ink); }
+    .cd-t span { font-size: 0.82rem; color: var(--text-2); }
 
-    .consult-copy {
-      padding-right: 0.5rem;
+    .form-box { background: #fff; border-radius: 20px; padding: 2.5rem; box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
+    .fg { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .fg label { font-size: 0.78rem; font-weight: 600; color: var(--text-2); }
+    .fg input, .fg textarea {
+      border: 1.5px solid rgba(0,0,0,0.1); border-radius: 10px;
+      padding: 0.75rem 1rem; font-size: 0.9rem; font-family: inherit;
+      color: var(--text); background: #fff; width: 100%;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-
-    .consult-copy ul {
-      margin: 1rem 0 0;
-      padding-left: 1.1rem;
-      color: var(--muted);
+    .fg input:focus, .fg textarea:focus {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0,113,227,0.12);
     }
-
-    .consult-form {
-      display: grid;
-      gap: 0.9rem;
-      padding: 1.25rem;
-      border-radius: 28px;
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid rgba(255, 255, 255, 0.78);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    .fg textarea { min-height: 110px; resize: vertical; }
+    .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .btn-submit {
+      width: 100%; padding: 0.9rem; border: none; border-radius: 980px;
+      background: var(--ink); color: #fff;
+      font-size: 0.9rem; font-weight: 700; font-family: inherit; letter-spacing: -0.01em;
+      cursor: pointer; transition: all 0.22s;
     }
+    .btn-submit:hover { background: #1d1d1f; transform: scale(1.01); }
+    .form-status { min-height: 1.3rem; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 600; text-align: center; }
+    .form-status.is-error { color: #d70015; }
+    .form-status.is-success { color: #1a7f3c; }
 
-    .consult-form label {
-      display: grid;
-      gap: 0.4rem;
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--ink);
+    /* ─── FOOTER ─── */
+    .footer { background: #000; padding: 4rem 0 2.5rem; }
+    .footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem; }
+    .footer-logo-img { display: block; height: 32px; width: auto; margin-bottom: 0.85rem; filter: invert(1); opacity: 0.75; }
+    .footer-brand-name { font-size: 0.95rem; font-weight: 700; color: #f5f5f7; margin-bottom: 0.6rem; }
+    .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.38); line-height: 1.65; max-width: 26ch; }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 1rem; }
+    .footer-col a { display: block; color: rgba(255,255,255,0.52); text-decoration: none; font-size: 0.875rem; padding: 0.25rem 0; transition: color 0.2s; }
+    .footer-col a:hover { color: #f5f5f7; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.75rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; color: rgba(255,255,255,0.22); flex-wrap: wrap; gap: 0.75rem;
     }
+    .footer-bottom a { color: inherit; text-decoration: none; }
+    .footer-bottom a:hover { color: rgba(255,255,255,0.5); }
 
-    .consult-form input,
-    .consult-form textarea {
-      width: 100%;
-      padding: 0.85rem 0.95rem;
-      border: 1px solid rgba(15, 23, 42, 0.1);
-      border-radius: 16px;
-      font: inherit;
-      color: var(--ink);
-      background: rgba(248, 250, 252, 0.9);
-      transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .services-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .showcase-stage { grid-template-columns: 40px 1fr 40px; }
+      .process-grid { grid-template-columns: 1fr; }
+      .proc-arrow { display: none; }
+      .pricing-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .price-card.featured { transform: none; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .stat-cell { border-bottom: 1px solid var(--border); }
     }
-
-    .consult-form input:focus,
-    .consult-form textarea:focus {
-      outline: none;
-      border-color: rgba(31, 95, 255, 0.35);
-      box-shadow: 0 0 0 4px rgba(31, 95, 255, 0.1);
-      background: #fff;
-    }
-
-    .consult-form textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .consult-form button {
-      border: 0;
-      cursor: pointer;
-    }
-
-    .form-status {
-      min-height: 1.4rem;
-      margin: 0;
-      font-size: 0.94rem;
-      font-weight: 700;
-    }
-
-    .form-status.is-error {
-      color: #a12626;
-    }
-
-    .form-status.is-success {
-      color: #14643e;
-    }
-
-    .site-footer {
-      margin-top: 2.5rem;
-      padding: 1.5rem;
-      border-radius: 30px;
-      background: linear-gradient(180deg, rgba(11, 18, 32, 0.94) 0%, rgba(17, 27, 48, 0.92) 100%);
-      color: #f7fbff;
-      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr 0.8fr;
-      gap: 1rem;
-    }
-
-    .footer-card h2,
-    .footer-card h3 {
-      margin-top: 0;
-      margin-bottom: 0.75rem;
-      color: #f7fbff;
-      letter-spacing: -0.03em;
-    }
-
-    .footer-card p,
-    .footer-card li {
-      color: rgba(247, 251, 255, 0.86);
-    }
-
-    .footer-card ul {
-      margin: 0;
-      padding-left: 1.1rem;
-    }
-
-    .footer-link {
-      color: #f7fbff;
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .footer-link:hover {
-      text-decoration: underline;
-    }
-
-    .footer-meta {
-      margin-top: 1.25rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.18);
-      font-size: 0.92rem;
-      color: rgba(247, 251, 255, 0.82);
-    }
-
-    @media (max-width: 1080px) {
-      :root {
-        --header-offset: 5.5rem;
-      }
-
-      .page-shell::before {
-        height: 20rem;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy,
-      .hero-panel {
-        max-width: none;
-      }
-
-      .services,
-      .packages,
-      .process {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 860px) {
-      :root {
-        --header-offset: 5rem;
-      }
-
-      .hero {
-        padding: 0.75rem;
-      }
-
-      .services,
-      .packages,
-      .process,
-      .consult,
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy {
-        padding: 0.75rem;
-      }
-
-      .section-block {
-        margin-top: 2.4rem;
-      }
-
-      .site-footer,
-      .consult,
-      .card,
-      .package,
-      .step {
-        border-radius: 22px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      :root {
-        --header-offset: 0;
-      }
-
-      body::before,
-      body::after,
-      .page-shell::before {
-        display: none;
-      }
-
-      .page-shell {
-        width: min(100% - 1rem, 1120px);
-        padding: 1rem 0 2rem;
-      }
-
-      .banner {
-        position: static;
-        width: min(100% - 1rem, 1120px);
-        font-size: 0.72rem;
-        padding: 0.8rem 0.9rem;
-        letter-spacing: 0.1em;
-        line-height: 1.4;
-      }
-
-      main {
-        padding: 1.2rem;
-        border-radius: 24px;
-      }
-
-      h1 {
-        font-size: 2.45rem;
-        max-width: none;
-        line-height: 0.95;
-      }
-
-      p {
-        font-size: 0.98rem;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .cta,
-      .secondary {
-        width: 100%;
-        text-align: center;
-      }
-
-      .eyebrow {
-        font-size: 0.68rem;
-        letter-spacing: 0.1em;
-      }
-
-      .hero-panel {
-        padding: 1.2rem;
-      }
-
-      .stat {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 0.35rem;
-      }
-
-      .stat strong {
-        text-align: left;
-      }
-
-      .consult {
-        padding: 1.1rem;
-      }
-
-      .consult-form {
-        padding: 1rem;
-      }
-
-      .consult-form input,
-      .consult-form textarea {
-        font-size: 16px;
-      }
-
-      .site-footer {
-        padding: 1.2rem;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .banner {
-        font-size: 0.68rem;
-      }
-
-      h1 {
-        font-size: 2.1rem;
-      }
-
-      .section-title {
-        font-size: 1.6rem;
-      }
-
-      .hero,
-      .consult,
-      .site-footer {
-        padding: 0.9rem;
-      }
-
-      .hero-copy,
-      .consult-copy,
-      .consult-form {
-        padding: 0.85rem;
-      }
+    @media (max-width: 600px) {
+      .showcase-stage { grid-template-columns: 1fr; }
+      .sc-nav-row { display: flex; justify-content: center; gap: 0.75rem; }
+      .sc-frame { height: 300px; }
+      .fg-row { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="banner">Asier Innovation • Digital Launch Studio</div>
-  <div class="page-shell">
-    <main>
-      <section class="hero">
-        <div class="hero-copy">
-          <span class="eyebrow">Website Design and Launch Support</span>
-          <h1>Professional websites for businesses that want to look established from day one.</h1>
-          <p>We create polished, trustworthy websites for founders, service businesses, and local brands that need a stronger online presence without a drawn-out build process.</p>
-          <p>Clear structure, modern design, and room to grow so your website works as a real business asset that helps people trust you faster.</p>
-          <div class="hero-actions">
-            <a class="cta" href="#consult-form">Book a website consult</a>
-            <a class="secondary" href="#service-options">View service options</a>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="mainNav">
+  <a href="#" class="nav-logo">Asier Innovation</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get started →</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="aurora" aria-hidden="true">
+    <div class="a1"></div>
+    <div class="a2"></div>
+    <div class="a3"></div>
+    <div class="a4"></div>
+  </div>
+  <div class="hero-grid-overlay" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Asier Innovation &nbsp;·&nbsp; Digital Launch Studio</div>
+    <h1>Your business<br>deserves a website<br>that <span class="grad">means business.</span></h1>
+    <p class="hero-sub">Professional websites for founders, service businesses, and local brands ready for a stronger online presence — built fast, built right.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a website consult</a>
+      <a href="#work" class="btn-ghost">See sample sites</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-cue" aria-hidden="true">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 3v10M4 9l4 4 4-4"/>
+    </svg>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ─── STATS ─── -->
+<div class="stats-bar">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="stat-cell"><span class="stat-num">2–4wk</span><span class="stat-lbl">Average delivery time</span></div>
+      <div class="stat-cell"><span class="stat-num">100%</span><span class="stat-lbl">Custom — no templates</span></div>
+      <div class="stat-cell"><span class="stat-num">12+</span><span class="stat-lbl">Industries served</span></div>
+      <div class="stat-cell"><span class="stat-num">AI-ready</span><span class="stat-lbl">Built to expand</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SERVICES ─── -->
+<section class="sec services-sec" id="services">
+  <div class="wrap">
+    <div class="services-intro">
+      <div>
+        <span class="chip">What we do</span>
+        <h2 class="sec-h">Professional websites for businesses that want to look established from day one.</h2>
+      </div>
+      <p class="sec-p">Clear structure, modern design, and room to grow — so your website works as a real business asset that helps people trust you faster.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="svc-card">
+        <span class="svc-n">01</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 28 28" fill="none" stroke="#0071e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="5" width="22" height="16" rx="2"/>
+            <path d="M9 21v2M19 21v2M6 24h16"/>
+          </svg>
+        </div>
+        <h3>Starter Business Sites</h3>
+        <p>Clean, focused websites for new businesses that need a homepage, service overview, and a strong first impression that converts visitors into real clients.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-n">02</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 28 28" fill="none" stroke="#0071e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 22l6-7 5 4 7-11"/>
+            <circle cx="22" cy="6" r="2"/>
+          </svg>
+        </div>
+        <h3>Brand-Led Design</h3>
+        <p>Layouts, colors, and messaging shaped around your business so the final site feels tailored and authoritative — not like every other site in your industry.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-n">03</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 28 28" fill="none" stroke="#0071e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 3v6l3 3-3 3v6"/>
+            <path d="M3 14h6l3-3-3-3H3"/>
+            <path d="M25 14h-6l-3 3 3 3h6"/>
+          </svg>
+        </div>
+        <h3>Growth-Ready Foundations</h3>
+        <p>Built with room for booking tools, content updates, automation, and AI-driven features — so you never need to rebuild from scratch as your business expands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SHOWCASE ─── -->
+<section class="showcase-sec" id="work">
+  <div class="wrap">
+    <div class="showcase-head">
+      <span class="chip">Live Sample Sites</span>
+      <h2 class="sec-h">See what we build.</h2>
+      <p class="sec-p">Every preview below is a fully working website — not a screenshot. Browse them exactly as your future clients would.</p>
+    </div>
+
+    <div class="showcase-stage">
+      <button class="sc-nav" type="button" aria-label="Previous sample site" data-showcase-prev>&#8249;</button>
+
+      <div class="showcase-window">
+        <!-- Browser chrome -->
+        <div class="sc-chrome">
+          <div class="sc-dots">
+            <div class="sc-dot sc-dot-r"></div>
+            <div class="sc-dot sc-dot-y"></div>
+            <div class="sc-dot sc-dot-g"></div>
+          </div>
+          <div class="sc-url-bar">
+            <span class="sc-url-text" id="showcaseUrl">preview.asierinnovation.com/local-service</span>
           </div>
         </div>
-        <aside class="hero-panel">
-          <h2>What you can expect</h2>
-          <p>A streamlined process focused on clarity, speed, and a final result that feels credible on desktop and mobile.</p>
-          <div class="stat">
-            <span>Mobile-friendly layouts</span>
-            <strong>Built in</strong>
+
+        <!-- Frame -->
+        <div class="sc-frame">
+          <div class="showcase-loading" aria-hidden="true"><span>Loading preview</span></div>
+          <iframe
+            class="showcase-preview is-active"
+            data-showcase-frame="0"
+            src="../sample-sites/local-service/index.html"
+            title="Local service business sample preview"
+            loading="eager"
+          ></iframe>
+          <iframe
+            class="showcase-preview"
+            data-showcase-frame="1"
+            src="../sample-sites/consulting-studio/index.html"
+            title="Consulting studio sample preview"
+            loading="eager"
+          ></iframe>
+          <iframe
+            class="showcase-preview"
+            data-showcase-frame="2"
+            src="../sample-sites/restaurant-launch/index.html"
+            title="Restaurant launch sample preview"
+            loading="eager"
+          ></iframe>
+        </div>
+
+        <!-- Info bar -->
+        <div class="sc-info">
+          <div class="sc-info-left">
+            <span class="sc-meta" id="showcaseMeta">Local Service</span>
+            <div class="sc-title" id="showcaseTitle">BluePeak Home Systems</div>
+            <div class="sc-copy" id="showcaseCopy">A high-trust site for a home services business — urgent CTAs, service cards with icons, certifications, customer reviews, and a lead capture form.</div>
           </div>
-          <div class="stat">
-            <span>Professional visual direction</span>
-            <strong>Custom shaped</strong>
+          <div class="sc-info-right">
+            <div class="sc-dots-row">
+              <button class="showcase-dot is-active" type="button" aria-label="Local service preview" data-showcase-dot="0"></button>
+              <button class="showcase-dot" type="button" aria-label="Consulting preview" data-showcase-dot="1"></button>
+              <button class="showcase-dot" type="button" aria-label="Restaurant preview" data-showcase-dot="2"></button>
+            </div>
+            <a class="sc-link" id="showcaseLink" href="../sample-sites/local-service/index.html" target="_blank" rel="noreferrer">Open live preview</a>
           </div>
-          <div class="stat">
-            <span>Future-ready expansion</span>
-            <strong>AI and integrations</strong>
+        </div>
+      </div>
+
+      <div class="sc-nav-row">
+        <button class="sc-nav" type="button" aria-label="Next sample site" data-showcase-next>&#8250;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section class="sec-sm process-sec" id="process">
+  <div class="wrap">
+    <div class="process-head">
+      <span class="chip">How it works</span>
+      <h2 class="sec-h">Simple process.<br>Strong result.</h2>
+    </div>
+    <div class="process-grid">
+      <div class="proc-step">
+        <span class="proc-n">01</span>
+        <h3>Clarify the message</h3>
+        <p>We define what your business offers, who it serves, and what the site needs to say to earn trust quickly from the right people.</p>
+        <span class="proc-arrow">→</span>
+      </div>
+      <div class="proc-step">
+        <span class="proc-n">02</span>
+        <h3>Design the experience</h3>
+        <p>The layout is shaped to feel polished, authoritative, and effortless to navigate — on every screen, for every visitor.</p>
+        <span class="proc-arrow">→</span>
+      </div>
+      <div class="proc-step">
+        <span class="proc-n">03</span>
+        <h3>Launch with confidence</h3>
+        <p>You get a professional web presence that's ready to share, easy to refine, and built to grow with your business over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section class="sec pricing-sec" id="pricing">
+  <div class="wrap">
+    <div class="pricing-head">
+      <span class="chip">Pricing</span>
+      <h2 class="sec-h">Scoped for where you are,<br>built for where you're going.</h2>
+      <p class="sec-p">Every project is quoted after a brief consult — these tiers reflect how most engagements are structured.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <span class="price-tag">Launch Scope</span>
+        <h3>Starter Site</h3>
+        <p class="price-scope">For businesses that need a clean, credible homepage and service overview — ready to launch fast.</p>
+        <ul class="price-list">
+          <li>Core homepage and service page structure</li>
+          <li>Clean copy direction and visual styling</li>
+          <li>Mobile-responsive layout</li>
+          <li>Launch-ready deployment support</li>
+        </ul>
+        <a href="#contact" class="btn-price btn-price-soft">Get a quote</a>
+      </div>
+
+      <div class="price-card featured">
+        <span class="price-tag">Most Popular</span>
+        <h3>Full Business Website</h3>
+        <p class="price-scope">Multi-page site with stronger conversion architecture and clear pathways for every visitor type.</p>
+        <ul class="price-list">
+          <li>Multi-page structure with service, about, and contact flow</li>
+          <li>Conversion-focused sections and stronger CTAs</li>
+          <li>Flexible foundation for future integrations</li>
+          <li>Analytics setup and performance optimization</li>
+          <li>30-day post-launch support included</li>
+        </ul>
+        <a href="#contact" class="btn-price btn-price-white">Get a quote</a>
+      </div>
+
+      <div class="price-card">
+        <span class="price-tag">Tailored Build</span>
+        <h3>Custom Direction</h3>
+        <p class="price-scope">For businesses with specific brand needs, booking flows, or AI feature integration from day one.</p>
+        <ul class="price-list">
+          <li>Brand-led layout and visual identity decisions</li>
+          <li>Booking, lead capture, or automation planning</li>
+          <li>AI feature integration roadmap</li>
+          <li>Phased expansion support post-launch</li>
+        </ul>
+        <a href="#contact" class="btn-price btn-price-soft">Get a quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA STRIP ─── -->
+<div class="cta-strip">
+  <div class="aurora" aria-hidden="true">
+    <div class="a1"></div>
+    <div class="a3"></div>
+  </div>
+  <div class="cta-strip-inner">
+    <h2>Ready to launch something you're proud of?</h2>
+    <p>Book a free 30-minute consult. No pressure, no jargon — just a clear conversation about your goals.</p>
+    <a href="#contact" class="btn-primary">Book a website consult</a>
+  </div>
+</div>
+
+<!-- ─── CONTACT ─── -->
+<section class="sec contact-sec" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-lhs">
+        <span class="chip">Get in touch</span>
+        <h2>Let's build something real.</h2>
+        <p>Fill in the form and I'll get back to you within one business day. The consult is free — it's just a conversation about what your business needs and how I can help you get there.</p>
+        <div class="contact-details">
+          <div class="cd">
+            <div class="cd-i">✉</div>
+            <div class="cd-t"><strong>Email</strong><span>hello@asierinnovation.com</span></div>
           </div>
-        </aside>
-      </section>
-
-      <section id="service-options" class="section-block">
-        <h2 class="section-title">Services designed for launch and credibility</h2>
-        <p class="section-lead">Whether you need a first website or a cleaner upgrade, the goal is the same: help your business look trustworthy, easy to understand, and ready to turn visitors into customers.</p>
-        <div class="services">
-          <article class="card">
-            <h2>Starter Business Sites</h2>
-            <p>Clean, focused websites for new businesses that need a homepage, service overview, and strong first impression.</p>
-          </article>
-          <article class="card">
-            <h2>Brand-Led Design</h2>
-            <p>Layouts, colors, and messaging shaped around your business so the final site feels tailored rather than templated.</p>
-          </article>
-          <article class="card">
-            <h2>Growth-Ready Foundations</h2>
-            <p>Built with room for future booking tools, updated content, automation, and AI-driven features as your needs expand.</p>
-          </article>
+          <div class="cd">
+            <div class="cd-i">⚡</div>
+            <div class="cd-t"><strong>Response time</strong><span>Within 1 business day</span></div>
+          </div>
+          <div class="cd">
+            <div class="cd-i">🌍</div>
+            <div class="cd-t"><strong>Location</strong><span>Remote-first, available worldwide</span></div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section-block" id="pricing-and-inclusions">
-        <h2 class="section-title">What is included and how projects are scoped</h2>
-        <p class="section-lead">The exact price depends on what your business needs, but every project is structured around clear deliverables, practical launch support, and a scope that matches your stage of growth.</p>
-        <div class="packages">
-          <article class="package">
-            <span class="package-tag">Launch Scope</span>
-            <h3>Starter site package</h3>
-            <p class="package-price">Entry-level investment, scoped after a consult.</p>
-            <ul class="package-list">
-              <li>Core homepage and service-focused page structure</li>
-              <li>Clean copy direction and polished visual styling</li>
-              <li>Mobile-friendly layout and launch-ready setup</li>
-            </ul>
-          </article>
-          <article class="package">
-            <span class="package-tag">Business Growth</span>
-            <h3>Expanded business website</h3>
-            <p class="package-price">Custom quote based on content, pages, and features.</p>
-            <ul class="package-list">
-              <li>Multi-page structure for services, about, and contact flow</li>
-              <li>Stronger conversion sections and clearer visitor pathways</li>
-              <li>Flexible foundation for future tools and integrations</li>
-            </ul>
-          </article>
-          <article class="package">
-            <span class="package-tag">Tailored Build</span>
-            <h3>Custom design direction</h3>
-            <p class="package-price">Priced by scope for businesses with specific needs.</p>
-            <ul class="package-list">
-              <li>Brand-led layout decisions and more tailored presentation</li>
-              <li>Planning for booking flows, lead capture, or automation</li>
-              <li>Launch support with room for phased expansion afterward</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="section-block">
-        <h2 class="section-title">Simple process, strong result</h2>
-        <div class="process">
-          <article class="step">
-            <span class="step-number">Step 01</span>
-            <h2>Clarify the message</h2>
-            <p>We define what your business offers, who it serves, and what the site needs to say clearly.</p>
-          </article>
-          <article class="step">
-            <span class="step-number">Step 02</span>
-            <h2>Design the experience</h2>
-            <p>The page is shaped to feel polished, trustworthy, and easy to navigate across screen sizes.</p>
-          </article>
-          <article class="step">
-            <span class="step-number">Step 03</span>
-            <h2>Launch with confidence</h2>
-            <p>You get a professional web presence that is ready to share, refine, and build on over time.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="consult" id="consult-form">
-        <div class="consult-copy">
-          <h2 class="section-title">Book a website consult</h2>
-          <p class="section-lead">This form is the next step if you want to turn interest into real client conversations. It can collect the key details you need before a call.</p>
-          <ul>
-            <li>Name and contact details</li>
-            <li>Business type and website goals</li>
-            <li>Project notes before the consult</li>
-          </ul>
-        </div>
-        <form class="consult-form" id="consultForm">
-          <label>
-            Full name
-            <input type="text" name="name" placeholder="Your name" required />
-          </label>
-          <label>
-            Email address
-            <input type="email" name="email" placeholder="name@example.com" required />
-          </label>
-          <label>
-            What do you need?
-            <input type="text" name="project" placeholder="New site, redesign, landing page, etc." />
-          </label>
-          <label>
-            Project details
-            <textarea name="details" placeholder="Tell us a bit about your business and what you want your website to do." required></textarea>
-          </label>
-          <button class="cta" type="submit">Request consult</button>
+      <div class="form-box">
+        <form id="consultForm">
+          <div class="fg-row">
+            <div class="fg">
+              <label>Full name</label>
+              <input type="text" name="name" placeholder="Your name" required>
+            </div>
+            <div class="fg">
+              <label>Email address</label>
+              <input type="email" name="email" placeholder="name@example.com" required>
+            </div>
+          </div>
+          <div class="fg">
+            <label>What do you need?</label>
+            <input type="text" name="project" placeholder="New site, redesign, landing page…">
+          </div>
+          <div class="fg">
+            <label>Project details</label>
+            <textarea name="details" placeholder="Tell us about your business and what you want your website to do." required></textarea>
+          </div>
+          <button class="btn-submit" type="submit">Request consult</button>
           <p class="form-status" id="formStatus" aria-live="polite"></p>
         </form>
-      </section>
-
-      <footer class="site-footer">
-        <div class="footer-grid">
-          <section class="footer-card">
-            <h2>Asier Innovation</h2>
-            <p>Website design and launch support for businesses that need a stronger, more credible online presence without unnecessary complexity.</p>
-          </section>
-          <section class="footer-card">
-            <h3>Contact</h3>
-            <p><a class="footer-link" href="mailto:your@email.com">your@email.com</a></p>
-            <p>Phone number available on request</p>
-            <p>Consult replies typically sent within a business day.</p>
-          </section>
-          <section class="footer-card">
-            <h3>What clients can expect</h3>
-            <ul>
-              <li>Clear scope before work begins</li>
-              <li>Professional communication throughout the project</li>
-              <li>Launch support and next-step guidance</li>
-            </ul>
-          </section>
-        </div>
-        <p class="footer-meta">An Asier Innovation offering. Project scope, timeline, and pricing are confirmed after the initial consult.</p>
-      </footer>
-    </main>
+      </div>
+    </div>
   </div>
-  <script>
-    const consultForm = document.getElementById("consultForm");
-    const formStatus = document.getElementById("formStatus");
+</section>
 
-    consultForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-main">
+      <div>
+        <img class="footer-logo-img" src="../logos/logo_main.png" alt="Asier Innovation logo">
+        <div class="footer-brand-name">Asier Innovation</div>
+        <div class="footer-tagline">Professional website design and launch support for businesses that want to look established from day one.</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#services">Starter Sites</a>
+        <a href="#services">Brand-Led Design</a>
+        <a href="#services">Growth Foundations</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Sample Work</h4>
+        <a href="../sample-sites/local-service/index.html" target="_blank">Local Service</a>
+        <a href="../sample-sites/consulting-studio/index.html" target="_blank">Consulting Studio</a>
+        <a href="../sample-sites/restaurant-launch/index.html" target="_blank">Restaurant Launch</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#process">Our Process</a>
+        <a href="#contact">Contact</a>
+        <a href="mailto:hello@asierinnovation.com">Email us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Asier Innovation. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
 
-      const submitButton = consultForm.querySelector("button[type='submit']");
-      const formData = new FormData(consultForm);
-      const payload = Object.fromEntries(formData.entries());
+<script>
+  // ─── Nav adaptive scroll ───
+  const nav = document.getElementById('mainNav');
+  const heroSection = document.getElementById('hero');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('is-light', window.scrollY > heroSection.offsetHeight * 0.85);
+  }, { passive: true });
 
-      formStatus.textContent = "Sending your request...";
-      formStatus.className = "form-status";
-      submitButton.disabled = true;
-      submitButton.textContent = "Sending...";
+  // ─── Showcase carousel ───
+  const showcaseItems = [
+    {
+      meta: 'Local Service',
+      title: 'BluePeak Home Systems',
+      copy: 'A high-trust site for a home services business — urgent CTAs, service cards with icons, certifications, customer reviews, and a lead capture form.',
+      href: '../sample-sites/local-service/index.html',
+      url: 'preview.asierinnovation.com/local-service',
+      frameTitle: 'Local service business sample preview'
+    },
+    {
+      meta: 'Consulting Brand',
+      title: 'Northline Advisory',
+      copy: 'An authoritative site for a management consulting firm — editorial design, outcome-driven case studies, team profiles, and an engagement inquiry form.',
+      href: '../sample-sites/consulting-studio/index.html',
+      url: 'preview.asierinnovation.com/consulting',
+      frameTitle: 'Consulting studio sample preview'
+    },
+    {
+      meta: 'Hospitality Launch',
+      title: 'Solstice Table',
+      copy: 'A dark, atmospheric site for a fine dining restaurant — seasonal menu with tab navigation, a reservation form, and an immersive full-viewport hero.',
+      href: '../sample-sites/restaurant-launch/index.html',
+      url: 'preview.asierinnovation.com/restaurant',
+      frameTitle: 'Restaurant launch sample preview'
+    }
+  ];
 
-      try {
-        const response = await fetch("/api/send-consult", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
-        });
+  const showcaseFrames  = Array.from(document.querySelectorAll('[data-showcase-frame]'));
+  const showcaseWindow  = document.querySelector('.showcase-window');
+  const showcaseMeta    = document.getElementById('showcaseMeta');
+  const showcaseTitle   = document.getElementById('showcaseTitle');
+  const showcaseCopy    = document.getElementById('showcaseCopy');
+  const showcaseLink    = document.getElementById('showcaseLink');
+  const showcaseUrl     = document.getElementById('showcaseUrl');
+  const showcasePrev    = document.querySelector('[data-showcase-prev]');
+  const showcaseNext    = document.querySelector('[data-showcase-next]');
+  const showcaseDots    = Array.from(document.querySelectorAll('[data-showcase-dot]'));
+  const showcaseLoaded  = showcaseFrames.map((f, i) => i === 0);
 
-        const contentType = response.headers.get("content-type") || "";
-        const data = contentType.includes("application/json")
-          ? await response.json()
-          : { error: "Consult form endpoint is not available in this environment yet." };
+  let showcaseIndex     = 0;
+  let showcaseIsAnimating = false;
 
-        if (!response.ok) {
-          throw new Error(data.error || "We could not send your request.");
-        }
-
-        consultForm.reset();
-        formStatus.textContent = "Consult request sent successfully.";
-        formStatus.className = "form-status is-success";
-      } catch (error) {
-        formStatus.textContent = error.message || "Something went wrong. Please try again.";
-        formStatus.className = "form-status is-error";
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = "Request consult";
-      }
+  showcaseFrames.forEach((frame, index) => {
+    frame.addEventListener('load', () => {
+      showcaseLoaded[index] = true;
+      if (index === showcaseIndex) showcaseWindow.classList.remove('is-loading');
     });
-  </script>
+  });
+
+  const renderShowcase = (index) => {
+    const item = showcaseItems[index];
+    showcaseMeta.textContent  = item.meta;
+    showcaseTitle.textContent = item.title;
+    showcaseCopy.textContent  = item.copy;
+    showcaseLink.href         = item.href;
+    if (showcaseUrl) showcaseUrl.textContent = item.url;
+    showcaseFrames.forEach((f, fi) => f.classList.toggle('is-active', fi === index));
+    showcaseDots.forEach((d, di) => d.classList.toggle('is-active', di === index));
+  };
+
+  const queueShowcase = (nextIndex) => {
+    if (showcaseIsAnimating || nextIndex === showcaseIndex) return;
+    showcaseIsAnimating = true;
+    showcaseWindow.classList.add('is-transitioning');
+    if (!showcaseLoaded[nextIndex]) {
+      showcaseWindow.classList.add('is-loading');
+    } else {
+      showcaseWindow.classList.remove('is-loading');
+    }
+    window.setTimeout(() => {
+      showcaseIndex = nextIndex;
+      renderShowcase(showcaseIndex);
+      window.setTimeout(() => {
+        showcaseWindow.classList.remove('is-transitioning');
+        if (showcaseLoaded[showcaseIndex]) showcaseWindow.classList.remove('is-loading');
+        showcaseIsAnimating = false;
+      }, 35);
+    }, 15);
+  };
+
+  showcasePrev.addEventListener('click', () => {
+    queueShowcase((showcaseIndex - 1 + showcaseItems.length) % showcaseItems.length);
+  });
+  showcaseNext.addEventListener('click', () => {
+    queueShowcase((showcaseIndex + 1) % showcaseItems.length);
+  });
+  showcaseDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => queueShowcase(index));
+  });
+
+  renderShowcase(showcaseIndex);
+
+  // ─── Consult form ───
+  const consultForm = document.getElementById('consultForm');
+  const formStatus  = document.getElementById('formStatus');
+
+  consultForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submitButton = consultForm.querySelector("button[type='submit']");
+    const payload = Object.fromEntries(new FormData(consultForm).entries());
+
+    formStatus.textContent = 'Sending your request…';
+    formStatus.className   = 'form-status';
+    submitButton.disabled  = true;
+    submitButton.textContent = 'Sending…';
+
+    try {
+      const response = await fetch('/api/send-consult', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const contentType = response.headers.get('content-type') || '';
+      const data = contentType.includes('application/json')
+        ? await response.json()
+        : { error: 'Consult form endpoint is not available in this environment yet.' };
+      if (!response.ok) throw new Error(data.error || 'We could not send your request.');
+      consultForm.reset();
+      formStatus.textContent = 'Consult request sent. I\'ll be in touch within one business day.';
+      formStatus.className   = 'form-status is-success';
+    } catch (error) {
+      formStatus.textContent = error.message || 'Something went wrong. Please try again.';
+      formStatus.className   = 'form-status is-error';
+    } finally {
+      submitButton.disabled    = false;
+      submitButton.textContent = 'Request consult';
+    }
+  });
+</script>
 </body>
 </html>

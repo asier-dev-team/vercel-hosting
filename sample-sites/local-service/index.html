@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BluePeak Home Systems — HVAC, Plumbing &amp; Electrical</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0b5ed7;
+      --blue-dark: #0a4fb5;
+      --navy: #0d1f38;
+      --bg: #ffffff;
+      --bg2: #f4f8ff;
+      --bg3: #eef4fd;
+      --text: #0d1f38;
+      --muted: #4b5768;
+      --border: #dce4ef;
+      --orange: #e85d04;
+      --green: #16803d;
+      --star: #f59e0b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* Emergency bar */
+    .topbar {
+      background: var(--orange); color: #fff;
+      text-align: center; padding: 0.6rem 1rem;
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.01em;
+    }
+    .topbar a { color: #fff; font-weight: 800; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 68px;
+      box-shadow: 0 1px 6px rgba(13,31,56,0.06);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .nav-logo-mark {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-mark svg { width: 20px; height: 20px; fill: #fff; }
+    .nav-logo-text { font-size: 1.05rem; font-weight: 800; color: var(--navy); letter-spacing: -0.01em; }
+    .nav-logo-text span { color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-phone { font-size: 1rem; font-weight: 800; color: var(--navy); text-decoration: none; letter-spacing: -0.01em; }
+    .nav-phone:hover { color: var(--blue); }
+    .btn { display: inline-block; padding: 0.65rem 1.35rem; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.875rem; transition: all 0.2s; }
+    .btn-blue { background: var(--blue); color: #fff; }
+    .btn-blue:hover { background: var(--blue-dark); }
+    .btn-outline { border: 2px solid var(--border); color: var(--navy); background: transparent; }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* Wrap */
+    .wrap { width: min(1180px, calc(100% - 2.5rem)); margin: 0 auto; }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #162d52 100%); padding: 4.5rem 0; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 400px; gap: 4rem; align-items: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px; padding: 0.35rem 0.9rem;
+      font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.85);
+      letter-spacing: 0.03em; margin-bottom: 1.5rem;
+    }
+    .hero-badge::before { content: '✓'; color: #4ade80; font-weight: 800; }
+    .hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 900; color: #fff; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+    .hero h1 em { font-style: normal; color: #60a5fa; }
+    .hero-sub { color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.75; margin-bottom: 2rem; max-width: 44ch; }
+    .trust-list { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .trust-list li { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; }
+    .trust-list li::before { content: '✓'; color: #4ade80; font-weight: 800; font-size: 0.9rem; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: var(--navy); font-weight: 800; padding: 0.9rem 1.75rem; font-size: 0.95rem; border-radius: 6px; text-decoration: none; transition: all 0.2s; }
+    .btn-white:hover { background: #f0f6ff; }
+    .btn-wire { border: 2px solid rgba(255,255,255,0.3); color: #fff; background: transparent; padding: 0.88rem 1.5rem; font-size: 0.95rem; font-weight: 700; border-radius: 6px; text-decoration: none; transition: all 0.2s; }
+    .btn-wire:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    /* Quote form */
+    .quote-card {
+      background: #fff; border-radius: 12px; padding: 2rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .quote-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--navy); margin-bottom: 0.3rem; }
+    .quote-card p { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .qg { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.85rem; }
+    .qg label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    .qg input, .qg select, .qg textarea {
+      border: 1.5px solid var(--border); border-radius: 6px;
+      padding: 0.65rem 0.85rem; font-size: 0.9rem; font-family: inherit;
+      color: var(--text); width: 100%; transition: border-color 0.2s;
+    }
+    .qg input:focus, .qg select:focus, .qg textarea:focus { outline: none; border-color: var(--blue); }
+    .qg textarea { min-height: 70px; resize: vertical; }
+    .btn-submit {
+      width: 100%; padding: 0.9rem; background: var(--orange); color: #fff;
+      border: none; border-radius: 6px; font-size: 0.95rem; font-weight: 800;
+      cursor: pointer; letter-spacing: 0.01em; transition: background 0.2s; margin-top: 0.25rem;
+    }
+    .btn-submit:hover { background: #d04f00; }
+    .form-trust { display: flex; justify-content: center; gap: 1rem; margin-top: 0.85rem; }
+    .form-trust span { font-size: 0.72rem; color: var(--muted); display: flex; align-items: center; gap: 0.3rem; }
+    .form-trust span::before { content: '🔒'; font-size: 0.75rem; }
+
+    /* Stats */
+    .stats-bar { background: var(--blue); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .stat-item { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.15); }
+    .stat-item:last-child { border-right: none; }
+    .stat-item strong { display: block; font-size: 2.2rem; font-weight: 900; color: #fff; letter-spacing: -0.04em; margin-bottom: 0.2rem; }
+    .stat-item span { font-size: 0.82rem; color: rgba(255,255,255,0.75); font-weight: 500; }
+
+    /* Services */
+    .services-section { padding: 5rem 0; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .section-head { text-align: center; margin-bottom: 3rem; }
+    .section-tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--blue); margin-bottom: 0.75rem; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; color: var(--navy); letter-spacing: -0.03em; }
+    .section-sub { color: var(--muted); max-width: 52ch; margin: 0.75rem auto 0; font-size: 0.95rem; line-height: 1.7; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .service-card {
+      border: 1.5px solid var(--border); border-radius: 10px; padding: 2rem;
+      transition: all 0.2s; cursor: default;
+    }
+    .service-card:hover { border-color: var(--blue); box-shadow: 0 8px 24px rgba(11,94,215,0.1); transform: translateY(-2px); }
+    .service-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--bg3); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+    .service-icon svg { width: 26px; height: 26px; }
+    .service-card h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+    .service-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .service-link { font-size: 0.82rem; font-weight: 700; color: var(--blue); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .service-link:hover { color: var(--blue-dark); }
+    .service-link::after { content: '→'; }
+
+    /* Why us */
+    .why-section { padding: 5rem 0; background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .why-text h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; color: var(--navy); letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+    .why-text p { color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+    .trust-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .trust-item { display: flex; gap: 0.75rem; align-items: flex-start; }
+    .ti-icon { width: 36px; height: 36px; border-radius: 8px; background: #dcfce7; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--green); font-size: 1rem; }
+    .trust-item strong { display: block; font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 0.15rem; }
+    .trust-item span { font-size: 0.82rem; color: var(--muted); }
+    .why-visual {
+      border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3560 100%);
+      padding: 2.5rem; position: relative;
+    }
+    .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .cert-badge {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 1.25rem; text-align: center;
+    }
+    .cert-badge .cert-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .cert-badge strong { display: block; color: #fff; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .cert-badge span { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+
+    /* Reviews */
+    .reviews-section { padding: 5rem 0; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .review-card { background: var(--bg2); border: 1.5px solid var(--border); border-radius: 10px; padding: 1.75rem; }
+    .review-stars { color: var(--star); font-size: 1rem; margin-bottom: 0.85rem; letter-spacing: 0.1em; }
+    .review-card blockquote { font-size: 0.93rem; color: var(--text); line-height: 1.75; margin-bottom: 1.25rem; font-style: italic; }
+    .reviewer { display: flex; align-items: center; gap: 0.75rem; }
+    .reviewer-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; color: #fff; flex-shrink: 0; }
+    .reviewer strong { display: block; font-size: 0.875rem; font-weight: 700; color: var(--navy); }
+    .reviewer span { font-size: 0.78rem; color: var(--muted); }
+
+    /* Service areas */
+    .areas-section { padding: 5rem 0; background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .areas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .areas-text h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; color: var(--navy); letter-spacing: -0.03em; margin-bottom: 1rem; }
+    .areas-text p { color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+    .areas-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem; }
+    .area-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text); font-weight: 500; padding: 0.3rem 0; border-bottom: 1px solid var(--border); }
+    .area-item::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    .areas-map { background: var(--bg3); border: 1.5px solid var(--border); border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; }
+
+    /* FAQ */
+    .faq-section { padding: 5rem 0; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+    .faq-intro h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; color: var(--navy); letter-spacing: -0.03em; margin-bottom: 1rem; }
+    .faq-intro p { color: var(--muted); line-height: 1.75; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    details { border-top: 1px solid var(--border); }
+    details:last-child { border-bottom: 1px solid var(--border); }
+    summary {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 0; cursor: pointer; list-style: none;
+      font-weight: 700; font-size: 0.95rem; color: var(--navy);
+      gap: 1rem;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-size: 1.4rem; font-weight: 300; color: var(--blue); flex-shrink: 0; transition: transform 0.2s; }
+    details[open] summary::after { content: '−'; }
+    details p { padding: 0 0 1.1rem; font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+
+    /* Footer */
+    .footer { background: var(--navy); padding: 3.5rem 0 2rem; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1rem; }
+    .footer-brand-mark { width: 34px; height: 34px; border-radius: 7px; background: var(--blue); display: flex; align-items: center; justify-content: center; }
+    .footer-brand-mark svg { width: 18px; height: 18px; fill: #fff; }
+    .footer-brand-text { font-size: 1rem; font-weight: 800; color: #fff; }
+    .footer-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.65; margin-bottom: 1.25rem; }
+    .footer-certs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .footer-cert { background: rgba(255,255,255,0.08); border-radius: 4px; padding: 0.3rem 0.65rem; font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.55); letter-spacing: 0.06em; }
+    .footer-col h4 { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+    .footer-col a { display: block; color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.875rem; padding: 0.25rem 0; transition: color 0.2s; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255,255,255,0.3); flex-wrap: wrap; gap: 0.5rem; }
+    .footer-bottom a { color: inherit; text-decoration: none; }
+
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .quote-card { max-width: 480px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-bottom: 1px solid rgba(255,255,255,0.15); }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid, .areas-grid, .faq-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .trust-items { grid-template-columns: 1fr; }
+      .areas-list { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .nav-phone { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  🔴 24/7 Emergency Service Available — Call Now: <a href="tel:8555550199">(855) 555-0199</a>
+</div>
+
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8.5v7l-8 4-8-4v-7l8-4.32z"/></svg>
+    </div>
+    <span class="nav-logo-text">Blue<span>Peak</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#areas">Service Areas</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:8555550199" class="nav-phone">(855) 555-0199</a>
+    <a href="#quote" class="btn btn-blue">Get Free Quote</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">Licensed &amp; Insured · 20+ Years Experience</div>
+        <h1>Home Comfort,<br><em>Fixed Fast.</em></h1>
+        <p class="hero-sub">Same-day service for HVAC, plumbing, and electrical emergencies across the metro area. Upfront pricing, no surprises.</p>
+        <ul class="trust-list">
+          <li>No overtime charges — ever</li>
+          <li>Upfront, transparent pricing before any work begins</li>
+          <li>100% satisfaction guarantee on every job</li>
+          <li>Background-checked, certified technicians</li>
+        </ul>
+        <div class="hero-actions">
+          <a href="#quote" class="btn-white">Get a Free Quote</a>
+          <a href="tel:8555550199" class="btn-wire">Call (855) 555-0199</a>
+        </div>
+      </div>
+      <div>
+        <div class="quote-card" id="quote">
+          <h3>Get a Free Quote</h3>
+          <p>We'll call you back within 15 minutes.</p>
+          <div class="qg">
+            <label>Service Needed</label>
+            <select>
+              <option value="">Select a service...</option>
+              <option>HVAC Repair</option>
+              <option>AC Installation</option>
+              <option>Furnace Repair</option>
+              <option>Plumbing Repair</option>
+              <option>Water Heater</option>
+              <option>Electrical Repair</option>
+              <option>Panel Upgrade</option>
+              <option>Other / Not Sure</option>
+            </select>
+          </div>
+          <div class="qg"><label>Your Name</label><input type="text" placeholder="John Smith"></div>
+          <div class="qg"><label>Phone Number</label><input type="tel" placeholder="(555) 000-0000"></div>
+          <div class="qg"><label>Service Address</label><input type="text" placeholder="123 Main St, City, ST"></div>
+          <div class="qg">
+            <label>Best Time to Call</label>
+            <select>
+              <option>As soon as possible</option>
+              <option>Morning (8am–12pm)</option>
+              <option>Afternoon (12pm–5pm)</option>
+              <option>Evening (5pm–8pm)</option>
+            </select>
+          </div>
+          <button class="btn-submit">Get My Free Quote →</button>
+          <div class="form-trust">
+            <span>No spam, ever</span>
+            <span>Free estimate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-item"><strong>12,400+</strong><span>Jobs Completed</span></div>
+      <div class="stat-item"><strong>4.9★</strong><span>Average Rating</span></div>
+      <div class="stat-item"><strong>24/7</strong><span>Emergency Service</span></div>
+      <div class="stat-item"><strong>Same-Day</strong><span>Appointments Available</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="services-section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Our Services</div>
+      <h2 class="section-title">Everything your home needs, one call away.</h2>
+      <p class="section-sub">From emergency repairs to planned upgrades, our certified technicians handle it all with the same commitment to quality.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0b5ed7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+          </svg>
+        </div>
+        <h3>Heating &amp; Cooling</h3>
+        <p>Full HVAC service including AC and furnace repair, installation, maintenance plans, and duct cleaning. Same-day for emergencies.</p>
+        <a href="#quote" class="service-link">Request service</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0b5ed7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        <h3>Plumbing</h3>
+        <p>Drain cleaning, leak detection and repair, pipe replacement, water heater service, and full bathroom and kitchen plumbing work.</p>
+        <a href="#quote" class="service-link">Request service</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0b5ed7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <h3>Electrical</h3>
+        <p>Panel upgrades, outlet and switch repair, ceiling fan installation, whole-home rewiring, generator hookup, and EV charger installation.</p>
+        <a href="#quote" class="service-link">Request service</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0b5ed7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+          </svg>
+        </div>
+        <h3>Water Heater</h3>
+        <p>Tank and tankless water heater repair, replacement, and installation. Most replacements completed in a single appointment.</p>
+        <a href="#quote" class="service-link">Request service</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0b5ed7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <h3>Indoor Air Quality</h3>
+        <p>Air purifier installation, whole-home humidifiers, UV light systems, and professional duct cleaning to keep your air clean and healthy.</p>
+        <a href="#quote" class="service-link">Request service</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0b5ed7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+        </div>
+        <h3>Maintenance Plans</h3>
+        <p>Annual tune-up plans for HVAC, plumbing, and electrical that extend equipment life, prevent breakdowns, and keep warranties valid.</p>
+        <a href="#quote" class="service-link">Learn more</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why us -->
+<section class="why-section" id="why">
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-text">
+        <div class="section-tag">Why BluePeak</div>
+        <h2>The home service company your neighbors call back.</h2>
+        <p>We built BluePeak on a simple idea: homeowners deserve honest pricing, reliable technicians, and a company that stands behind every job. No games, no bait-and-switch, no subcontractors.</p>
+        <div class="trust-items">
+          <div class="trust-item">
+            <div class="ti-icon">✓</div>
+            <div><strong>Licensed &amp; Insured</strong><span>Fully licensed in all 50 service categories</span></div>
+          </div>
+          <div class="trust-item">
+            <div class="ti-icon">✓</div>
+            <div><strong>Upfront Pricing</strong><span>Written estimate before any work begins</span></div>
+          </div>
+          <div class="trust-item">
+            <div class="ti-icon">✓</div>
+            <div><strong>Background Checked</strong><span>Every tech vetted before entering your home</span></div>
+          </div>
+          <div class="trust-item">
+            <div class="ti-icon">✓</div>
+            <div><strong>Satisfaction Guaranteed</strong><span>We'll make it right or refund the job</span></div>
+          </div>
+          <div class="trust-item">
+            <div class="ti-icon">✓</div>
+            <div><strong>Financing Available</strong><span>0% APR plans for qualifying repairs</span></div>
+          </div>
+          <div class="trust-item">
+            <div class="ti-icon">✓</div>
+            <div><strong>No Overtime Fees</strong><span>Same price nights, weekends, and holidays</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual">
+        <div class="cert-grid">
+          <div class="cert-badge">
+            <div class="cert-icon">🏆</div>
+            <strong>BBB Accredited</strong>
+            <span>A+ Rating since 2008</span>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-icon">🔧</div>
+            <strong>NATE Certified</strong>
+            <span>HVAC Excellence</span>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-icon">⚡</div>
+            <strong>NECA Member</strong>
+            <span>Electrical Contractors</span>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-icon">💧</div>
+            <strong>PHCC Member</strong>
+            <span>Plumbing &amp; HVAC</span>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-icon">🌿</div>
+            <strong>EPA Certified</strong>
+            <span>Section 608 Technicians</span>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-icon">⭐</div>
+            <strong>Angi Super Service</strong>
+            <span>5 consecutive years</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Customer Reviews</div>
+      <h2 class="section-title">4.9 stars from 1,800+ reviews</h2>
+      <p class="section-sub">Real reviews from homeowners across the metro area. We don't cherry-pick — these are our most recent.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"AC went out on a Friday evening during a heat wave. BluePeak had someone at my house within two hours. Fixed it the same night, and the price was exactly what they quoted over the phone. I can't say enough good things."</blockquote>
+        <div class="reviewer">
+          <div class="reviewer-avatar" style="background:#0b5ed7">M</div>
+          <div>
+            <strong>Michael R.</strong>
+            <span>Homeowner in Westfield · 3 days ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Had a slow drain that turned into a bigger issue. The technician was honest about what was needed, walked me through every option, and didn't try to upsell me. Work was clean, fast, and came with a written warranty. Will always use BluePeak."</blockquote>
+        <div class="reviewer">
+          <div class="reviewer-avatar" style="background:#16803d">S</div>
+          <div>
+            <strong>Sandra T.</strong>
+            <span>Homeowner in Maplewood · 1 week ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Got three quotes for a panel upgrade. BluePeak was the only company that explained what we actually needed versus what was overkill. Saved us $800, finished the job ahead of schedule, and the inspector passed it first try."</blockquote>
+        <div class="reviewer">
+          <div class="reviewer-avatar" style="background:#e85d04">D</div>
+          <div>
+            <strong>David K.</strong>
+            <span>Homeowner in Ridgewood · 2 weeks ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Service Areas -->
+<section class="areas-section" id="areas">
+  <div class="wrap">
+    <div class="areas-grid">
+      <div class="areas-text">
+        <div class="section-tag">Service Area</div>
+        <h2>We serve the greater metro area.</h2>
+        <p>Our fleet of 40+ fully-stocked service vans covers the entire region. Most appointments are available same-day or next-day.</p>
+        <div class="areas-list">
+          <div class="area-item">Downtown</div>
+          <div class="area-item">Westfield</div>
+          <div class="area-item">Maplewood</div>
+          <div class="area-item">Ridgewood</div>
+          <div class="area-item">Greenbrook</div>
+          <div class="area-item">Summit Heights</div>
+          <div class="area-item">Northport</div>
+          <div class="area-item">Cedar Falls</div>
+          <div class="area-item">Lakewood</div>
+          <div class="area-item">Pinecrest</div>
+          <div class="area-item">Harborview</div>
+          <div class="area-item">Valley Glen</div>
+        </div>
+      </div>
+      <div class="areas-map">
+        <svg viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <rect width="500" height="380" fill="#eef4fd"/>
+          <path d="M50,80 L180,50 L290,90 L400,60 L450,130 L420,200 L380,270 L280,310 L180,290 L100,240 L50,160 Z" fill="#dce8f8" stroke="#b8cfe8" stroke-width="2"/>
+          <circle cx="250" cy="190" r="8" fill="#0b5ed7"/>
+          <circle cx="160" cy="140" r="5" fill="#0b5ed7" opacity="0.6"/>
+          <circle cx="320" cy="150" r="5" fill="#0b5ed7" opacity="0.6"/>
+          <circle cx="200" cy="240" r="5" fill="#0b5ed7" opacity="0.6"/>
+          <circle cx="330" cy="230" r="5" fill="#0b5ed7" opacity="0.6"/>
+          <circle cx="120" cy="200" r="5" fill="#0b5ed7" opacity="0.6"/>
+          <circle cx="370" cy="180" r="5" fill="#0b5ed7" opacity="0.6"/>
+          <text x="250" y="222" text-anchor="middle" fill="#0b5ed7" font-family="-apple-system,sans-serif" font-size="11" font-weight="700">BluePeak HQ</text>
+          <line x1="50" y1="180" x2="450" y2="180" stroke="rgba(11,94,215,0.1)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="250" y1="50" x2="250" y2="330" stroke="rgba(11,94,215,0.1)" stroke-width="1" stroke-dasharray="4,4"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="wrap">
+    <div class="faq-grid">
+      <div class="faq-intro">
+        <div class="section-tag">FAQ</div>
+        <h2>Common questions, straight answers.</h2>
+        <p>If you don't see your question here, call us at (855) 555-0199 and we'll answer right away.</p>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>How quickly can you get to my home?</summary>
+          <p>For emergencies, we aim to arrive within 2 hours. For non-urgent service calls, most appointments are available same-day or next-day. You'll receive a 30-minute heads-up text before your technician arrives.</p>
+        </details>
+        <details>
+          <summary>Do you charge extra for evenings and weekends?</summary>
+          <p>No. We believe honest pricing means the same rate regardless of when you call. There are no overtime fees, weekend surcharges, or holiday premiums. Ever.</p>
+        </details>
+        <details>
+          <summary>What does "upfront pricing" actually mean?</summary>
+          <p>Before any work begins, your technician will diagnose the problem and give you a written quote. You approve the price before we touch anything. No surprises on the invoice.</p>
+        </details>
+        <details>
+          <summary>Are your technicians employees or subcontractors?</summary>
+          <p>All BluePeak technicians are direct employees — never subcontractors. They're background-checked, drug-tested, uniformed, and drive marked BluePeak vehicles.</p>
+        </details>
+        <details>
+          <summary>What's covered under your satisfaction guarantee?</summary>
+          <p>If you're not satisfied with any work we perform, call us within 30 days and we'll return to make it right at no charge. If we can't fix the issue to your satisfaction, we'll refund the service cost in full.</p>
+        </details>
+        <details>
+          <summary>Do you offer financing for larger repairs?</summary>
+          <p>Yes. We offer 0% APR financing plans for qualifying projects over $500, including equipment replacements and major installations. Ask your technician for details, or mention it when you call.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <div class="footer-brand-mark">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8.5v7l-8 4-8-4v-7l8-4.32z"/></svg>
+          </div>
+          <span class="footer-brand-text">BluePeak Home Systems</span>
+        </div>
+        <p class="footer-desc">Licensed, bonded, and insured home services for the metro area. Available 24/7 for emergencies. Same-day scheduling for most services.</p>
+        <div class="footer-certs">
+          <span class="footer-cert">BBB A+</span>
+          <span class="footer-cert">NATE Certified</span>
+          <span class="footer-cert">EPA Certified</span>
+          <span class="footer-cert">Licensed &amp; Insured</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#">Heating &amp; Cooling</a>
+        <a href="#">Plumbing</a>
+        <a href="#">Electrical</a>
+        <a href="#">Water Heaters</a>
+        <a href="#">Maintenance Plans</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:8555550199">(855) 555-0199</a>
+        <a href="#">Schedule Online</a>
+        <a href="#areas">Service Areas</a>
+        <a href="#">Emergency Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 BluePeak Home Systems. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Licenses</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

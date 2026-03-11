@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northline Advisory — Strategic Management Consulting</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #faf9f7;
+      --ink: #0d1f3c;
+      --muted: #5c6e82;
+      --gold: #b8942a;
+      --gold-light: #f5edd8;
+      --border: #e5e0d8;
+      --card: #ffffff;
+      --navy: #071428;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,249,247,0.96); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 68px;
+    }
+    .nav-logo { font-family: Georgia, serif; font-size: 1.1rem; font-weight: normal; letter-spacing: 0.03em; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; letter-spacing: 0.01em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta { padding: 0.55rem 1.25rem; background: var(--ink); color: #fff !important; border-radius: 3px; font-weight: 600; }
+    .nav-cta:hover { background: var(--gold) !important; }
+
+    /* Containers */
+    .wrap { width: min(1200px, calc(100% - 3rem)); margin: 0 auto; }
+
+    /* Hero */
+    .hero { padding: 6rem 0 5rem; border-bottom: 1px solid var(--border); }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: end; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .hero-tag::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); }
+    .hero h1 {
+      font-family: Georgia, serif; font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 1.04; letter-spacing: -0.035em; font-weight: normal; color: var(--ink); max-width: 14ch;
+    }
+    .hero-side p { color: var(--muted); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 0.8rem 1.6rem; border-radius: 3px; text-decoration: none; font-weight: 600; font-size: 0.875rem; letter-spacing: 0.01em; transition: all 0.2s; }
+    .btn-dark { background: var(--ink); color: #fff; }
+    .btn-dark:hover { background: var(--gold); }
+    .btn-outline { border: 1px solid var(--border); color: var(--ink); background: transparent; }
+    .btn-outline:hover { border-color: var(--ink); }
+    .hero-stats { display: flex; gap: 3rem; margin-top: 4.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .stat strong { display: block; font-family: Georgia, serif; font-size: 2.2rem; font-weight: normal; color: var(--ink); letter-spacing: -0.03em; }
+    .stat span { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Clients */
+    .clients { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+    .clients-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+    .clients-row { display: flex; gap: 3.5rem; align-items: center; flex-wrap: wrap; }
+    .client-name { font-family: Georgia, serif; font-size: 1rem; color: #c0b8ae; letter-spacing: 0.03em; user-select: none; }
+
+    /* Section shared */
+    .section { padding: 5.5rem 0; }
+    .section-border { border-top: 1px solid var(--border); }
+    .label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .heading { font-family: Georgia, serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: normal; line-height: 1.2; letter-spacing: -0.025em; color: var(--ink); }
+
+    /* Services */
+    .services-intro { display: grid; grid-template-columns: 1fr 1.8fr; gap: 5rem; padding-bottom: 3rem; margin-bottom: 3rem; border-bottom: 1px solid var(--border); align-items: start; }
+    .services-intro p { color: var(--muted); line-height: 1.8; font-size: 0.95rem; padding-top: 0.5rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .service { border-top: 2px solid var(--border); padding-top: 2rem; }
+    .service:first-child { border-top-color: var(--gold); }
+    .service h3 { font-family: Georgia, serif; font-size: 1.2rem; font-weight: normal; color: var(--ink); margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+    .service p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+    .service ul { list-style: none; font-size: 0.83rem; color: var(--muted); }
+    .service ul li { padding: 0.3rem 0; border-bottom: 1px solid var(--border); }
+    .service ul li::before { content: '→ '; color: var(--gold); }
+
+    /* Case study */
+    .case-study { background: var(--navy); color: #fff; }
+    .case-study .label { color: var(--gold); }
+    .case-study-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 5rem; align-items: center; }
+    .case-study h2 { font-family: Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: normal; line-height: 1.25; color: #fff; letter-spacing: -0.02em; margin-top: 1.5rem; max-width: 22ch; }
+    .case-study p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-top: 1.25rem; max-width: 52ch; }
+    .btn-gold { display: inline-block; padding: 0.8rem 1.6rem; background: var(--gold); color: #fff; text-decoration: none; border-radius: 3px; font-weight: 600; font-size: 0.875rem; margin-top: 2rem; transition: opacity 0.2s; }
+    .btn-gold:hover { opacity: 0.85; }
+    .cs-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .cs-metric { border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 1.5rem; }
+    .cs-metric strong { display: block; font-family: Georgia, serif; font-size: 2.2rem; font-weight: normal; color: var(--gold); margin-bottom: 0.2rem; letter-spacing: -0.03em; }
+    .cs-metric span { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+    /* Approach */
+    .approach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 3rem; }
+    .step { border-top: 2px solid var(--border); padding-top: 1.5rem; }
+    .step:first-child { border-top-color: var(--gold); }
+    .step-num { font-family: Georgia, serif; font-size: 2.8rem; color: #ddd; line-height: 1; margin-bottom: 1rem; font-weight: normal; }
+    .step h3 { font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; }
+    .step p { font-size: 0.86rem; color: var(--muted); line-height: 1.75; }
+
+    /* Team */
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3rem; }
+    .team-avatar { width: 100%; aspect-ratio: 3/4; border-radius: 6px; margin-bottom: 1.25rem; overflow: hidden; }
+    .team-card h3 { font-family: Georgia, serif; font-size: 1.2rem; font-weight: normal; color: var(--ink); margin-bottom: 0.2rem; }
+    .team-card .title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .team-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.7; }
+
+    /* Testimonial */
+    .testimonial { background: var(--gold-light); border-top: 1px solid #e8d9ba; border-bottom: 1px solid #e8d9ba; }
+    .testimonial-inner { max-width: 740px; margin: 0 auto; text-align: center; }
+    .testimonial blockquote { font-family: Georgia, serif; font-size: clamp(1.2rem, 2.5vw, 1.65rem); font-weight: normal; line-height: 1.6; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 1.5rem; font-style: italic; }
+    .testimonial cite { font-size: 0.82rem; font-style: normal; color: var(--muted); font-weight: 600; }
+
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
+    .contact-text p { color: var(--muted); line-height: 1.8; margin-top: 1.25rem; }
+    .offices { margin-top: 2.5rem; }
+    .offices h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+    .office { display: flex; justify-content: space-between; padding: 0.65rem 0; border-top: 1px solid var(--border); font-size: 0.875rem; }
+    .office .city { color: var(--ink); font-weight: 600; }
+    .office .addr { color: var(--muted); }
+    .form-box { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 2.25rem; }
+    .form-box h3 { font-family: Georgia, serif; font-size: 1.4rem; font-weight: normal; color: var(--ink); margin-bottom: 1.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .fg { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .fg label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .fg input, .fg select, .fg textarea { border: 1px solid var(--border); border-radius: 3px; padding: 0.7rem 0.9rem; font-size: 0.9rem; font-family: inherit; color: var(--ink); background: var(--bg); transition: border-color 0.2s; width: 100%; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: var(--gold); }
+    .fg textarea { resize: vertical; min-height: 90px; }
+    .btn-full { width: 100%; text-align: center; display: block; }
+
+    /* Footer */
+    .footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 3.5rem 0 2rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand { font-family: Georgia, serif; font-size: 1.1rem; color: #fff; margin-bottom: 0.75rem; }
+    .footer-tagline { font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.45); }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+    .footer-col a { display: block; color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.875rem; padding: 0.25rem 0; transition: color 0.2s; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.78rem; }
+    .footer-bottom a { color: inherit; text-decoration: none; }
+
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .hero-grid, .services-intro, .case-study-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .services-grid, .approach-grid, .team-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .services-grid, .approach-grid, .team-grid, .cs-metrics, .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-logo">Northline Advisory</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#insights">Insights</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">Management Consulting &amp; Advisory</div>
+        <h1>Clarity is the rarest competitive advantage.</h1>
+        <div class="hero-stats">
+          <div class="stat"><strong>18+</strong><span>Years in practice</span></div>
+          <div class="stat"><strong>340+</strong><span>Engagements</span></div>
+          <div class="stat"><strong>$4.2B</strong><span>Client value created</span></div>
+          <div class="stat"><strong>94%</strong><span>Client retention</span></div>
+        </div>
+      </div>
+      <div class="hero-side">
+        <p>We partner with ambitious leaders navigating growth, transformation, and strategic inflection points. Our work is built on deep analysis, honest counsel, and sustained engagement through implementation.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-dark">Schedule a Conversation</a>
+          <a href="#services" class="btn btn-outline">Our Services</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="clients">
+  <div class="wrap">
+    <div class="clients-label">Trusted by leaders at</div>
+    <div class="clients-row">
+      <span class="client-name">Vantage Group</span>
+      <span class="client-name">Meridian Capital</span>
+      <span class="client-name">Altus Health</span>
+      <span class="client-name">Creston Industries</span>
+      <span class="client-name">Harbor Logistics</span>
+      <span class="client-name">Solent Partners</span>
+    </div>
+  </div>
+</div>
+
+<section class="section section-border" id="services">
+  <div class="wrap">
+    <div class="services-intro">
+      <div>
+        <div class="label">What we do</div>
+        <h2 class="heading">Three disciplines, one through line: better decisions.</h2>
+      </div>
+      <p>Every engagement at Northline is structured around producing measurable outcomes. We don't deliver reports and disappear — we embed alongside your leadership team and stay accountable to the results we commit to together.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service">
+        <h3>Corporate Strategy</h3>
+        <p>We help senior leaders sharpen competitive positioning, evaluate market opportunities, and make high-stakes resource allocation decisions with confidence.</p>
+        <ul>
+          <li>Market entry &amp; expansion</li>
+          <li>Competitive positioning</li>
+          <li>Portfolio strategy &amp; divestiture</li>
+          <li>M&amp;A due diligence</li>
+        </ul>
+      </div>
+      <div class="service">
+        <h3>Operational Excellence</h3>
+        <p>We translate strategic priorities into operational realities — reducing cost, improving throughput, and building the organizational muscle to sustain performance.</p>
+        <ul>
+          <li>Process transformation</li>
+          <li>Cost structure optimization</li>
+          <li>Supply chain redesign</li>
+          <li>Performance management</li>
+        </ul>
+      </div>
+      <div class="service">
+        <h3>Executive Advisory</h3>
+        <p>For CEOs and C-suite leaders who need a rigorous thought partner — someone who will challenge assumptions and provide honest, unfiltered perspective.</p>
+        <ul>
+          <li>Board &amp; investor relations</li>
+          <li>Organizational design</li>
+          <li>Leadership team alignment</li>
+          <li>Crisis navigation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section case-study">
+  <div class="wrap">
+    <div class="case-study-grid">
+      <div>
+        <div class="label">Selected Work</div>
+        <h2>A $900M manufacturer reduces time-to-market by 43%.</h2>
+        <p>Facing intensifying competition and bloated product development cycles, Creston Industries engaged Northline for a full operational audit. Over 14 months, we redesigned their stage-gate process, restructured three business units, and implemented governance frameworks that cut decision latency in half.</p>
+        <a href="#contact" class="btn-gold">Discuss Your Challenge</a>
+      </div>
+      <div class="cs-metrics">
+        <div class="cs-metric"><strong>43%</strong><span>Reduction in time-to-market</span></div>
+        <div class="cs-metric"><strong>$140M</strong><span>Annual savings identified</span></div>
+        <div class="cs-metric"><strong>14mo</strong><span>Engagement duration</span></div>
+        <div class="cs-metric"><strong>3</strong><span>Business units restructured</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border" id="approach">
+  <div class="wrap">
+    <div class="label">How we work</div>
+    <h2 class="heading">A four-phase model built for lasting impact.</h2>
+    <div class="approach-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Diagnostic</h3>
+        <p>Structured stakeholder interviews, data analysis, and benchmarking establish a clear picture of where value is being lost or left unrealized.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Strategy</h3>
+        <p>A tailored strategic roadmap with clear priorities, decision criteria, and resource implications. No generic frameworks — only what fits your situation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Execution</h3>
+        <p>We stay embedded through implementation — working alongside your team, removing blockers, and measuring progress against defined milestones.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Measurement</h3>
+        <p>Every engagement closes with defined KPIs, internal ownership handoff, and a 90-day review to confirm outcomes are holding.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border" id="team">
+  <div class="wrap">
+    <div class="label">Our People</div>
+    <h2 class="heading">Senior practitioners, not junior analysts.</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">
+          <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <rect width="300" height="400" fill="#e8dcc8"/>
+            <ellipse cx="150" cy="390" rx="110" ry="95" fill="#c9a07a"/>
+            <ellipse cx="150" cy="148" rx="62" ry="70" fill="#d4a97a"/>
+            <ellipse cx="150" cy="138" rx="48" ry="56" fill="#c4956a"/>
+          </svg>
+        </div>
+        <h3>Marcus Elliott</h3>
+        <div class="title">Managing Partner</div>
+        <p>25 years advising Fortune 500 leadership teams on strategy, M&A, and organizational transformation. Former partner at two global firms.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <rect width="300" height="400" fill="#d4dde8"/>
+            <ellipse cx="150" cy="390" rx="110" ry="95" fill="#9a7868"/>
+            <ellipse cx="150" cy="148" rx="62" ry="70" fill="#a88070"/>
+            <ellipse cx="150" cy="138" rx="48" ry="56" fill="#987060"/>
+          </svg>
+        </div>
+        <h3>Sarah Chen</h3>
+        <div class="title">Partner, Operations</div>
+        <p>Spent 12 years at McKinsey before joining Northline. Leads our operational excellence practice with deep expertise in manufacturing and lean transformation.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <rect width="300" height="400" fill="#d0dcd0"/>
+            <ellipse cx="150" cy="390" rx="110" ry="95" fill="#8a6a50"/>
+            <ellipse cx="150" cy="148" rx="62" ry="70" fill="#987860"/>
+            <ellipse cx="150" cy="138" rx="48" ry="56" fill="#886850"/>
+          </svg>
+        </div>
+        <h3>David Osei</h3>
+        <div class="title">Partner, Finance &amp; M&A</div>
+        <p>Former investment banker with 20 years structuring complex transactions. Leads our corporate finance advisory and M&A due diligence practice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section testimonial">
+  <div class="wrap">
+    <div class="testimonial-inner">
+      <blockquote>Northline didn't hand us a report and disappear. They stayed through the hard work of implementation and helped us hit targets we genuinely didn't think were reachable in the timeframe.</blockquote>
+      <cite>— Chief Executive Officer, Manufacturing firm, $1.2B revenue</cite>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-text">
+        <div class="label">Get in Touch</div>
+        <h2 class="heading">Every engagement starts with a conversation.</h2>
+        <p>We work with a limited number of clients each year to maintain the quality and depth of attention each engagement deserves. If you're navigating a significant strategic challenge, we'd like to hear about it.</p>
+        <div class="offices">
+          <h4>Our Offices</h4>
+          <div class="office"><span class="city">New York</span><span class="addr">One World Trade Center, Fl. 85</span></div>
+          <div class="office"><span class="city">London</span><span class="addr">22 Bishopsgate, EC2N 4BQ</span></div>
+          <div class="office"><span class="city">Singapore</span><span class="addr">One Raffles Place, Tower 2</span></div>
+          <div class="office"><span class="city">Chicago</span><span class="addr">Willis Tower, Suite 4400</span></div>
+        </div>
+      </div>
+      <div class="form-box">
+        <h3>Start the conversation</h3>
+        <div class="form-row">
+          <div class="fg"><label>First Name</label><input type="text" placeholder="James"></div>
+          <div class="fg"><label>Last Name</label><input type="text" placeholder="Warren"></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>Company</label><input type="text" placeholder="Acme Corp"></div>
+          <div class="fg"><label>Title</label><input type="text" placeholder="CEO"></div>
+        </div>
+        <div class="fg"><label>Email</label><input type="email" placeholder="james@acmecorp.com"></div>
+        <div class="fg">
+          <label>Area of Interest</label>
+          <select>
+            <option>Corporate Strategy</option>
+            <option>Operational Excellence</option>
+            <option>Executive Advisory</option>
+            <option>M&amp;A Due Diligence</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>Tell us about your challenge</label><textarea placeholder="Brief description of the situation you're navigating..."></textarea></div>
+        <a href="#" class="btn btn-dark btn-full">Submit Inquiry</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Northline Advisory</div>
+        <div class="footer-tagline">Strategic counsel for leaders at turning points. Built on rigorous analysis and honest partnership.</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#">Corporate Strategy</a>
+        <a href="#">Operational Excellence</a>
+        <a href="#">Executive Advisory</a>
+        <a href="#">M&amp;A Advisory</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Our Team</a>
+        <a href="#">Insights</a>
+        <a href="#">Careers</a>
+      </div>
+      <div class="footer-col">
+        <h4>Offices</h4>
+        <a href="#">New York</a>
+        <a href="#">London</a>
+        <a href="#">Singapore</a>
+        <a href="#">Chicago</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Northline Advisory. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
