@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -5,6 +8,33 @@ function escapeHtml(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function getConfigApiKey() {
+  try {
+    const configPath = path.join(process.cwd(), "config.yaml");
+    const configText = fs.readFileSync(configPath, "utf8");
+    const resendKeyMatch = configText.match(/^\s*resend_key:\s*["']?([^"'\n]+)["']?\s*$/m);
+    if (resendKeyMatch) {
+      return resendKeyMatch[1].trim();
+    }
+
+    const legacyMatch = configText.match(/^\s*api_key:\s*["']?([^"'\n]+)["']?\s*$/m);
+    return legacyMatch ? legacyMatch[1].trim() : "";
+  } catch {
+    return "";
+  }
+}
+
+function getErrorMessage(data, fallback) {
+  if (!data) return fallback;
+  if (typeof data === "string" && data.trim()) return data.trim();
+  if (typeof data.message === "string" && data.message.trim()) return data.message.trim();
+  if (typeof data.error === "string" && data.error.trim()) return data.error.trim();
+  if (data.error && typeof data.error.message === "string" && data.error.message.trim()) {
+    return data.error.message.trim();
+  }
+  return fallback;
 }
 
 module.exports = async (req, res) => {
@@ -19,10 +49,10 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Name, email, and project details are required." });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY || getConfigApiKey();
   if (!apiKey) {
     return res.status(500).json({
-      error: "Missing RESEND_API_KEY environment variable.",
+      error: "Missing RESEND_API_KEY environment variable or config.yaml resend_key.",
     });
   }
 
@@ -37,6 +67,7 @@ module.exports = async (req, res) => {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        "User-Agent": "vercel-hosting-consult-form/1.0",
       },
       body: JSON.stringify({
         from: "Website Builder Service <onboarding@resend.dev>",
@@ -85,12 +116,12 @@ module.exports = async (req, res) => {
 
     if (!response.ok) {
       return res.status(response.status).json({
-        error: data.message || "Failed to send consult request.",
+        error: getErrorMessage(data, "Failed to send consult request."),
       });
     }
 
     return res.status(200).json({ success: true, id: data.id });
-  } catch {
+  } catch (error) {
     return res.status(500).json({ error: "Unexpected error while sending email." });
   }
 };

@@ -4,6 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asier Innovation — Professional Website Design &amp; Launch</title>
+  <!-- Calendly badge widget -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <style>
+    .calendly-badge-widget .calendly-badge-content {
+      background: linear-gradient(160deg,
+        #f8f8f8 0%,
+        #d0d0d0 25%,
+        #a8a8a8 45%,
+        #c8c8c8 55%,
+        #efefef 75%,
+        #c0c0c0 100%
+      ) !important;
+      color: #1a1a1a !important;
+      text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.7) !important;
+      border: 1px solid rgba(255,255,255,0.4) !important;
+    }
+  </style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -77,6 +95,50 @@
     .nav-cta:hover { color: #fff; }
     .nav.is-light .nav-cta { color: var(--accent); }
     .nav.is-light .nav-cta:hover { color: var(--accent-dk); }
+
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+    /* Hamburger button — hidden on desktop */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      width: 44px; height: 44px;
+      background: none; border: none; cursor: pointer; padding: 0; gap: 5px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: rgba(255,255,255,0.8); border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .nav.is-light .nav-hamburger span { background: var(--ink); }
+    .nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    .nav-mobile {
+      display: none;
+      position: fixed; top: 52px; left: 0; right: 0; z-index: 299;
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0.5rem 1.5rem 1.5rem; flex-direction: column;
+    }
+    .nav-mobile.is-open { display: flex; }
+    .nav-mobile a {
+      display: block; padding: 1rem 0;
+      font-size: 1.05rem; font-weight: 600;
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-mobile a:hover { color: #fff; }
+    .nav-mobile-cta {
+      margin-top: 1rem;
+      display: block; text-align: center; padding: 1rem !important;
+      background: #fff; color: #000 !important; border-radius: 980px;
+      font-size: 0.95rem; font-weight: 700; border-bottom: none !important;
+    }
 
     /* ─── LAYOUT ─── */
     .wrap        { width: min(1100px, calc(100% - 3rem)); margin: 0 auto; }
@@ -167,7 +229,7 @@
     .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
     .btn-primary {
-      display: inline-block; padding: 0.88rem 2.2rem;
+      display: inline-block; padding: 1rem 2.2rem;
       background: #fff; color: #000;
       border-radius: 980px; text-decoration: none;
       font-size: 0.9rem; font-weight: 600; letter-spacing: -0.01em;
@@ -176,7 +238,7 @@
     .btn-primary:hover { background: #e8e8ed; transform: scale(1.02); }
 
     .btn-ghost {
-      display: inline-block; padding: 0.88rem 2.2rem;
+      display: inline-block; padding: 1rem 2.2rem;
       border: 1px solid rgba(255,255,255,0.22);
       background: rgba(255,255,255,0.05);
       color: rgba(255,255,255,0.86);
@@ -211,8 +273,8 @@
     .stat-lbl { font-size: 0.8rem; color: var(--text-2); font-weight: 500; }
 
     /* ─── SECTION SHARED ─── */
-    .sec { padding: 7rem 0; }
-    .sec-sm { padding: 5.5rem 0; }
+    .sec { padding: clamp(4rem, 10vw, 7rem) 0; }
+    .sec-sm { padding: clamp(3rem, 7vw, 5.5rem) 0; }
     .chip {
       display: inline-block;
       font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
@@ -248,7 +310,7 @@
     .svc-card p { font-size: 0.875rem; color: var(--text-2); line-height: 1.75; }
 
     /* ─── SHOWCASE ─── */
-    .showcase-sec { background: #000; padding: 7rem 0; }
+    .showcase-sec { background: #000; padding: clamp(4rem, 10vw, 7rem) 0; }
     .showcase-sec .chip { color: rgba(255,255,255,0.38); }
     .showcase-sec .sec-h { color: #f5f5f7; }
     .showcase-sec .sec-p { color: rgba(255,255,255,0.45); max-width: 50ch; }
@@ -293,9 +355,20 @@
       flex: 1; height: 24px; background: rgba(255,255,255,0.06);
       border-radius: 5px; display: flex; align-items: center; padding: 0 0.75rem;
     }
-    .sc-url-text { font-size: 0.68rem; color: rgba(255,255,255,0.28); font-family: ui-monospace, monospace; }
+    .sc-url-text { font-size: 0.75rem; color: rgba(255,255,255,0.28); font-family: ui-monospace, monospace; }
 
     .sc-frame { position: relative; height: 460px; overflow: hidden; background: #fff; }
+
+    /* Swipe capture overlay — invisible layer over the iframe */
+    .sc-swipe-overlay {
+      position: absolute; inset: 0; z-index: 10;
+      touch-action: pan-y; /* let vertical scroll through, capture horizontal */
+      pointer-events: none; /* desktop: don't block iframe interaction */
+    }
+    @media (hover: none) {
+      /* touch devices: enable pointer events so swipe fires */
+      .sc-swipe-overlay { pointer-events: auto; }
+    }
 
     .showcase-preview {
       position: absolute; inset: 0;
@@ -347,6 +420,8 @@
       width: 7px; height: 7px; border-radius: 50%;
       padding: 0; border: 0; background: rgba(255,255,255,0.18);
       cursor: pointer; transition: all 0.25s;
+      /* enlarge tap target without affecting visual size */
+      outline: 18px solid transparent;
     }
     .showcase-dot.is-active { background: #fff; width: 22px; border-radius: 4px; }
     .sc-link {
@@ -418,7 +493,7 @@
     }
     .btn-price {
       display: block; text-align: center;
-      padding: 0.8rem 1.5rem; border-radius: 980px;
+      padding: 1rem 1.5rem; border-radius: 980px;
       text-decoration: none; font-size: 0.9rem; font-weight: 600; letter-spacing: -0.01em;
       transition: all 0.2s;
     }
@@ -429,7 +504,7 @@
 
     /* ─── CTA STRIP ─── */
     .cta-strip {
-      background: #000; padding: 7rem 0;
+      background: #000; padding: clamp(4rem, 10vw, 7rem) 0;
       text-align: center; position: relative; overflow: hidden;
     }
     .cta-strip .aurora { opacity: 0.65; }
@@ -461,7 +536,7 @@
     .fg label { font-size: 0.78rem; font-weight: 600; color: var(--text-2); }
     .fg input, .fg textarea {
       border: 1.5px solid rgba(0,0,0,0.1); border-radius: 10px;
-      padding: 0.75rem 1rem; font-size: 0.9rem; font-family: inherit;
+      padding: 0.875rem 1rem; font-size: 0.9rem; font-family: inherit;
       color: var(--text); background: #fff; width: 100%;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
@@ -472,7 +547,7 @@
     .fg textarea { min-height: 110px; resize: vertical; }
     .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .btn-submit {
-      width: 100%; padding: 0.9rem; border: none; border-radius: 980px;
+      width: 100%; padding: 1rem; border: none; border-radius: 980px;
       background: var(--ink); color: #fff;
       font-size: 0.9rem; font-weight: 700; font-family: inherit; letter-spacing: -0.01em;
       cursor: pointer; transition: all 0.22s;
@@ -488,7 +563,7 @@
     .footer-logo-img { display: block; height: 32px; width: auto; margin-bottom: 0.85rem; filter: invert(1); opacity: 0.75; }
     .footer-brand-name { font-size: 0.95rem; font-weight: 700; color: #f5f5f7; margin-bottom: 0.6rem; }
     .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.38); line-height: 1.65; max-width: 26ch; }
-    .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 1rem; }
+    .footer-col h4 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 1rem; }
     .footer-col a { display: block; color: rgba(255,255,255,0.52); text-decoration: none; font-size: 0.875rem; padding: 0.25rem 0; transition: color 0.2s; }
     .footer-col a:hover { color: #f5f5f7; }
     .footer-bottom {
@@ -501,7 +576,10 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
+      .nav { padding: 0 1.25rem; }
       .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
       .services-intro { grid-template-columns: 1fr; gap: 2rem; }
       .services-grid { grid-template-columns: 1fr; }
       .showcase-stage { grid-template-columns: 40px 1fr 40px; }
@@ -515,12 +593,29 @@
       .stat-cell { border-bottom: 1px solid var(--border); }
     }
     @media (max-width: 600px) {
-      .showcase-stage { grid-template-columns: 1fr; }
-      .sc-nav-row { display: flex; justify-content: center; gap: 0.75rem; }
+      .showcase-stage { display: block; position: relative; }
       .sc-frame { height: 300px; }
+      /* Float nav buttons over the frame on mobile */
+      [data-showcase-prev],
+      .sc-nav-row {
+        position: absolute;
+        /* chrome bar ~48px + half frame 150px = 198px */
+        top: 198px; transform: translateY(-50%);
+        z-index: 20;
+      }
+      [data-showcase-prev] { left: 0.75rem; }
+      .sc-nav-row { right: 0.75rem; display: block; }
       .fg-row { grid-template-columns: 1fr; }
       .footer-main { grid-template-columns: 1fr; }
       .stats-row { grid-template-columns: 1fr 1fr; }
+      .form-box { padding: 1.75rem; }
+    }
+    @media (max-width: 375px) {
+      .nav { padding: 0 1rem; }
+      .stat-cell { padding: 1.5rem 0.75rem; }
+      .stat-num { font-size: 1.7rem; }
+      .hero { padding: 8rem 1.25rem 5rem; }
+      .form-box { padding: 1.25rem; }
     }
   </style>
 </head>
@@ -535,8 +630,22 @@
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Get started →</a>
+  <div class="nav-right">
+    <a href="#contact" class="nav-cta">Get started →</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+
+<!-- Mobile nav drawer -->
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
+  <a href="#services" class="nav-mobile-link">Services</a>
+  <a href="#work" class="nav-mobile-link">Work</a>
+  <a href="#pricing" class="nav-mobile-link">Pricing</a>
+  <a href="#contact" class="nav-mobile-link">Contact</a>
+  <a href="#contact" class="nav-mobile-cta">Get started →</a>
+</div>
 
 <!-- ─── HERO ─── -->
 <section class="hero" id="hero">
@@ -572,8 +681,6 @@
     <div class="stats-row">
       <div class="stat-cell"><span class="stat-num">2–4wk</span><span class="stat-lbl">Average delivery time</span></div>
       <div class="stat-cell"><span class="stat-num">100%</span><span class="stat-lbl">Custom — no templates</span></div>
-      <div class="stat-cell"><span class="stat-num">12+</span><span class="stat-lbl">Industries served</span></div>
-      <div class="stat-cell"><span class="stat-num">AI-ready</span><span class="stat-lbl">Built to expand</span></div>
     </div>
   </div>
 </div>
@@ -655,6 +762,7 @@
 
         <!-- Frame -->
         <div class="sc-frame">
+          <div class="sc-swipe-overlay" aria-hidden="true"></div>
           <div class="showcase-loading" aria-hidden="true"><span>Loading preview</span></div>
           <iframe
             class="showcase-preview is-active"
@@ -677,6 +785,13 @@
             title="Restaurant launch sample preview"
             loading="eager"
           ></iframe>
+          <iframe
+            class="showcase-preview"
+            data-showcase-frame="3"
+            src="../sample-sites/tattoo-studio/index.html"
+            title="Tattoo studio sample preview"
+            loading="eager"
+          ></iframe>
         </div>
 
         <!-- Info bar -->
@@ -691,6 +806,7 @@
               <button class="showcase-dot is-active" type="button" aria-label="Local service preview" data-showcase-dot="0"></button>
               <button class="showcase-dot" type="button" aria-label="Consulting preview" data-showcase-dot="1"></button>
               <button class="showcase-dot" type="button" aria-label="Restaurant preview" data-showcase-dot="2"></button>
+              <button class="showcase-dot" type="button" aria-label="Tattoo studio preview" data-showcase-dot="3"></button>
             </div>
             <a class="sc-link" id="showcaseLink" href="../sample-sites/local-service/index.html" target="_blank" rel="noreferrer">Open live preview</a>
           </div>
@@ -871,6 +987,7 @@
         <a href="../sample-sites/local-service/index.html" target="_blank">Local Service</a>
         <a href="../sample-sites/consulting-studio/index.html" target="_blank">Consulting Studio</a>
         <a href="../sample-sites/restaurant-launch/index.html" target="_blank">Restaurant Launch</a>
+        <a href="../sample-sites/tattoo-studio/index.html" target="_blank">Tattoo Studio</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -893,6 +1010,25 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('is-light', window.scrollY > heroSection.offsetHeight * 0.85);
   }, { passive: true });
+
+  // ─── Hamburger menu ───
+  const hamburger = document.getElementById('navHamburger');
+  const navMobile = document.getElementById('navMobile');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navMobile.classList.toggle('is-open');
+    hamburger.classList.toggle('is-open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    navMobile.setAttribute('aria-hidden', !isOpen);
+  });
+  // Close menu when a link is clicked
+  navMobile.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMobile.classList.remove('is-open');
+      hamburger.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      navMobile.setAttribute('aria-hidden', 'true');
+    });
+  });
 
   // ─── Showcase carousel ───
   const showcaseItems = [
@@ -919,6 +1055,14 @@
       href: '../sample-sites/restaurant-launch/index.html',
       url: 'preview.asierinnovation.com/restaurant',
       frameTitle: 'Restaurant launch sample preview'
+    },
+    {
+      meta: 'Creative Studio',
+      title: 'Axiom Tattoo Co.',
+      copy: 'A dark, editorial site for a custom tattoo artist — SVG gallery artwork, style specialties, consultation booking form, and a sticky mobile CTA.',
+      href: '../sample-sites/tattoo-studio/index.html',
+      url: 'preview.asierinnovation.com/tattoo',
+      frameTitle: 'Tattoo studio sample preview'
     }
   ];
 
@@ -932,7 +1076,7 @@
   const showcasePrev    = document.querySelector('[data-showcase-prev]');
   const showcaseNext    = document.querySelector('[data-showcase-next]');
   const showcaseDots    = Array.from(document.querySelectorAll('[data-showcase-dot]'));
-  const showcaseLoaded  = showcaseFrames.map((f, i) => i === 0);
+  const showcaseLoaded  = showcaseFrames.map(() => true);
 
   let showcaseIndex     = 0;
   let showcaseIsAnimating = false;
@@ -987,6 +1131,24 @@
 
   renderShowcase(showcaseIndex);
 
+  // ─── Swipe gestures (mobile) ───
+  const swipeOverlay = document.querySelector('.sc-swipe-overlay');
+  let swipeStartX = 0, swipeStartY = 0;
+  swipeOverlay.addEventListener('touchstart', (e) => {
+    swipeStartX = e.touches[0].clientX;
+    swipeStartY = e.touches[0].clientY;
+  }, { passive: true });
+  swipeOverlay.addEventListener('touchend', (e) => {
+    const dx = swipeStartX - e.changedTouches[0].clientX;
+    const dy = swipeStartY - e.changedTouches[0].clientY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      queueShowcase(dx > 0
+        ? (showcaseIndex + 1) % showcaseItems.length
+        : (showcaseIndex - 1 + showcaseItems.length) % showcaseItems.length
+      );
+    }
+  }, { passive: true });
+
   // ─── Consult form ───
   const consultForm = document.getElementById('consultForm');
   const formStatus  = document.getElementById('formStatus');
@@ -1008,9 +1170,18 @@
         body: JSON.stringify(payload)
       });
       const contentType = response.headers.get('content-type') || '';
-      const data = contentType.includes('application/json')
-        ? await response.json()
-        : { error: 'Consult form endpoint is not available in this environment yet.' };
+      let data;
+
+      if (contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const responseText = (await response.text()).trim();
+        data = {
+          error: responseText
+            ? `Consult form endpoint returned ${response.status}. ${responseText.slice(0, 140)}`
+            : 'Consult form endpoint is not available in this environment yet.'
+        };
+      }
       if (!response.ok) throw new Error(data.error || 'We could not send your request.');
       consultForm.reset();
       formStatus.textContent = 'Consult request sent. I\'ll be in touch within one business day.';
@@ -1024,5 +1195,8 @@
     }
   });
 </script>
+<!-- Calendly badge widget -->
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/asierdevteam/30min', text: 'Schedule time with me', color: '#c0c0c0', textColor: '#1a1a1a', branding: true }); }</script>
 </body>
 </html>

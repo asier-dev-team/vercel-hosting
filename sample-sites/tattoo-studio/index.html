@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Axiom Tattoo Co. — Custom tattoo art by Kai Mercer. Fine line, blackwork, geometric, and neo-traditional. East Los Angeles. By appointment only.">
+  <title>Axiom Tattoo Co. — Kai Mercer · East Los Angeles</title>
+
+  <style>
+    /* ============================================================
+       TOKENS
+    ============================================================ */
+    :root {
+      --bg:          #080808;
+      --bg2:         #111111;
+      --bg3:         #1c1c1c;
+      --text:        #ede8df;
+      --muted:       #6b6460;
+      --accent:      #c9a84c;
+      --accent-dim:  rgba(201,168,76,0.35);
+      --border:      rgba(255,255,255,0.07);
+      --border-med:  rgba(255,255,255,0.13);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: 72px;
+    }
+
+    @media (min-width: 768px) {
+      body { padding-bottom: 0; }
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .wrap {
+      width: calc(100% - 1.5rem);
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .wrap {
+        width: min(1160px, calc(100% - 3rem));
+      }
+    }
+
+    section {
+      padding: clamp(3.5rem, 9vw, 6rem) 0;
+    }
+
+    /* ============================================================
+       TYPOGRAPHY UTILITIES
+    ============================================================ */
+    .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 540px;
+    }
+
+    /* ============================================================
+       ANNOUNCEMENT BAR
+    ============================================================ */
+    .announce-bar {
+      background: rgba(201,168,76,0.12);
+      border-bottom: 1px solid var(--accent-dim);
+      text-align: center;
+      padding: 0.6rem 1rem;
+    }
+
+    .announce-bar a {
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      display: block;
+    }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: 60px;
+      background: rgba(8,8,8,0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      width: calc(100% - 1.5rem);
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .nav-inner {
+        width: min(1160px, calc(100% - 3rem));
+        position: relative;
+      }
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      text-transform: uppercase;
+      text-decoration: none;
+      z-index: 2;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .nav-links a {
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+    }
+
+    .nav-cta {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        height: 36px;
+        padding: 0 1.25rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 2px;
+        transition: background 0.2s, color 0.2s;
+        text-decoration: none;
+        z-index: 2;
+      }
+
+      .nav-cta:hover {
+        background: var(--accent);
+        color: #0a0808;
+      }
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 2;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      transition: transform 0.25s, opacity 0.25s;
+      transform-origin: center;
+    }
+
+    .hamburger.is-open span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+    .hamburger.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.is-open span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    @media (min-width: 768px) {
+      .hamburger { display: none; }
+    }
+
+    /* ============================================================
+       MOBILE DRAWER
+    ============================================================ */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 199;
+      background: #0a0808;
+      flex-direction: column;
+      padding: 5rem 2rem 2.5rem;
+    }
+
+    .nav-drawer.is-open {
+      display: flex;
+    }
+
+    .drawer-close {
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.6rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drawer-links {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-links a {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .drawer-links a:hover {
+      color: var(--accent);
+    }
+
+    .drawer-bottom {
+      margin-top: 2rem;
+    }
+
+    .drawer-cta {
+      display: block;
+      width: 100%;
+      padding: 1.1rem;
+      background: var(--accent);
+      color: #0a0808;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      margin-bottom: 1.25rem;
+    }
+
+    .drawer-ig {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 640px;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 60%, rgba(80,40,10,0.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 30%, rgba(50,30,5,0.2) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-location {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(5rem, 22vw, 16rem);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      line-height: 0.85;
+      color: var(--text);
+    }
+
+    .hero-sub-line {
+      font-size: clamp(0.9rem, 3vw, 1.4rem);
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .hero-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto 2rem;
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      color: rgba(237,232,223,0.5);
+      letter-spacing: 0.06em;
+      font-style: italic;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #0a0808;
+      padding: 1rem 2rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      min-height: 48px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-med);
+      background: transparent;
+      color: var(--text);
+      padding: 1rem 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      min-height: 48px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .hero-scroll-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       GALLERY
+    ============================================================ */
+    .gallery-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+
+    @media (min-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .gallery-item {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg2);
+      cursor: pointer;
+    }
+
+    .gallery-item svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .gallery-item:hover svg {
+      transform: scale(1.04);
+    }
+
+    .gallery-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1rem 0.75rem;
+      background: linear-gradient(to top, rgba(8,8,8,0.92) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    /* Always show thin label hint on mobile */
+    @media (max-width: 767px) {
+      .gallery-label {
+        opacity: 1;
+        padding: 1rem 0.6rem 0.5rem;
+      }
+
+      .gallery-label .gl-style {
+        font-size: 0.6rem;
+      }
+
+      .gallery-label .gl-artist {
+        display: none;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .gallery-item:hover .gallery-label {
+        opacity: 1;
+      }
+    }
+
+    .gl-style {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      font-weight: 600;
+      display: block;
+    }
+
+    .gl-artist {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ============================================================
+       ARTIST SECTION
+    ============================================================ */
+    .artist-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .artist-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .artist-inner {
+        flex-direction: row;
+        gap: 5rem;
+        align-items: flex-start;
+      }
+
+      .artist-left {
+        flex: 0 0 auto;
+        width: 340px;
+      }
+
+      .artist-right {
+        flex: 1;
+      }
+    }
+
+    .artist-photo-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      width: 100%;
+      max-width: 380px;
+      background: var(--bg3);
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .artist-photo-wrap {
+        max-width: 100%;
+      }
+    }
+
+    .artist-photo-wrap svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .artist-photo-credit {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .artist-photo-rule {
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .artist-photo-ig {
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    .artist-bio p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .artist-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+      padding: 1.75rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .stat-num {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .artist-cta-link {
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .artist-cta-link:hover { opacity: 0.7; }
+
+    /* ============================================================
+       STYLES SECTION
+    ============================================================ */
+    .styles-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .styles-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    @media (min-width: 768px) {
+      .styles-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+    }
+
+    .style-card {
+      background: var(--bg2);
+      padding: 2rem;
+      border: none;
+    }
+
+    .style-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 1.25rem;
+      opacity: 0.7;
+    }
+
+    .style-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .style-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .style-tags {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: rgba(201,168,76,0.6);
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       PROCESS SECTION
+    ============================================================ */
+    .process-section {
+      background: var(--bg3);
+      border-top: 1px solid var(--border);
+    }
+
+    .process-header {
+      margin-bottom: 3rem;
+    }
+
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .process-steps {
+        flex-direction: row;
+        gap: 3rem;
+      }
+    }
+
+    .process-step {
+      flex: 1;
+    }
+
+    .step-num {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--accent);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .step-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .process-divider {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .process-divider {
+        display: block;
+        width: 1px;
+        background: var(--border);
+        flex-shrink: 0;
+      }
+    }
+
+    /* ============================================================
+       BOOKING SECTION
+    ============================================================ */
+    .booking-section {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .booking-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .booking-inner {
+        flex-direction: row;
+        gap: 5rem;
+        align-items: flex-start;
+      }
+
+      .booking-left {
+        flex: 0 0 auto;
+        width: 340px;
+      }
+
+      .booking-right {
+        flex: 1;
+      }
+    }
+
+    .booking-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+    }
+
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .contact-val {
+      color: var(--text);
+    }
+
+    .booking-availability {
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    /* Form */
+    .consult-form {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 500px) {
+      .form-row.two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-field label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-med);
+      border-radius: 2px;
+      padding: 0.9rem 1rem;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+      min-height: 48px;
+      width: 100%;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6460' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    .form-field select option {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    .form-field textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: var(--muted);
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1.1rem;
+      background: var(--accent);
+      color: #0a0808;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      min-height: 52px;
+      font-family: inherit;
+      transition: opacity 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover { opacity: 0.88; }
+
+    /* ============================================================
+       FAQ SECTION
+    ============================================================ */
+    .faq-section {
+      background: var(--bg2);
+    }
+
+    .faq-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .faq-list {
+      max-width: 720px;
+    }
+
+    details {
+      border-top: 1px solid var(--border);
+    }
+
+    details:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    summary {
+      padding: 1.2rem 0;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: '+';
+      color: var(--accent);
+      font-size: 1.4rem;
+      font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    details[open] summary::after {
+      content: '−';
+    }
+
+    details p {
+      padding: 0 0 1.2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .site-footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: clamp(3rem, 7vw, 5rem) 0 0;
+    }
+
+    .footer-upper {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      padding-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    @media (min-width: 768px) {
+      .footer-upper {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+    }
+
+    .footer-brand-name {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-ig {
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-links-wrap {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .footer-links-col h4 {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-links-col a {
+      font-size: 0.85rem;
+      color: rgba(237,232,223,0.55);
+      transition: color 0.2s;
+    }
+
+    .footer-links-col a:hover {
+      color: var(--text);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-bottom span {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ============================================================
+       STICKY BOTTOM CTA (mobile)
+    ============================================================ */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 150;
+      border-top: 1px solid rgba(201,168,76,0.5);
+    }
+
+    .sticky-cta a {
+      display: block;
+      width: 100%;
+      background: var(--accent);
+      color: #0a0808;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      padding: 1.1rem;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+      .sticky-cta { display: none; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       ANNOUNCEMENT BAR
+  ============================================================ -->
+  <a class="announce-bar" href="#booking">
+    Currently booking May &amp; June — limited spots available
+  </a>
+
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">AXIOM</a>
+
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#styles">Styles</a>
+        <a href="#booking">Book</a>
+      </div>
+
+      <a href="#booking" class="nav-cta">Book Consult</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       MOBILE DRAWER
+  ============================================================ -->
+  <div class="nav-drawer" id="navDrawer" role="dialog" aria-label="Navigation menu" aria-modal="true">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">×</button>
+
+    <nav class="drawer-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#styles">Styles</a>
+      <a href="#booking">Book</a>
+    </nav>
+
+    <div class="drawer-bottom">
+      <a href="#booking" class="drawer-cta">Book a Consultation</a>
+      <p class="drawer-ig">@axiomtattoo</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-location">Los Angeles · Est. 2014</p>
+      <h1>AXIOM</h1>
+      <div class="hero-sub-line">Tattoo Co.</div>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">Custom tattoo art by Kai Mercer</p>
+      <div class="hero-ctas">
+        <a href="#booking" class="btn-primary">Book a Consultation</a>
+        <a href="#work" class="btn-secondary">View Work</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-label">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GALLERY
+  ============================================================ -->
+  <section id="work">
+    <div class="wrap">
+      <div class="gallery-header">
+        <span class="label">Selected Work</span>
+        <h2 class="section-heading">Every piece begins with a conversation.</h2>
+        <p class="section-sub">A selection of recent custom work across styles. All designs are unique — created specifically for each client and never repeated.</p>
+      </div>
+    </div>
+
+    <div class="gallery-grid">
+
+      <!-- Piece 1: Geometric Mandala -->
+      <div class="gallery-item">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" aria-label="Geometric mandala blackwork tattoo">
+          <rect width="300" height="400" fill="#111"/>
+          <!-- Outer ring with triangular rays -->
+          <g transform="translate(150,200)">
+            <!-- Triangular rays -->
+            <g stroke="rgba(237,232,223,0.55)" stroke-width="0.8" fill="none">
+              <polygon points="0,-148 6,-130 -6,-130"/>
+              <polygon points="105,-104 96,-88 90,-103"/>
+              <polygon points="148,0 130,-6 130,6"/>
+              <polygon points="105,104 90,103 96,88"/>
+              <polygon points="0,148 -6,130 6,130"/>
+              <polygon points="-105,104 -96,88 -90,103"/>
+              <polygon points="-148,0 -130,6 -130,-6"/>
+              <polygon points="-105,-104 -90,-103 -96,-88"/>
+            </g>
+            <!-- Outer circles -->
+            <circle r="140" stroke="rgba(237,232,223,0.18)" stroke-width="0.8" fill="none"/>
+            <circle r="128" stroke="rgba(237,232,223,0.3)" stroke-width="0.6" fill="none"/>
+            <circle r="118" stroke="rgba(237,232,223,0.4)" stroke-width="1.5" fill="none"/>
+            <!-- Dot ring -->
+            <g fill="rgba(237,232,223,0.65)">
+              <circle cx="0" cy="-118" r="2.2"/>
+              <circle cx="83.4" cy="-83.4" r="2.2"/>
+              <circle cx="118" cy="0" r="2.2"/>
+              <circle cx="83.4" cy="83.4" r="2.2"/>
+              <circle cx="0" cy="118" r="2.2"/>
+              <circle cx="-83.4" cy="83.4" r="2.2"/>
+              <circle cx="-118" cy="0" r="2.2"/>
+              <circle cx="-83.4" cy="-83.4" r="2.2"/>
+            </g>
+            <!-- Petal ring -->
+            <g stroke="rgba(237,232,223,0.45)" stroke-width="1" fill="none">
+              <path d="M0,-105 Q18,-80 0,-55 Q-18,-80 0,-105"/>
+              <path d="M74,-74 Q80,-46 55,-30 Q46,-58 74,-74"/>
+              <path d="M105,0 Q80,18 55,0 Q80,-18 105,0"/>
+              <path d="M74,74 Q46,58 55,30 Q80,46 74,74"/>
+              <path d="M0,105 Q-18,80 0,55 Q18,80 0,105"/>
+              <path d="M-74,74 Q-80,46 -55,30 Q-46,58 -74,74"/>
+              <path d="M-105,0 Q-80,-18 -55,0 Q-80,18 -105,0"/>
+              <path d="M-74,-74 Q-46,-58 -55,-30 Q-80,-46 -74,-74"/>
+            </g>
+            <!-- Middle circles -->
+            <circle r="90" stroke="rgba(237,232,223,0.25)" stroke-width="0.6" fill="none"/>
+            <circle r="78" stroke="rgba(237,232,223,0.35)" stroke-width="1.2" fill="none"/>
+            <!-- 8-pointed star -->
+            <g stroke="rgba(237,232,223,0.8)" stroke-width="1.5" fill="none">
+              <line x1="0" y1="-70" x2="0" y2="70"/>
+              <line x1="-70" y1="0" x2="70" y2="0"/>
+              <line x1="-49.5" y1="-49.5" x2="49.5" y2="49.5"/>
+              <line x1="49.5" y1="-49.5" x2="-49.5" y2="49.5"/>
+              <polygon points="0,-60 14,-14 60,0 14,14 0,60 -14,14 -60,0 -14,-14" stroke-width="1.5" stroke="rgba(237,232,223,0.7)" fill="none"/>
+            </g>
+            <!-- Inner circles -->
+            <circle r="55" stroke="rgba(237,232,223,0.5)" stroke-width="1" fill="none"/>
+            <circle r="40" stroke="rgba(237,232,223,0.6)" stroke-width="1.5" fill="none"/>
+            <circle r="24" stroke="rgba(237,232,223,0.7)" stroke-width="1.2" fill="none"/>
+            <circle r="12" stroke="rgba(237,232,223,0.8)" stroke-width="1.5" fill="none"/>
+            <!-- Center dot -->
+            <circle r="3.5" fill="rgba(237,232,223,0.9)"/>
+            <!-- Small accent dots inner ring -->
+            <g fill="rgba(237,232,223,0.55)">
+              <circle cx="0" cy="-40" r="1.5"/>
+              <circle cx="28.3" cy="-28.3" r="1.5"/>
+              <circle cx="40" cy="0" r="1.5"/>
+              <circle cx="28.3" cy="28.3" r="1.5"/>
+              <circle cx="0" cy="40" r="1.5"/>
+              <circle cx="-28.3" cy="28.3" r="1.5"/>
+              <circle cx="-40" cy="0" r="1.5"/>
+              <circle cx="-28.3" cy="-28.3" r="1.5"/>
+            </g>
+          </g>
+        </svg>
+        <div class="gallery-label">
+          <span class="gl-style">Geometric Blackwork</span>
+          <span class="gl-artist">Kai Mercer</span>
+        </div>
+      </div>
+
+      <!-- Piece 2: Fine Line Botanical -->
+      <div class="gallery-item">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" aria-label="Fine line botanical tattoo">
+          <rect width="300" height="400" fill="#0f0f0f"/>
+          <g stroke="rgba(237,232,223,0.7)" stroke-width="0.8" fill="none" stroke-linecap="round">
+            <!-- Main stem -->
+            <path d="M150,370 C148,320 152,280 148,240 C144,200 152,160 150,120 C148,80 150,55 150,40"/>
+            <!-- Lower leaves left -->
+            <path d="M149,330 C130,315 110,305 100,290 C115,298 130,308 149,318"/>
+            <!-- Lower leaves right -->
+            <path d="M150,320 C170,308 190,295 200,278 C185,290 168,300 150,310"/>
+            <!-- Mid leaves left -->
+            <path d="M148,270 C128,252 105,248 92,232 C108,242 128,250 148,260"/>
+            <!-- Mid leaves right -->
+            <path d="M150,262 C172,246 194,240 205,222 C190,235 170,244 150,254"/>
+            <!-- Upper leaves left -->
+            <path d="M148,210 C130,195 112,186 100,170 C115,180 132,190 148,200"/>
+            <!-- Upper leaves right -->
+            <path d="M150,202 C168,188 186,176 196,160 C182,172 164,184 150,194"/>
+            <!-- Smaller mid leaves -->
+            <path d="M149,240 C138,228 124,224 115,212 C126,220 138,228 149,232"/>
+            <path d="M150,234 C160,224 174,218 182,206 C171,214 159,222 150,228"/>
+            <!-- Top branch left -->
+            <path d="M149,155 C136,138 122,128 112,112 C124,124 136,136 149,148"/>
+            <!-- Top branch right -->
+            <path d="M150,148 C162,134 174,122 184,108 C172,120 160,134 150,142"/>
+            <!-- Flowers at top -->
+            <!-- Flower 1 center -->
+            <circle cx="150" cy="38" r="5" stroke-width="0.8"/>
+            <path d="M150,33 C152,28 156,26 158,30 C156,34 153,36 150,33"/>
+            <path d="M155,36 C160,36 163,40 160,42 C157,42 154,40 155,36"/>
+            <path d="M150,43 C148,48 144,50 142,46 C144,42 147,40 150,43"/>
+            <path d="M145,36 C140,36 137,40 140,42 C143,42 146,40 145,36"/>
+            <!-- Flower 2 -->
+            <circle cx="136" cy="118" r="4"/>
+            <path d="M136,114 C138,110 141,108 142,112 C140,115 138,116 136,114"/>
+            <path d="M140,116 C144,117 146,120 143,122 C141,122 139,120 140,116"/>
+            <path d="M136,122 C134,126 131,128 130,124 C131,121 133,120 136,122"/>
+            <path d="M132,116 C128,117 126,120 129,122 C131,122 133,120 132,116"/>
+            <!-- Flower 3 -->
+            <circle cx="165" cy="106" r="3.5"/>
+            <path d="M165,102.5 C167,98 170,97 170,101 C169,103 167,104 165,102.5"/>
+            <path d="M168.5,104.5 C172,106 173,109 170,110 C168,110 166,108 168.5,104.5"/>
+            <path d="M165,109.5 C163,113 160,114 159.5,110 C161,108 163,107 165,109.5"/>
+            <path d="M161.5,104.5 C158,106 157,109 160,110 C162,110 164,108 161.5,104.5"/>
+            <!-- Scattered dots -->
+            <circle cx="80" cy="150" r="1.2" fill="rgba(237,232,223,0.4)" stroke="none"/>
+            <circle cx="220" cy="180" r="1" fill="rgba(237,232,223,0.35)" stroke="none"/>
+            <circle cx="70" cy="260" r="1.4" fill="rgba(237,232,223,0.3)" stroke="none"/>
+            <circle cx="225" cy="300" r="1" fill="rgba(237,232,223,0.4)" stroke="none"/>
+            <circle cx="88" cy="340" r="1.2" fill="rgba(237,232,223,0.3)" stroke="none"/>
+            <circle cx="212" cy="240" r="0.8" fill="rgba(237,232,223,0.35)" stroke="none"/>
+            <circle cx="75" cy="200" r="1" fill="rgba(237,232,223,0.3)" stroke="none"/>
+          </g>
+        </svg>
+        <div class="gallery-label">
+          <span class="gl-style">Fine Line Botanical</span>
+          <span class="gl-artist">Kai Mercer</span>
+        </div>
+      </div>
+
+      <!-- Piece 3: Coiled Serpent -->
+      <div class="gallery-item">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" aria-label="Coiled serpent neo-traditional tattoo">
+          <rect width="300" height="400" fill="#0d0d0d"/>
+          <!-- Rose at base -->
+          <g transform="translate(150,345)">
+            <circle r="18" stroke="rgba(237,232,223,0.6)" stroke-width="1.2" fill="none"/>
+            <path d="M0,-18 C8,-12 12,0 8,10 C4,18 -4,18 -8,10 C-12,0 -8,-12 0,-18" stroke="rgba(237,232,223,0.7)" stroke-width="1" fill="none"/>
+            <path d="M-14,-10 C-6,-14 6,-12 12,-6 C14,4 8,14 0,14 C-8,14 -14,4 -14,-10" stroke="rgba(237,232,223,0.5)" stroke-width="0.9" fill="none"/>
+            <path d="M-18,5 C-10,0 0,-4 10,-2 C16,4 12,16 4,18 C-4,18 -14,14 -18,5" stroke="rgba(237,232,223,0.45)" stroke-width="0.9" fill="none"/>
+            <!-- Leaves -->
+            <path d="M14,8 C22,4 28,10 24,18 C18,20 12,16 14,8" stroke="rgba(237,232,223,0.5)" stroke-width="0.8" fill="none"/>
+            <path d="M-14,8 C-22,4 -28,10 -24,18 C-18,20 -12,16 -14,8" stroke="rgba(237,232,223,0.5)" stroke-width="0.8" fill="none"/>
+          </g>
+          <!-- Serpent body — S-curve -->
+          <g stroke="rgba(237,232,223,0.9)" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Outer body path -->
+            <path d="M162,310 C175,285 185,255 180,225 C175,195 155,180 150,160 C145,140 148,115 160,100 C170,88 178,82 180,70 C182,58 175,48 165,44 C155,40 142,44 136,54"
+                  stroke-width="14" stroke="rgba(30,20,10,1)" fill="none"/>
+            <path d="M162,310 C175,285 185,255 180,225 C175,195 155,180 150,160 C145,140 148,115 160,100 C170,88 178,82 180,70 C182,58 175,48 165,44 C155,40 142,44 136,54"
+                  stroke-width="11" stroke="rgba(237,232,223,0.12)" fill="none"/>
+            <path d="M162,310 C175,285 185,255 180,225 C175,195 155,180 150,160 C145,140 148,115 160,100 C170,88 178,82 180,70 C182,58 175,48 165,44 C155,40 142,44 136,54"
+                  stroke-width="3" stroke="rgba(237,232,223,0.88)" fill="none"/>
+            <!-- Inner body path offset -->
+            <path d="M138,316 C148,290 155,260 148,230 C141,200 122,185 118,162 C114,140 118,112 130,96 C140,82 148,76 148,62 C148,50 142,44 136,40 C130,38 122,42 118,50"
+                  stroke-width="14" stroke="rgba(30,20,10,1)" fill="none"/>
+            <path d="M138,316 C148,290 155,260 148,230 C141,200 122,185 118,162 C114,140 118,112 130,96 C140,82 148,76 148,62 C148,50 142,44 136,40 C130,38 122,42 118,50"
+                  stroke-width="11" stroke="rgba(237,232,223,0.08)" fill="none"/>
+            <path d="M138,316 C148,290 155,260 148,230 C141,200 122,185 118,162 C114,140 118,112 130,96 C140,82 148,76 148,62 C148,50 142,44 136,40 C130,38 122,42 118,50"
+                  stroke-width="3" stroke="rgba(237,232,223,0.88)" fill="none"/>
+            <!-- Scale lines along body -->
+            <g stroke="rgba(237,232,223,0.4)" stroke-width="0.9">
+              <path d="M167,290 C163,284 158,283 155,287"/>
+              <path d="M172,270 C168,264 163,263 160,267"/>
+              <path d="M176,250 C172,244 167,243 164,247"/>
+              <path d="M177,230 C173,224 168,223 165,227"/>
+              <path d="M173,210 C169,204 164,204 162,208"/>
+              <path d="M165,192 C161,186 156,186 154,190"/>
+              <path d="M158,175 C154,170 150,170 148,174"/>
+              <path d="M153,158 C150,152 146,152 145,156"/>
+              <path d="M152,140 C150,135 147,135 146,140"/>
+              <path d="M154,122 C152,117 150,117 149,122"/>
+              <path d="M158,105 C157,100 154,99 152,103"/>
+              <!-- Left body scales -->
+              <path d="M133,300 C137,294 142,293 145,297"/>
+              <path d="M128,278 C132,272 137,271 140,275"/>
+              <path d="M124,255 C128,249 133,248 136,252"/>
+              <path d="M122,232 C126,226 131,225 134,229"/>
+              <path d="M123,210 C127,204 132,204 135,208"/>
+              <path d="M126,190 C130,184 134,184 136,188"/>
+              <path d="M130,172 C133,167 136,167 137,172"/>
+              <path d="M130,155 C133,150 135,150 135,155"/>
+              <path d="M131,138 C133,133 135,134 134,139"/>
+              <path d="M133,122 C135,117 137,118 136,123"/>
+              <path d="M136,107 C138,102 140,103 139,108"/>
+            </g>
+          </g>
+          <!-- Head -->
+          <ellipse cx="127" cy="52" rx="18" ry="12" transform="rotate(-20,127,52)" stroke="rgba(237,232,223,0.9)" stroke-width="2.5" fill="#0d0d0d"/>
+          <!-- Eye -->
+          <ellipse cx="122" cy="48" rx="4" ry="3" stroke="rgba(237,232,223,0.85)" stroke-width="1.5" fill="none" transform="rotate(-20,122,48)"/>
+          <ellipse cx="122" cy="48" rx="1.5" ry="2" fill="rgba(237,232,223,0.9)" transform="rotate(-20,122,48)"/>
+          <!-- Forked tongue -->
+          <g stroke="rgba(237,232,223,0.75)" stroke-width="1.2" fill="none" stroke-linecap="round">
+            <line x1="112" y1="50" x2="100" y2="44"/>
+            <line x1="100" y1="44" x2="96" y2="40"/>
+            <line x1="100" y1="44" x2="98" y2="38"/>
+          </g>
+        </svg>
+        <div class="gallery-label">
+          <span class="gl-style">Neo-Traditional Serpent</span>
+          <span class="gl-artist">Kai Mercer</span>
+        </div>
+      </div>
+
+      <!-- Piece 4: Geometric Wolf -->
+      <div class="gallery-item">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" aria-label="Geometric wolf tattoo">
+          <rect width="300" height="400" fill="#121212"/>
+          <g transform="translate(150,200)">
+            <!-- Background triangle frame -->
+            <polygon points="0,-155 130,80 -130,80" stroke="rgba(237,232,223,0.2)" stroke-width="1.5" fill="none"/>
+            <!-- Outer structural lines -->
+            <line x1="-130" y1="80" x2="130" y2="80" stroke="rgba(237,232,223,0.15)" stroke-width="1"/>
+            <!-- Ears -->
+            <polygon points="0,-155 -40,-110 -80,-60" fill="rgba(237,232,223,0.08)" stroke="rgba(237,232,223,0.75)" stroke-width="2" stroke-linejoin="round"/>
+            <polygon points="0,-155 40,-110 80,-60" fill="rgba(237,232,223,0.08)" stroke="rgba(237,232,223,0.75)" stroke-width="2" stroke-linejoin="round"/>
+            <!-- Inner ear detail -->
+            <polygon points="0,-140 -30,-108 -58,-72" fill="rgba(237,232,223,0.04)" stroke="rgba(237,232,223,0.35)" stroke-width="1.2"/>
+            <polygon points="0,-140 30,-108 58,-72" fill="rgba(237,232,223,0.04)" stroke="rgba(237,232,223,0.35)" stroke-width="1.2"/>
+            <!-- Main head shape -->
+            <polygon points="0,-110 -90,-30 -70,80 70,80 90,-30" fill="rgba(15,12,8,1)" stroke="rgba(237,232,223,0.85)" stroke-width="2.2" stroke-linejoin="round"/>
+            <!-- Forehead panels -->
+            <polygon points="0,-110 -45,-55 0,-20 45,-55" fill="rgba(237,232,223,0.06)" stroke="rgba(237,232,223,0.45)" stroke-width="1.2"/>
+            <!-- Left cheek -->
+            <polygon points="-90,-30 -45,-55 -50,20 -90,30" fill="rgba(237,232,223,0.05)" stroke="rgba(237,232,223,0.35)" stroke-width="1"/>
+            <!-- Right cheek -->
+            <polygon points="90,-30 45,-55 50,20 90,30" fill="rgba(237,232,223,0.05)" stroke="rgba(237,232,223,0.35)" stroke-width="1"/>
+            <!-- Muzzle triangles -->
+            <polygon points="-50,20 50,20 0,80" fill="rgba(237,232,223,0.07)" stroke="rgba(237,232,223,0.5)" stroke-width="1.5"/>
+            <polygon points="-30,50 30,50 0,80" fill="rgba(237,232,223,0.1)" stroke="rgba(237,232,223,0.4)" stroke-width="1.2"/>
+            <!-- Nose -->
+            <polygon points="0,22 -14,34 14,34" fill="rgba(237,232,223,0.75)" stroke="none"/>
+            <!-- Eyes — diamond shapes -->
+            <polygon points="-48,-45 -38,-38 -48,-30 -58,-38" fill="rgba(237,232,223,0.9)" stroke="none"/>
+            <polygon points="-48,-45 -38,-38 -48,-30 -58,-38" fill="none" stroke="rgba(237,232,223,1)" stroke-width="1.5"/>
+            <!-- Eye inner -->
+            <polygon points="-48,-41 -43,-38 -48,-34 -53,-38" fill="#121212" stroke="none"/>
+            <polygon points="48,-45 38,-38 48,-30 58,-38" fill="rgba(237,232,223,0.9)" stroke="none"/>
+            <polygon points="48,-45 38,-38 48,-30 58,-38" fill="none" stroke="rgba(237,232,223,1)" stroke-width="1.5"/>
+            <polygon points="48,-41 43,-38 48,-34 53,-38" fill="#121212" stroke="none"/>
+            <!-- Geometric fur lines -->
+            <g stroke="rgba(237,232,223,0.4)" stroke-width="1" fill="none">
+              <line x1="-90" y1="-30" x2="-70" y2="-50"/>
+              <line x1="-90" y1="0" x2="-70" y2="-15"/>
+              <line x1="-88" y1="30" x2="-68" y2="20"/>
+              <line x1="90" y1="-30" x2="70" y2="-50"/>
+              <line x1="90" y1="0" x2="70" y2="-15"/>
+              <line x1="88" y1="30" x2="68" y2="20"/>
+              <!-- Forehead lines -->
+              <line x1="-20" y1="-90" x2="-10" y2="-70"/>
+              <line x1="20" y1="-90" x2="10" y2="-70"/>
+              <line x1="0" y1="-108" x2="0" y2="-85"/>
+            </g>
+            <!-- Bottom geometric fill pattern -->
+            <g transform="translate(0,65)">
+              <polygon points="-40,0 40,0 20,15 -20,15" fill="rgba(237,232,223,0.05)" stroke="rgba(237,232,223,0.3)" stroke-width="0.8"/>
+            </g>
+          </g>
+        </svg>
+        <div class="gallery-label">
+          <span class="gl-style">Geometric Wolf</span>
+          <span class="gl-artist">Kai Mercer</span>
+        </div>
+      </div>
+
+      <!-- Piece 5: Ornamental Frame -->
+      <div class="gallery-item">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" aria-label="Ornamental blackwork tattoo">
+          <rect width="300" height="400" fill="#0e0e0e"/>
+          <g transform="translate(150,200)">
+            <!-- Outer oval frame -->
+            <ellipse rx="88" ry="120" stroke="rgba(237,232,223,0.75)" stroke-width="2" fill="none"/>
+            <ellipse rx="80" ry="112" stroke="rgba(237,232,223,0.35)" stroke-width="0.8" fill="none"/>
+            <!-- Dotwork fill inside oval (simulated) -->
+            <ellipse rx="72" ry="104" stroke="rgba(237,232,223,0.12)" stroke-width="0.6" fill="none" stroke-dasharray="1.5,6"/>
+            <ellipse rx="60" ry="88" stroke="rgba(237,232,223,0.12)" stroke-width="0.6" fill="none" stroke-dasharray="1.5,7"/>
+            <ellipse rx="46" ry="72" stroke="rgba(237,232,223,0.12)" stroke-width="0.6" fill="none" stroke-dasharray="1.5,8"/>
+            <!-- Dotwork dots scattered -->
+            <g fill="rgba(237,232,223,0.35)">
+              <circle cx="0" cy="-80" r="1"/>
+              <circle cx="30" cy="-75" r="0.8"/>
+              <circle cx="-30" cy="-75" r="0.8"/>
+              <circle cx="55" cy="-55" r="0.8"/>
+              <circle cx="-55" cy="-55" r="0.8"/>
+              <circle cx="68" cy="-25" r="0.8"/>
+              <circle cx="-68" cy="-25" r="0.8"/>
+              <circle cx="70" cy="10" r="0.8"/>
+              <circle cx="-70" cy="10" r="0.8"/>
+              <circle cx="62" cy="45" r="0.8"/>
+              <circle cx="-62" cy="45" r="0.8"/>
+              <circle cx="48" cy="75" r="0.8"/>
+              <circle cx="-48" cy="75" r="0.8"/>
+              <circle cx="20" cy="90" r="0.8"/>
+              <circle cx="-20" cy="90" r="0.8"/>
+              <circle cx="0" cy="92" r="1"/>
+              <!-- inner ring -->
+              <circle cx="0" cy="-55" r="1"/>
+              <circle cx="22" cy="-50" r="0.8"/>
+              <circle cx="-22" cy="-50" r="0.8"/>
+              <circle cx="40" cy="-32" r="0.8"/>
+              <circle cx="-40" cy="-32" r="0.8"/>
+              <circle cx="46" cy="-5" r="0.8"/>
+              <circle cx="-46" cy="-5" r="0.8"/>
+              <circle cx="42" cy="25" r="0.8"/>
+              <circle cx="-42" cy="25" r="0.8"/>
+              <circle cx="28" cy="50" r="0.8"/>
+              <circle cx="-28" cy="50" r="0.8"/>
+              <circle cx="0" cy="58" r="1"/>
+            </g>
+            <!-- Top flourish -->
+            <g stroke="rgba(237,232,223,0.72)" stroke-width="1.2" fill="none" stroke-linecap="round">
+              <path d="M0,-120 C0,-148 0,-155 0,-168"/>
+              <path d="M0,-168 C-18,-162 -28,-150 -22,-140"/>
+              <path d="M0,-168 C18,-162 28,-150 22,-140"/>
+              <path d="M-22,-140 C-35,-125 -40,-108 -30,-100"/>
+              <path d="M22,-140 C35,-125 40,-108 30,-100"/>
+              <!-- Scroll curls top -->
+              <path d="M-30,-100 C-28,-88 -18,-82 -10,-90 C-4,-96 -6,-106 -16,-106 C-24,-106 -26,-96 -20,-92"/>
+              <path d="M30,-100 C28,-88 18,-82 10,-90 C4,-96 6,-106 16,-106 C24,-106 26,-96 20,-92"/>
+            </g>
+            <!-- Bottom flourish (mirror) -->
+            <g stroke="rgba(237,232,223,0.72)" stroke-width="1.2" fill="none" stroke-linecap="round">
+              <path d="M0,120 C0,148 0,155 0,168"/>
+              <path d="M0,168 C-18,162 -28,150 -22,140"/>
+              <path d="M0,168 C18,162 28,150 22,140"/>
+              <path d="M-22,140 C-35,125 -40,108 -30,100"/>
+              <path d="M22,140 C35,125 40,108 30,100"/>
+              <path d="M-30,100 C-28,88 -18,82 -10,90 C-4,96 -6,106 -16,106 C-24,106 -26,96 -20,92"/>
+              <path d="M30,100 C28,88 18,82 10,90 C4,96 6,106 16,106 C24,106 26,96 20,92"/>
+            </g>
+            <!-- Left side flourish -->
+            <g stroke="rgba(237,232,223,0.65)" stroke-width="1" fill="none" stroke-linecap="round">
+              <path d="M-88,0 C-115,0 -125,0 -138,0"/>
+              <path d="M-138,0 C-132,-14 -120,-18 -114,-10"/>
+              <path d="M-138,0 C-132,14 -120,18 -114,10"/>
+              <path d="M-114,-10 C-100,-18 -88,-14 -86,-4"/>
+              <path d="M-114,10 C-100,18 -88,14 -86,4"/>
+            </g>
+            <!-- Right side flourish (mirror) -->
+            <g stroke="rgba(237,232,223,0.65)" stroke-width="1" fill="none" stroke-linecap="round">
+              <path d="M88,0 C115,0 125,0 138,0"/>
+              <path d="M138,0 C132,-14 120,-18 114,-10"/>
+              <path d="M138,0 C132,14 120,18 114,10"/>
+              <path d="M114,-10 C100,-18 88,-14 86,-4"/>
+              <path d="M114,10 C100,18 88,14 86,4"/>
+            </g>
+            <!-- Crescent moons top corners -->
+            <g stroke="rgba(237,232,223,0.6)" stroke-width="1.2" fill="none">
+              <path d="M-105,-140 C-96,-152 -82,-152 -78,-142 C-86,-132 -102,-132 -105,-140"/>
+              <path d="M105,-140 C96,-152 82,-152 78,-142 C86,-132 102,-132 105,-140"/>
+            </g>
+            <!-- Stars -->
+            <g fill="rgba(237,232,223,0.7)">
+              <!-- 4-pointed star top-left -->
+              <polygon points="-118,-155 -115,-148 -108,-152 -115,-148 -112,-141 -115,-148 -122,-144 -115,-148"/>
+              <!-- 4-pointed star top-right -->
+              <polygon points="118,-155 121,-148 128,-152 121,-148 124,-141 121,-148 114,-144 121,-148"/>
+              <!-- Small dots at extremities -->
+              <circle cx="0" cy="-172" r="2.5"/>
+              <circle cx="0" cy="172" r="2.5"/>
+              <circle cx="-142" cy="0" r="2"/>
+              <circle cx="142" cy="0" r="2"/>
+            </g>
+            <!-- Center diamond -->
+            <polygon points="0,-20 14,0 0,20 -14,0" stroke="rgba(237,232,223,0.8)" stroke-width="1.5" fill="none"/>
+            <polygon points="0,-12 8,0 0,12 -8,0" stroke="rgba(237,232,223,0.6)" stroke-width="1" fill="none"/>
+            <circle cx="0" cy="0" r="3" fill="rgba(237,232,223,0.85)"/>
+          </g>
+        </svg>
+        <div class="gallery-label">
+          <span class="gl-style">Ornamental Blackwork</span>
+          <span class="gl-artist">Kai Mercer</span>
+        </div>
+      </div>
+
+      <!-- Piece 6: Moth -->
+      <div class="gallery-item">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" aria-label="Fine line moth tattoo">
+          <rect width="300" height="400" fill="#111"/>
+          <!-- Moon behind moth -->
+          <circle cx="150" cy="185" r="78" stroke="rgba(237,232,223,0.18)" stroke-width="1.5" fill="none"/>
+          <circle cx="150" cy="185" r="72" stroke="rgba(237,232,223,0.08)" stroke-width="0.8" fill="none"/>
+          <g transform="translate(150,195)">
+            <!-- Upper wings -->
+            <!-- Left upper wing -->
+            <path d="M-8,-95 C-25,-105 -65,-110 -95,-90 C-118,-74 -125,-50 -118,-30 C-110,-10 -90,5 -70,10 C-50,14 -30,8 -15,0 C-8,-4 -5,-8 -5,-12"
+                  stroke="rgba(237,232,223,0.85)" stroke-width="1.8" fill="rgba(237,232,223,0.03)" stroke-linejoin="round"/>
+            <!-- Right upper wing -->
+            <path d="M8,-95 C25,-105 65,-110 95,-90 C118,-74 125,-50 118,-30 C110,-10 90,5 70,10 C50,14 30,8 15,0 C8,-4 5,-8 5,-12"
+                  stroke="rgba(237,232,223,0.85)" stroke-width="1.8" fill="rgba(237,232,223,0.03)" stroke-linejoin="round"/>
+            <!-- Lower wings -->
+            <!-- Left lower wing -->
+            <path d="M-8,5 C-22,8 -55,18 -75,40 C-90,58 -85,82 -70,92 C-55,100 -35,96 -20,80 C-10,68 -6,50 -5,35"
+                  stroke="rgba(237,232,223,0.8)" stroke-width="1.8" fill="rgba(237,232,223,0.03)" stroke-linejoin="round"/>
+            <!-- Right lower wing -->
+            <path d="M8,5 C22,8 55,18 75,40 C90,58 85,82 70,92 C55,100 35,96 20,80 C10,68 6,50 5,35"
+                  stroke="rgba(237,232,223,0.8)" stroke-width="1.8" fill="rgba(237,232,223,0.03)" stroke-linejoin="round"/>
+
+            <!-- Wing vein details — left upper -->
+            <g stroke="rgba(237,232,223,0.35)" stroke-width="0.7" fill="none">
+              <path d="M-10,-50 C-30,-55 -55,-52 -70,-40"/>
+              <path d="M-10,-30 C-30,-32 -52,-28 -65,-18"/>
+              <path d="M-10,-10 C-28,-10 -48,-5 -58,5"/>
+              <path d="M-12,-70 C-35,-78 -62,-74 -80,-62"/>
+              <!-- Upper wing eyespot -->
+              <circle cx="-62" cy="-55" r="18"/>
+              <circle cx="-62" cy="-55" r="12"/>
+              <circle cx="-62" cy="-55" r="6"/>
+            </g>
+            <circle cx="-62" cy="-55" r="3" fill="rgba(237,232,223,0.65)"/>
+
+            <!-- Wing vein details — right upper -->
+            <g stroke="rgba(237,232,223,0.35)" stroke-width="0.7" fill="none">
+              <path d="M10,-50 C30,-55 55,-52 70,-40"/>
+              <path d="M10,-30 C30,-32 52,-28 65,-18"/>
+              <path d="M10,-10 C28,-10 48,-5 58,5"/>
+              <path d="M12,-70 C35,-78 62,-74 80,-62"/>
+              <circle cx="62" cy="-55" r="18"/>
+              <circle cx="62" cy="-55" r="12"/>
+              <circle cx="62" cy="-55" r="6"/>
+            </g>
+            <circle cx="62" cy="-55" r="3" fill="rgba(237,232,223,0.65)"/>
+
+            <!-- Lower wing details — left -->
+            <g stroke="rgba(237,232,223,0.3)" stroke-width="0.7" fill="none">
+              <path d="M-10,20 C-28,26 -48,35 -58,52"/>
+              <path d="M-10,40 C-25,46 -42,55 -48,68"/>
+              <!-- Eyespot -->
+              <circle cx="-44" cy="55" r="14"/>
+              <circle cx="-44" cy="55" r="8"/>
+              <circle cx="-44" cy="55" r="4"/>
+            </g>
+            <circle cx="-44" cy="55" r="2" fill="rgba(237,232,223,0.6)"/>
+
+            <!-- Lower wing details — right -->
+            <g stroke="rgba(237,232,223,0.3)" stroke-width="0.7" fill="none">
+              <path d="M10,20 C28,26 48,35 58,52"/>
+              <path d="M10,40 C25,46 42,55 48,68"/>
+              <circle cx="44" cy="55" r="14"/>
+              <circle cx="44" cy="55" r="8"/>
+              <circle cx="44" cy="55" r="4"/>
+            </g>
+            <circle cx="44" cy="55" r="2" fill="rgba(237,232,223,0.6)"/>
+
+            <!-- Wing edge decorative dots -->
+            <g fill="rgba(237,232,223,0.4)">
+              <circle cx="-110" cy="-52" r="1.5"/>
+              <circle cx="-115" cy="-32" r="1.2"/>
+              <circle cx="-108" cy="-10" r="1.3"/>
+              <circle cx="110" cy="-52" r="1.5"/>
+              <circle cx="115" cy="-32" r="1.2"/>
+              <circle cx="108" cy="-10" r="1.3"/>
+              <circle cx="-78" cy="78" r="1.2"/>
+              <circle cx="-65" cy="90" r="1.2"/>
+              <circle cx="78" cy="78" r="1.2"/>
+              <circle cx="65" cy="90" r="1.2"/>
+            </g>
+
+            <!-- Body -->
+            <ellipse rx="7" ry="55" cy="-25" stroke="rgba(237,232,223,0.85)" stroke-width="1.8" fill="rgba(8,8,8,1)"/>
+            <!-- Body segments -->
+            <g stroke="rgba(237,232,223,0.3)" stroke-width="0.7">
+              <line x1="-7" y1="-45" x2="7" y2="-45"/>
+              <line x1="-7" y1="-35" x2="7" y2="-35"/>
+              <line x1="-7" y1="-25" x2="7" y2="-25"/>
+              <line x1="-7" y1="-15" x2="7" y2="-15"/>
+              <line x1="-7" y1="-5" x2="7" y2="-5"/>
+              <line x1="-7" y1="5" x2="7" y2="5"/>
+            </g>
+            <!-- Head -->
+            <circle cy="-78" r="9" stroke="rgba(237,232,223,0.85)" stroke-width="1.5" fill="#111"/>
+            <!-- Eyes on head -->
+            <circle cx="-4" cy="-80" r="2.5" fill="rgba(237,232,223,0.8)"/>
+            <circle cx="4" cy="-80" r="2.5" fill="rgba(237,232,223,0.8)"/>
+            <!-- Antennae -->
+            <g stroke="rgba(237,232,223,0.7)" stroke-width="1" fill="none" stroke-linecap="round">
+              <path d="M-5,-86 C-15,-108 -28,-128 -35,-145"/>
+              <path d="M-35,-145 C-40,-152 -42,-155 -38,-160"/>
+              <circle cx="-38" cy="-162" r="2.5" fill="rgba(237,232,223,0.7)" stroke="none"/>
+              <path d="M5,-86 C15,-108 28,-128 35,-145"/>
+              <path d="M35,-145 C40,-152 42,-155 38,-160"/>
+              <circle cx="38" cy="-162" r="2.5" fill="rgba(237,232,223,0.7)" stroke="none"/>
+            </g>
+          </g>
+        </svg>
+        <div class="gallery-label">
+          <span class="gl-style">Fine Line Moth</span>
+          <span class="gl-artist">Kai Mercer</span>
+        </div>
+      </div>
+
+    </div><!-- /gallery-grid -->
+  </section>
+
+  <!-- ============================================================
+       ARTIST SECTION
+  ============================================================ -->
+  <section id="about" class="artist-section">
+    <div class="wrap">
+      <div class="artist-inner">
+        <div class="artist-left">
+          <div class="artist-photo-wrap">
+            <svg viewBox="0 0 380 508" xmlns="http://www.w3.org/2000/svg" aria-label="Kai Mercer artist portrait placeholder">
+              <rect width="380" height="508" fill="#1a1614"/>
+              <!-- Ornate frame outer -->
+              <rect x="18" y="18" width="344" height="472" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+              <rect x="28" y="28" width="324" height="452" fill="none" stroke="rgba(201,168,76,0.2)" stroke-width="0.8"/>
+              <!-- Corner ornaments -->
+              <g stroke="rgba(201,168,76,0.55)" stroke-width="1.2" fill="none">
+                <!-- Top-left corner -->
+                <path d="M18,50 L18,18 L50,18"/>
+                <path d="M28,58 L28,28 L58,28"/>
+                <circle cx="38" cy="38" r="6" stroke-width="1"/>
+                <circle cx="38" cy="38" r="2.5" fill="rgba(201,168,76,0.5)" stroke="none"/>
+                <!-- Top-right corner -->
+                <path d="M362,50 L362,18 L330,18"/>
+                <path d="M352,58 L352,28 L322,28"/>
+                <circle cx="342" cy="38" r="6" stroke-width="1"/>
+                <circle cx="342" cy="38" r="2.5" fill="rgba(201,168,76,0.5)" stroke="none"/>
+                <!-- Bottom-left corner -->
+                <path d="M18,458 L18,490 L50,490"/>
+                <path d="M28,450 L28,480 L58,480"/>
+                <circle cx="38" cy="470" r="6" stroke-width="1"/>
+                <circle cx="38" cy="470" r="2.5" fill="rgba(201,168,76,0.5)" stroke="none"/>
+                <!-- Bottom-right corner -->
+                <path d="M362,458 L362,490 L330,490"/>
+                <path d="M352,450 L352,480 L322,480"/>
+                <circle cx="342" cy="470" r="6" stroke-width="1"/>
+                <circle cx="342" cy="470" r="2.5" fill="rgba(201,168,76,0.5)" stroke="none"/>
+              </g>
+              <!-- Abstract silhouette / figure -->
+              <g fill="rgba(237,232,223,0.06)">
+                <!-- body mass -->
+                <ellipse cx="190" cy="340" rx="80" ry="120"/>
+                <!-- head -->
+                <ellipse cx="190" cy="195" rx="42" ry="50"/>
+                <!-- shoulders -->
+                <ellipse cx="130" cy="280" rx="35" ry="20"/>
+                <ellipse cx="250" cy="280" rx="35" ry="20"/>
+              </g>
+              <g fill="rgba(237,232,223,0.04)">
+                <ellipse cx="190" cy="195" rx="38" ry="46"/>
+                <rect x="115" y="255" width="150" height="170" rx="8"/>
+              </g>
+              <!-- Subtle cross-hatch texture on figure -->
+              <g stroke="rgba(237,232,223,0.06)" stroke-width="0.6" fill="none">
+                <line x1="110" y1="260" x2="270" y2="260"/>
+                <line x1="110" y1="275" x2="270" y2="275"/>
+                <line x1="110" y1="290" x2="270" y2="290"/>
+                <line x1="110" y1="305" x2="270" y2="305"/>
+                <line x1="110" y1="320" x2="270" y2="320"/>
+                <line x1="110" y1="335" x2="270" y2="335"/>
+                <line x1="110" y1="350" x2="270" y2="350"/>
+                <line x1="110" y1="365" x2="270" y2="365"/>
+                <line x1="110" y1="380" x2="270" y2="380"/>
+                <line x1="110" y1="395" x2="270" y2="395"/>
+                <line x1="110" y1="410" x2="270" y2="410"/>
+              </g>
+              <!-- KM monogram center circle -->
+              <circle cx="190" cy="254" r="65" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1.2"/>
+              <circle cx="190" cy="254" r="58" fill="rgba(201,168,76,0.04)" stroke="rgba(201,168,76,0.18)" stroke-width="0.8"/>
+              <!-- KM letters -->
+              <text x="190" y="268" text-anchor="middle" font-family="-apple-system, Helvetica Neue, Arial, sans-serif" font-size="38" font-weight="900" fill="rgba(201,168,76,0.65)" letter-spacing="0.08em">KM</text>
+              <!-- Bottom label -->
+              <rect x="120" y="440" width="140" height="28" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="0.8"/>
+              <text x="190" y="459" text-anchor="middle" font-family="-apple-system, Helvetica Neue, Arial, sans-serif" font-size="9" fill="rgba(201,168,76,0.5)" letter-spacing="0.2em" text-transform="uppercase">KAI MERCER</text>
+            </svg>
+          </div>
+          <div class="artist-photo-credit">
+            <div class="artist-photo-rule"></div>
+            <span class="artist-photo-ig">@axiomtattoo</span>
+          </div>
+        </div>
+
+        <div class="artist-right">
+          <span class="label">The Artist</span>
+          <h2 class="section-heading">Ten years. One approach: your story, drawn in ink.</h2>
+
+          <div class="artist-bio">
+            <p>Kai Mercer has been tattooing professionally since 2014, building a practice rooted in custom design, careful placement, and a genuine obsession with the craft. Every piece is drawn from scratch — no flash, no repeats.</p>
+            <p>Specializing in fine line, blackwork, geometric, and neo-traditional styles, Kai works across a wide range of aesthetics while maintaining a commitment to clean linework and lasting results.</p>
+            <p>Based out of Axiom's private studio in East LA, bookings are taken by consultation only. Walk-ins are not accepted.</p>
+          </div>
+
+          <div class="artist-stats">
+            <div class="stat-item">
+              <span class="stat-num">10+</span>
+              <span class="stat-label">Years tattooing</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">1,800+</span>
+              <span class="stat-label">Custom pieces</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">By appt.</span>
+              <span class="stat-label">Consultation only</span>
+            </div>
+          </div>
+
+          <a href="#booking" class="artist-cta-link">Book a consultation →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STYLES SECTION
+  ============================================================ -->
+  <section id="styles">
+    <div class="wrap">
+      <div class="styles-header">
+        <span class="label">Specialties</span>
+        <h2 class="section-heading">What I do.</h2>
+      </div>
+
+      <div class="styles-grid">
+
+        <!-- Blackwork -->
+        <div class="style-card">
+          <svg class="style-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="20,4 36,32 4,32" stroke="rgba(201,168,76,0.7)" stroke-width="1.5" fill="none"/>
+            <polygon points="20,11 30,28 10,28" fill="rgba(201,168,76,0.25)" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
+            <circle cx="20" cy="22" r="4" fill="rgba(201,168,76,0.5)"/>
+          </svg>
+          <h3 class="style-name">Blackwork</h3>
+          <p class="style-desc">Bold, high-contrast designs with saturated black ink. From solid fills to intricate patterns, blackwork has an impact that ages beautifully.</p>
+          <p class="style-tags">Tribal · Geometric fills · Abstract · Negative space</p>
+        </div>
+
+        <!-- Fine Line -->
+        <div class="style-card">
+          <svg class="style-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="20" y1="4" x2="20" y2="36" stroke="rgba(201,168,76,0.7)" stroke-width="0.9"/>
+            <path d="M20,12 C14,10 10,14 12,18 C14,22 20,20 20,20" stroke="rgba(201,168,76,0.6)" stroke-width="0.9" fill="none"/>
+            <path d="M20,20 C26,18 30,22 28,26 C26,30 20,28 20,28" stroke="rgba(201,168,76,0.6)" stroke-width="0.9" fill="none"/>
+            <circle cx="20" cy="6" r="2.5" stroke="rgba(201,168,76,0.7)" stroke-width="0.9" fill="none"/>
+          </svg>
+          <h3 class="style-name">Fine Line</h3>
+          <p class="style-desc">Precision work with single-needle and fine gauge needles. Minimal, delicate, and deeply personal. Best for portraits, botanicals, and script.</p>
+          <p class="style-tags">Botanical · Script &amp; lettering · Portrait · Minimalist</p>
+        </div>
+
+        <!-- Neo-Traditional -->
+        <div class="style-card">
+          <svg class="style-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="18" r="10" stroke="rgba(201,168,76,0.7)" stroke-width="1.5" fill="none"/>
+            <path d="M14,28 C12,32 14,36 20,36 C26,36 28,32 26,28" stroke="rgba(201,168,76,0.6)" stroke-width="1.2" fill="none"/>
+            <path d="M17,8 C14,4 10,4 9,8" stroke="rgba(201,168,76,0.5)" stroke-width="1" fill="none"/>
+            <path d="M23,8 C26,4 30,4 31,8" stroke="rgba(201,168,76,0.5)" stroke-width="1" fill="none"/>
+            <circle cx="20" cy="18" r="3" fill="rgba(201,168,76,0.5)"/>
+          </svg>
+          <h3 class="style-name">Neo-Traditional</h3>
+          <p class="style-desc">Classic tattoo imagery reinterpreted with modern technique — rich compositions, bold outlines, and considered color choices.</p>
+          <p class="style-tags">Floral · Animals · Portraits · Illustrative</p>
+        </div>
+
+        <!-- Geometric -->
+        <div class="style-card">
+          <svg class="style-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="20,4 36,20 20,36 4,20" stroke="rgba(201,168,76,0.7)" stroke-width="1.5" fill="none"/>
+            <polygon points="20,10 30,20 20,30 10,20" stroke="rgba(201,168,76,0.5)" stroke-width="1" fill="none"/>
+            <circle cx="20" cy="20" r="4" stroke="rgba(201,168,76,0.6)" stroke-width="1" fill="none"/>
+            <line x1="4" y1="20" x2="36" y2="20" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+            <line x1="20" y1="4" x2="20" y2="36" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+          </svg>
+          <h3 class="style-name">Geometric</h3>
+          <p class="style-desc">Clean angles, sacred geometry, and mathematical precision. Mandala work, dotwork, and abstract geometric compositions.</p>
+          <p class="style-tags">Mandalas · Dotwork · Sacred geometry · Linework</p>
+        </div>
+
+        <!-- Japanese -->
+        <div class="style-card">
+          <svg class="style-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4,30 C8,24 12,20 20,20 C28,20 32,16 36,10" stroke="rgba(201,168,76,0.7)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M4,34 C8,28 14,24 20,24 C26,24 30,20 36,14" stroke="rgba(201,168,76,0.4)" stroke-width="1" stroke-linecap="round" fill="none"/>
+            <circle cx="28" cy="10" r="6" stroke="rgba(201,168,76,0.6)" stroke-width="1.2" fill="none"/>
+            <path d="M25,8 C24,6 26,4 28,6 C30,4 32,6 31,8" stroke="rgba(201,168,76,0.5)" stroke-width="0.9" fill="none"/>
+          </svg>
+          <h3 class="style-name">Japanese</h3>
+          <p class="style-desc">Drawing on centuries of tradition — flowing compositions designed around the body's natural contours and movement.</p>
+          <p class="style-tags">Irezumi · Koi · Floral · Waves &amp; wind</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROCESS SECTION
+  ============================================================ -->
+  <section class="process-section">
+    <div class="wrap">
+      <div class="process-header">
+        <span class="label">How It Works</span>
+        <h2 class="section-heading">Three steps from idea to ink.</h2>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Consultation</h3>
+          <p class="step-desc">Submit the booking form below with your idea, placement, and size. Kai reviews all requests and responds within 48 hours to discuss the concept and confirm fit.</p>
+        </div>
+        <div class="process-divider"></div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <h3 class="step-title">Design</h3>
+          <p class="step-desc">Once booked, Kai creates a custom design based on your brief. You'll review the artwork before your appointment — revisions are included.</p>
+        </div>
+        <div class="process-divider"></div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Your Appointment</h3>
+          <p class="step-desc">Come in, get tattooed. Sessions run 2–6 hours depending on size. Aftercare instructions provided. Touch-ups within 6 months are free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BOOKING SECTION
+  ============================================================ -->
+  <section id="booking" class="booking-section">
+    <div class="wrap">
+      <div class="booking-inner">
+        <div class="booking-left">
+          <span class="label">Book a Consultation</span>
+          <h2 class="section-heading">Start the conversation.</h2>
+          <p class="booking-desc">Fill out the form and Kai will be in touch within 48 hours. The more detail you provide, the better — reference images, placement ideas, and size all help.</p>
+
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-label">Instagram</span>
+              <span class="contact-val">@axiomtattoo</span>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">Email</span>
+              <span class="contact-val">kai@axiomtattoo.com</span>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">Location</span>
+              <span class="contact-val">East Los Angeles, CA<br><small style="color:var(--muted);font-size:0.78rem">By appointment only</small></span>
+            </li>
+          </ul>
+
+          <p class="booking-availability">Currently booking: May &amp; June 2026</p>
+        </div>
+
+        <div class="booking-right">
+          <form class="consult-form" action="#" method="post" novalidate>
+            <div class="form-row two-col">
+              <div class="form-field">
+                <label for="f-name">Name</label>
+                <input type="text" id="f-name" name="name" placeholder="Your full name" required autocomplete="name">
+              </div>
+              <div class="form-field">
+                <label for="f-email">Email</label>
+                <input type="email" id="f-email" name="email" placeholder="you@email.com" required autocomplete="email">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="f-phone">Phone <span style="color:var(--muted);font-size:0.65rem;letter-spacing:0.06em;text-transform:none">(optional)</span></label>
+                <input type="tel" id="f-phone" name="phone" placeholder="(323) 555-0000" autocomplete="tel">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="f-concept">Tattoo Idea / Concept</label>
+                <textarea id="f-concept" name="concept" placeholder="Describe your tattoo idea — subject matter, mood, references, any imagery that inspires you..." style="min-height:100px" required></textarea>
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div class="form-field">
+                <label for="f-style">Style Preference</label>
+                <select id="f-style" name="style">
+                  <option value="">Select a style</option>
+                  <option>Blackwork</option>
+                  <option>Fine Line</option>
+                  <option>Neo-Traditional</option>
+                  <option>Geometric</option>
+                  <option>Japanese</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="f-placement">Placement</label>
+                <input type="text" id="f-placement" name="placement" placeholder="Forearm, ribs, shoulder...">
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div class="form-field">
+                <label for="f-size">Approximate Size</label>
+                <select id="f-size" name="size">
+                  <option value="">Select size</option>
+                  <option>Small – under 3"</option>
+                  <option>Medium – 3–6"</option>
+                  <option>Large – 6"+</option>
+                  <option>Full sleeve / large piece</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="f-referral">How Did You Hear About Us?</label>
+                <select id="f-referral" name="referral">
+                  <option value="">Select one</option>
+                  <option>Instagram</option>
+                  <option>Word of mouth</option>
+                  <option>Google</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="form-submit">Send Consultation Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ SECTION
+  ============================================================ -->
+  <section class="faq-section">
+    <div class="wrap">
+      <div class="faq-header">
+        <span class="label">FAQ</span>
+        <h2 class="section-heading">Common questions.</h2>
+      </div>
+
+      <div class="faq-list">
+        <details>
+          <summary>How much does a tattoo cost?</summary>
+          <p>Pricing depends on size, complexity, and placement. Small pieces start at $200. Larger custom work is quoted per project after your consultation. A deposit is required to hold your booking.</p>
+        </details>
+        <details>
+          <summary>Do you do walk-ins?</summary>
+          <p>No. Axiom is a private studio that operates by appointment only. All bookings start with a consultation.</p>
+        </details>
+        <details>
+          <summary>How far in advance do I need to book?</summary>
+          <p>Current wait time is approximately 6–8 weeks. Availability varies — submit a booking request and Kai will confirm the earliest available slot.</p>
+        </details>
+        <details>
+          <summary>What should I do to prepare for my appointment?</summary>
+          <p>Stay hydrated, eat a full meal beforehand, wear comfortable clothing that gives easy access to the placement area, and avoid alcohol for 24 hours before your session.</p>
+        </details>
+        <details>
+          <summary>Are touch-ups included?</summary>
+          <p>Yes. Free touch-ups are included within 6 months of your original appointment, provided aftercare instructions were followed.</p>
+        </details>
+        <details>
+          <summary>Do you tattoo cover-ups?</summary>
+          <p>Cover-up work is taken on selectively and requires an in-person consultation or high-resolution photos of the existing tattoo. Submit via the booking form and Kai will advise on feasibility.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-upper">
+        <div class="footer-brand">
+          <span class="footer-brand-name">AXIOM TATTOO CO.</span>
+          <p class="footer-tagline">Custom tattoo art. East Los Angeles.</p>
+          <span class="footer-ig">@axiomtattoo</span>
+        </div>
+
+        <div class="footer-links-wrap">
+          <div class="footer-links-col">
+            <h4>Visit</h4>
+            <ul>
+              <li><a href="#booking">Book a Consult</a></li>
+              <li><a href="#work">View Work</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-links-col">
+            <h4>Studio</h4>
+            <ul>
+              <li><a href="https://instagram.com/axiomtattoo" target="_blank" rel="noopener">Instagram</a></li>
+              <li><a href="mailto:kai@axiomtattoo.com">Email</a></li>
+              <li><a href="#booking">Location</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Axiom Tattoo Co. All rights reserved.</span>
+        <span>By appointment only · East Los Angeles, CA</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       STICKY BOTTOM CTA (mobile)
+  ============================================================ -->
+  <div class="sticky-cta" aria-hidden="true">
+    <a href="#booking">Book a Consultation</a>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // Hamburger / drawer
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('navDrawer');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    drawer.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        drawer.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        drawer.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Drawer close button
+    document.getElementById('drawerClose').addEventListener('click', () => {
+      drawer.classList.remove('is-open');
+      hamburger.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+
+    // Form submit (prevent default for demo)
+    const form = document.querySelector('.consult-form');
+    if (form) {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = form.querySelector('.form-submit');
+        btn.textContent = 'Request Sent — Kai will be in touch within 48 hours.';
+        btn.style.background = 'rgba(201,168,76,0.25)';
+        btn.style.color = 'var(--accent)';
+        btn.style.border = '1px solid var(--accent-dim)';
+        btn.disabled = true;
+      });
+    }
+  </script>
+
+</body>
+</html>
