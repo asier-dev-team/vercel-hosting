@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BluePeak Home Systems — HVAC, Plumbing &amp; Electrical</title>
+  <title>Home Services — Design Concept · Asier Innovation</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -29,6 +29,7 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+      padding-top: 36px;
       padding-bottom: 72px;
     }
 
@@ -64,7 +65,7 @@
     ===================== */
     .nav {
       position: sticky;
-      top: 0;
+      top: 36px;
       z-index: 200;
       background: #fff;
       border-bottom: 1px solid var(--border);
@@ -884,9 +885,85 @@
       .why-grid { gap: 5rem; }
       .faq-grid { gap: 5rem; }
     }
+    /* ─── Asier Innovation Concept Bar ─── */
+    .ai-bar {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 9999; height: 36px;
+      background: #0a0a0a;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.25rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.04em;
+    }
+    .ai-bar-left { display: flex; align-items: center; gap: 0.6rem; color: rgba(255,255,255,0.4); }
+    .ai-bar-brand { color: #fff; font-weight: 600; letter-spacing: 0.06em; }
+    .ai-bar-sep { width: 1px; height: 12px; background: rgba(255,255,255,0.15); flex-shrink: 0; }
+    .ai-bar-label { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.63rem; }
+    .ai-bar-right { display: flex; align-items: center; }
+    .ai-bar-cta { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.68rem; font-weight: 500; transition: color 0.2s; }
+    .ai-bar-cta:hover { color: #fff; }
+    @media (max-width: 480px) { .ai-bar-right { display: none; } }
+
+    /* ─── Asier Innovation Features Section ─── */
+    .ai-features {
+      background: #080808; color: #ede8df;
+      padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .ai-features-inner { width: min(900px, calc(100% - 3rem)); margin: 0 auto; text-align: center; }
+    .ai-features-eyebrow {
+      display: inline-block;
+      font-size: 0.63rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); margin-bottom: 1.25rem;
+      font-family: -apple-system, "Helvetica Neue", sans-serif;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px; padding: 0.35rem 0.85rem;
+    }
+    .ai-features-heading {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700;
+      letter-spacing: -0.04em; color: #fff; margin-bottom: 0.75rem; line-height: 1.2;
+      font-family: -apple-system, "Helvetica Neue", sans-serif;
+    }
+    .ai-features-desc {
+      color: rgba(237,232,223,0.45); font-size: 0.9rem; line-height: 1.75;
+      max-width: 46ch; margin: 0 auto 2.5rem;
+      font-family: -apple-system, "Helvetica Neue", sans-serif;
+    }
+    .ai-features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 2.5rem; text-align: left; }
+    .ai-feature-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px; padding: 0.7rem 0.9rem;
+      font-family: -apple-system, "Helvetica Neue", sans-serif;
+      font-size: 0.8rem; color: rgba(237,232,223,0.65); line-height: 1.4;
+    }
+    .ai-feature-item::before { content: '✓'; color: #4ade80; font-size: 0.72rem; flex-shrink: 0; font-weight: 700; }
+    .ai-features-cta {
+      display: inline-flex; align-items: center;
+      background: #fff; color: #0a0a0a;
+      font-family: -apple-system, "Helvetica Neue", sans-serif;
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; text-decoration: none;
+      padding: 0.85rem 2rem; border-radius: 100px; transition: background 0.2s;
+    }
+    .ai-features-cta:hover { background: #e8e8e8; }
+    @media (min-width: 600px) { .ai-features-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 900px) { .ai-features-grid { grid-template-columns: repeat(4, 1fr); } }
   </style>
 </head>
 <body>
+
+<!-- ─── Asier Innovation Concept Bar ─── -->
+<div class="ai-bar" role="complementary" aria-label="Design preview notice">
+  <div class="ai-bar-left">
+    <span class="ai-bar-brand">Asier Innovation</span>
+    <div class="ai-bar-sep"></div>
+    <span class="ai-bar-label">Home Services — Design Concept</span>
+  </div>
+  <div class="ai-bar-right">
+    <a href="../../first_iteration_site/" class="ai-bar-cta">Get this for your business →</a>
+  </div>
+</div>
 
 <div class="topbar">
   🔴 24/7 Emergency Service Available — Call Now: <a href="tel:8555550199">(855) 555-0199</a>
@@ -1288,6 +1365,26 @@
 </section>
 
 <!-- Footer -->
+<!-- ─── Asier Innovation Features ─── -->
+<section class="ai-features">
+  <div class="ai-features-inner">
+    <p class="ai-features-eyebrow">Designed by Asier Innovation</p>
+    <h2 class="ai-features-heading">What this design can do<br>for your business</h2>
+    <p class="ai-features-desc">Built for home service businesses that need to convert mobile visitors into booked jobs — fast.</p>
+    <div class="ai-features-grid">
+      <div class="ai-feature-item">Emergency tap-to-call banner</div>
+      <div class="ai-feature-item">Service showcase with icons</div>
+      <div class="ai-feature-item">Trust signals & certifications</div>
+      <div class="ai-feature-item">Customer review section</div>
+      <div class="ai-feature-item">Sticky mobile call bar</div>
+      <div class="ai-feature-item">Lead capture form</div>
+      <div class="ai-feature-item">Mobile-first responsive layout</div>
+      <div class="ai-feature-item">Fast-loading performance</div>
+    </div>
+    <a href="../../first_iteration_site/" class="ai-features-cta">Get a website like this →</a>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="wrap">
     <div class="footer-top">
@@ -1332,8 +1429,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 BluePeak Home Systems. All rights reserved.</span>
-      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Licenses</a></span>
+      <span>Design concept by <a href="../../first_iteration_site/" style="color:inherit;text-decoration:none;">Asier Innovation</a> · Home Services Template</span>
+      <span><a href="../../first_iteration_site/">Get a website like this →</a></span>
     </div>
   </div>
 </footer>

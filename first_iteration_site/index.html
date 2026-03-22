@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asier Innovation — Professional Website Design &amp; Launch</title>
-  <!-- Calendly badge widget -->
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <!-- Calendly badge widget — loaded non-blocking to avoid render delay -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet"></noscript>
   <style>
     .calendly-badge-widget .calendly-badge-content {
       background: linear-gradient(160deg,
@@ -54,7 +55,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 300;
       height: 52px;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem;
+      padding: 0 1rem;
       background: rgba(0,0,0,0.72);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -75,7 +76,7 @@
     .nav.is-light .nav-logo { color: var(--ink); }
 
     .nav-links {
-      display: flex; gap: 2.2rem; list-style: none; align-items: center;
+      display: none; gap: 2.2rem; list-style: none; align-items: center;
       position: absolute; left: 50%; transform: translateX(-50%);
     }
     .nav-links a {
@@ -88,6 +89,7 @@
     .nav.is-light .nav-links a:hover { color: var(--text); }
 
     .nav-cta {
+      display: none;
       font-size: 0.8rem; font-weight: 600;
       color: rgba(255,255,255,0.6); text-decoration: none;
       transition: color 0.4s;
@@ -98,9 +100,9 @@
 
     .nav-right { display: flex; align-items: center; gap: 1rem; }
 
-    /* Hamburger button — hidden on desktop */
+    /* Hamburger button — shown on mobile, hidden on desktop */
     .nav-hamburger {
-      display: none;
+      display: flex;
       flex-direction: column; justify-content: center; align-items: center;
       width: 44px; height: 44px;
       background: none; border: none; cursor: pointer; padding: 0; gap: 5px;
@@ -152,7 +154,7 @@
       display: flex; align-items: center; justify-content: center;
       text-align: center;
       overflow: hidden;
-      padding: 9rem 2rem 7rem;
+      padding: 8rem 1.25rem 5rem;
     }
 
     /* Aurora blobs */
@@ -209,7 +211,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.8rem, 7.5vw, 6.8rem);
+      font-size: clamp(2.2rem, 8vw, 6.8rem);
       font-weight: 700; letter-spacing: -0.055em; line-height: 1.02;
       color: #f5f5f7;
       max-width: 14ch; margin: 0 auto 1.75rem;
@@ -262,14 +264,14 @@
     /* ─── STATS BAR ─── */
     .stats-bar { background: var(--bg-2); border-bottom: 1px solid var(--border); }
     .stats-row {
-      display: grid; grid-template-columns: repeat(4, 1fr);
+      display: grid; grid-template-columns: 1fr 1fr;
     }
     .stat-cell {
-      padding: 2.25rem 1.75rem; text-align: center;
-      border-right: 1px solid var(--border);
+      padding: 1.5rem 0.75rem; text-align: center;
+      border-bottom: 1px solid var(--border);
     }
-    .stat-cell:last-child { border-right: none; }
-    .stat-num { display: block; font-size: 2.1rem; font-weight: 700; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 0.2rem; }
+    .stat-cell:last-child { border-bottom: none; }
+    .stat-num { display: block; font-size: 1.7rem; font-weight: 700; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 0.2rem; }
     .stat-lbl { font-size: 0.8rem; color: var(--text-2); font-weight: 500; }
 
     /* ─── SECTION SHARED ─── */
@@ -291,13 +293,13 @@
     /* ─── SERVICES ─── */
     .services-sec { background: var(--bg); }
     .services-intro {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      display: grid; grid-template-columns: 1fr; gap: 2rem;
       align-items: end; margin-bottom: 3.5rem;
     }
     .services-intro .sec-p { max-width: 48ch; }
 
     .services-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
+      display: grid; grid-template-columns: 1fr;
       gap: 1.5px; background: var(--border);
       border: 1.5px solid var(--border); border-radius: 20px; overflow: hidden;
     }
@@ -317,7 +319,7 @@
     .showcase-head { margin-bottom: 3.5rem; }
 
     .showcase-stage {
-      display: grid; grid-template-columns: 48px 1fr 48px;
+      display: block; position: relative;
       gap: 1.25rem; align-items: center;
     }
     .sc-nav {
@@ -328,7 +330,8 @@
       transition: all 0.2s; backdrop-filter: blur(10px);
     }
     .sc-nav:hover { background: rgba(255,255,255,0.14); color: #fff; }
-    .sc-nav-row { display: contents; }
+    .sc-nav-row { display: block; position: absolute; top: 198px; transform: translateY(-50%); right: 0.75rem; z-index: 20; }
+    [data-showcase-prev] { position: absolute; top: 198px; transform: translateY(-50%); left: 0.75rem; z-index: 20; }
 
     .showcase-window {
       border-radius: 18px; overflow: hidden;
@@ -357,7 +360,7 @@
     }
     .sc-url-text { font-size: 0.75rem; color: rgba(255,255,255,0.28); font-family: ui-monospace, monospace; }
 
-    .sc-frame { position: relative; height: 460px; overflow: hidden; background: #fff; }
+    .sc-frame { position: relative; height: 340px; overflow: hidden; background: #fff; }
 
     /* Swipe capture overlay — invisible layer over the iframe */
     .sc-swipe-overlay {
@@ -436,7 +439,7 @@
     .process-sec { background: var(--bg-2); }
     .process-head { text-align: center; margin-bottom: 3.5rem; }
     .process-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
+      display: grid; grid-template-columns: 1fr;
       gap: 1.5px; background: var(--border);
       border: 1.5px solid var(--border); border-radius: 20px; overflow: hidden;
     }
@@ -447,14 +450,14 @@
     }
     .proc-step h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 0.6rem; }
     .proc-step p { font-size: 0.875rem; color: var(--text-2); line-height: 1.8; }
-    .proc-arrow { position: absolute; top: 2.85rem; right: -0.6rem; z-index: 1; color: #d1d1d6; font-size: 1rem; }
+    .proc-arrow { display: none; position: absolute; top: 2.85rem; right: -0.6rem; z-index: 1; color: #d1d1d6; font-size: 1rem; }
     .proc-step:last-child .proc-arrow { display: none; }
 
     /* ─── PRICING ─── */
     .pricing-sec { background: var(--bg); }
     .pricing-head { text-align: center; margin-bottom: 3.5rem; }
     .pricing-head .sec-p { max-width: 48ch; margin: 1rem auto 0; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
     .price-card {
       background: var(--bg-2); border-radius: 20px; padding: 2.25rem 2rem;
       border: 1.5px solid transparent;
@@ -464,7 +467,7 @@
     .price-card.featured {
       background: var(--ink); border-color: transparent;
       box-shadow: 0 24px 80px rgba(0,0,0,0.22);
-      transform: scale(1.025);
+      transform: none;
     }
     .price-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); display: block; margin-bottom: 1.25rem; }
     .price-card.featured .price-tag { color: rgba(255,255,255,0.4); }
@@ -518,7 +521,7 @@
 
     /* ─── CONTACT ─── */
     .contact-sec { background: var(--bg-2); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: start; }
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: start; }
     .contact-lhs h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 700; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 1rem; }
     .contact-lhs p { font-size: 0.95rem; color: var(--text-2); line-height: 1.78; }
     .contact-details { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.1rem; }
@@ -531,12 +534,12 @@
     .cd-t strong { display: block; font-size: 0.875rem; font-weight: 700; color: var(--ink); }
     .cd-t span { font-size: 0.82rem; color: var(--text-2); }
 
-    .form-box { background: #fff; border-radius: 20px; padding: 2.5rem; box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
+    .form-box { background: #fff; border-radius: 20px; padding: 1.25rem; box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
     .fg { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
     .fg label { font-size: 0.78rem; font-weight: 600; color: var(--text-2); }
     .fg input, .fg textarea {
       border: 1.5px solid rgba(0,0,0,0.1); border-radius: 10px;
-      padding: 0.875rem 1rem; font-size: 0.9rem; font-family: inherit;
+      padding: 0.875rem 1rem; font-size: 1rem; font-family: inherit;
       color: var(--text); background: #fff; width: 100%;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
@@ -545,7 +548,7 @@
       box-shadow: 0 0 0 4px rgba(0,113,227,0.12);
     }
     .fg textarea { min-height: 110px; resize: vertical; }
-    .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .fg-row { display: grid; grid-template-columns: 1fr; gap: 1rem; }
     .btn-submit {
       width: 100%; padding: 1rem; border: none; border-radius: 980px;
       background: var(--ink); color: #fff;
@@ -559,7 +562,7 @@
 
     /* ─── FOOTER ─── */
     .footer { background: #000; padding: 4rem 0 2.5rem; }
-    .footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem; }
+    .footer-main { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3.5rem; }
     .footer-logo-img { display: block; height: 32px; width: auto; margin-bottom: 0.85rem; filter: invert(1); opacity: 0.75; }
     .footer-brand-name { font-size: 0.95rem; font-weight: 700; color: #f5f5f7; margin-bottom: 0.6rem; }
     .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.38); line-height: 1.65; max-width: 26ch; }
@@ -574,48 +577,88 @@
     .footer-bottom a { color: inherit; text-decoration: none; }
     .footer-bottom a:hover { color: rgba(255,255,255,0.5); }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 960px) {
+    /* ─── RESPONSIVE (mobile-first) ─── */
+    @media (min-width: 376px) {
       .nav { padding: 0 1.25rem; }
-      .nav-links { display: none; }
-      .nav-cta { display: none; }
-      .nav-hamburger { display: flex; }
-      .services-intro { grid-template-columns: 1fr; gap: 2rem; }
-      .services-grid { grid-template-columns: 1fr; }
-      .showcase-stage { grid-template-columns: 40px 1fr 40px; }
-      .process-grid { grid-template-columns: 1fr; }
-      .proc-arrow { display: none; }
-      .pricing-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .price-card.featured { transform: none; }
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .footer-main { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-      .stat-cell { border-bottom: 1px solid var(--border); }
-    }
-    @media (max-width: 600px) {
-      .showcase-stage { display: block; position: relative; }
-      .sc-frame { height: 300px; }
-      /* Float nav buttons over the frame on mobile */
-      [data-showcase-prev],
-      .sc-nav-row {
-        position: absolute;
-        /* chrome bar ~48px + half frame 150px = 198px */
-        top: 198px; transform: translateY(-50%);
-        z-index: 20;
-      }
-      [data-showcase-prev] { left: 0.75rem; }
-      .sc-nav-row { right: 0.75rem; display: block; }
-      .fg-row { grid-template-columns: 1fr; }
-      .footer-main { grid-template-columns: 1fr; }
-      .stats-row { grid-template-columns: 1fr 1fr; }
+      .stat-cell { padding: 2.25rem 1.75rem; }
+      .stat-num { font-size: 2.1rem; }
+      .hero { padding: 9rem 2rem 7rem; }
       .form-box { padding: 1.75rem; }
     }
-    @media (max-width: 375px) {
-      .nav { padding: 0 1rem; }
-      .stat-cell { padding: 1.5rem 0.75rem; }
-      .stat-num { font-size: 1.7rem; }
-      .hero { padding: 8rem 1.25rem 5rem; }
-      .form-box { padding: 1.25rem; }
+    @media (min-width: 601px) {
+      /* Showcase: restore grid layout, float nav buttons back into grid flow */
+      .showcase-stage { display: grid; grid-template-columns: 40px 1fr 40px; position: static; }
+      .sc-frame { height: 460px; }
+      [data-showcase-prev] { position: static; top: auto; transform: none; }
+      .sc-nav-row { display: contents; position: static; top: auto; transform: none; }
+      .fg-row { grid-template-columns: 1fr 1fr; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .form-box { padding: 2rem; }
+    }
+    @media (min-width: 961px) {
+      .nav { padding: 0 2.5rem; }
+      .nav-links { display: flex; }
+      .nav-cta { display: inline; }
+      .nav-hamburger { display: none; }
+      .services-intro { grid-template-columns: 1fr 1fr; gap: 5rem; }
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+      .showcase-stage { grid-template-columns: 48px 1fr 48px; }
+      .process-grid { grid-template-columns: repeat(3, 1fr); }
+      .proc-arrow { display: block; }
+      .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+      .price-card.featured { transform: scale(1.025); }
+      .contact-grid { grid-template-columns: 1fr 1.1fr; gap: 5rem; }
+      .footer-main { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+      .stats-row { grid-template-columns: repeat(4, 1fr); }
+      .stat-cell { border-bottom: none; border-right: 1px solid var(--border); padding: 2.25rem 1.75rem; }
+      .stat-cell:last-child { border-right: none; border-bottom: none; }
+      .stat-num { font-size: 2.1rem; }
+      .form-box { padding: 2.5rem; }
+    }
+
+    /* ─── STICKY MOBILE CTA BAR ─── */
+    .mobile-cta-bar { display: none; }
+
+    @media (max-width: 960px) {
+      /* Full-width stacked hero buttons on phones */
+      .hero-actions { flex-direction: column; align-items: stretch; padding: 0 0.5rem; }
+      .btn-primary, .btn-ghost { text-align: center; }
+
+      /* Show contact form above the info block on mobile */
+      .form-box { order: -1; }
+
+      /* Sticky bottom CTA bar */
+      .mobile-cta-bar {
+        display: flex;
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+        padding: 0.875rem 1.25rem;
+        padding-bottom: calc(0.875rem + env(safe-area-inset-bottom, 0px));
+        background: rgba(0,0,0,0.94);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        gap: 0.75rem; align-items: center;
+      }
+      .mobile-cta-bar-book {
+        flex: 1; padding: 0.875rem 1rem;
+        background: #fff; color: #000;
+        border-radius: 980px; text-align: center; text-decoration: none;
+        font-size: 0.88rem; font-weight: 700; letter-spacing: -0.01em;
+        transition: background 0.2s;
+      }
+      .mobile-cta-bar-book:hover { background: #e8e8ed; }
+      .mobile-cta-bar-call {
+        width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%;
+        background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+        color: rgba(255,255,255,0.85); display: flex; align-items: center; justify-content: center;
+        text-decoration: none; font-size: 1.2rem;
+      }
+
+      /* Pad body so content isn't hidden behind sticky bar */
+      body { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px)); }
+
+      /* Hide Calendly badge on mobile — sticky bar replaces it */
+      .calendly-badge-widget { display: none !important; }
     }
   </style>
 </head>
@@ -660,7 +703,7 @@
   <div class="hero-content">
     <div class="hero-eyebrow">Asier Innovation &nbsp;·&nbsp; Digital Launch Studio</div>
     <h1>Your business<br>deserves a website<br>that <span class="grad">means business.</span></h1>
-    <p class="hero-sub">Professional websites for founders, service businesses, and local brands ready for a stronger online presence — built fast, built right.</p>
+    <p class="hero-sub">Professional, mobile-first websites for founders, service businesses, and local brands — designed to look and perform flawlessly on every phone, built fast, built right.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Book a website consult</a>
       <a href="#work" class="btn-ghost">See sample sites</a>
@@ -693,7 +736,7 @@
         <span class="chip">What we do</span>
         <h2 class="sec-h">Professional websites for businesses that want to look established from day one.</h2>
       </div>
-      <p class="sec-p">Clear structure, modern design, and room to grow — so your website works as a real business asset that helps people trust you faster.</p>
+      <p class="sec-p">Mobile-first design, clear structure, and room to grow — every site we build looks and performs flawlessly on phones first, then everywhere else.</p>
     </div>
 
     <div class="services-grid">
@@ -717,7 +760,7 @@
           </svg>
         </div>
         <h3>Brand-Led Design</h3>
-        <p>Layouts, colors, and messaging shaped around your business so the final site feels tailored and authoritative — not like every other site in your industry.</p>
+        <p>Layouts, colors, and messaging shaped around your business — and built mobile-first, so the site feels just as powerful on a phone as on any screen.</p>
       </div>
       <div class="svc-card">
         <span class="svc-n">03</span>
@@ -739,9 +782,9 @@
 <section class="showcase-sec" id="work">
   <div class="wrap">
     <div class="showcase-head">
-      <span class="chip">Live Sample Sites</span>
-      <h2 class="sec-h">See what we build.</h2>
-      <p class="sec-p">Every preview below is a fully working website — not a screenshot. Browse them exactly as your future clients would.</p>
+      <span class="chip">Design Concepts</span>
+      <h2 class="sec-h">See what's possible.</h2>
+      <p class="sec-p">Each preview is a fully working design concept — not a screenshot. Explore them to get inspired by what your website could look like and what it could do.</p>
     </div>
 
     <div class="showcase-stage">
@@ -797,9 +840,9 @@
         <!-- Info bar -->
         <div class="sc-info">
           <div class="sc-info-left">
-            <span class="sc-meta" id="showcaseMeta">Local Service</span>
+            <span class="sc-meta" id="showcaseMeta">Home Services — Design Concept</span>
             <div class="sc-title" id="showcaseTitle">BluePeak Home Systems</div>
-            <div class="sc-copy" id="showcaseCopy">A high-trust site for a home services business — urgent CTAs, service cards with icons, certifications, customer reviews, and a lead capture form.</div>
+            <div class="sc-copy" id="showcaseCopy">A design concept for home service businesses — tap-to-call emergency banner, service cards, customer reviews, trust certifications, and a mobile-first lead form.</div>
           </div>
           <div class="sc-info-right">
             <div class="sc-dots-row">
@@ -865,7 +908,7 @@
         <ul class="price-list">
           <li>Core homepage and service page structure</li>
           <li>Clean copy direction and visual styling</li>
-          <li>Mobile-responsive layout</li>
+          <li>Mobile-first responsive layout</li>
           <li>Launch-ready deployment support</li>
         </ul>
         <a href="#contact" class="btn-price btn-price-soft">Get a quote</a>
@@ -924,15 +967,27 @@
         <p>Fill in the form and I'll get back to you within one business day. The consult is free — it's just a conversation about what your business needs and how I can help you get there.</p>
         <div class="contact-details">
           <div class="cd">
-            <div class="cd-i">✉</div>
+            <div class="cd-i">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 7l8 5 8-5"/></svg>
+            </div>
             <div class="cd-t"><strong>Email</strong><span>hello@asierinnovation.com</span></div>
           </div>
           <div class="cd">
-            <div class="cd-i">⚡</div>
+            <div class="cd-i">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 4.5A1.5 1.5 0 014.5 3h1.379a1 1 0 01.958.713l.933 3.106a1 1 0 01-.285 1.02L6.2 9.154C7.29 11.38 9.62 13.71 11.846 14.8l1.315-1.285a1 1 0 011.02-.285l3.106.933A1 1 0 0118 15.121V16.5A1.5 1.5 0 0116.5 18C9.044 18 3 11.956 3 4.5z"/></svg>
+            </div>
+            <div class="cd-t"><strong>Phone</strong><span><a href="tel:5555550100" style="color:inherit;text-decoration:none;">(555) 555-0100</a></span></div>
+          </div>
+          <div class="cd">
+            <div class="cd-i">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2.5"/></svg>
+            </div>
             <div class="cd-t"><strong>Response time</strong><span>Within 1 business day</span></div>
           </div>
           <div class="cd">
-            <div class="cd-i">🌍</div>
+            <div class="cd-i">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="10" cy="10" r="7"/><path d="M3.5 7.5h13M3.5 12.5h13M10 3c-2 2-3 4.5-3 7s1 5 3 7M10 3c2 2 3 4.5 3 7s-1 5-3 7"/></svg>
+            </div>
             <div class="cd-t"><strong>Location</strong><span>Remote-first, available worldwide</span></div>
           </div>
         </div>
@@ -943,11 +998,11 @@
           <div class="fg-row">
             <div class="fg">
               <label>Full name</label>
-              <input type="text" name="name" placeholder="Your name" required>
+              <input type="text" name="name" placeholder="Your name" required autocomplete="name">
             </div>
             <div class="fg">
               <label>Email address</label>
-              <input type="email" name="email" placeholder="name@example.com" required>
+              <input type="email" name="email" placeholder="name@example.com" required autocomplete="email">
             </div>
           </div>
           <div class="fg">
@@ -983,7 +1038,7 @@
         <a href="#pricing">Pricing</a>
       </div>
       <div class="footer-col">
-        <h4>Sample Work</h4>
+        <h4>Design Concepts</h4>
         <a href="../sample-sites/local-service/index.html" target="_blank">Local Service</a>
         <a href="../sample-sites/consulting-studio/index.html" target="_blank">Consulting Studio</a>
         <a href="../sample-sites/restaurant-launch/index.html" target="_blank">Restaurant Launch</a>
@@ -994,6 +1049,7 @@
         <a href="#process">Our Process</a>
         <a href="#contact">Contact</a>
         <a href="mailto:hello@asierinnovation.com">Email us</a>
+        <a href="tel:5555550100">(555) 555-0100</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1033,36 +1089,36 @@
   // ─── Showcase carousel ───
   const showcaseItems = [
     {
-      meta: 'Local Service',
+      meta: 'Home Services — Design Concept',
       title: 'BluePeak Home Systems',
-      copy: 'A high-trust site for a home services business — urgent CTAs, service cards with icons, certifications, customer reviews, and a lead capture form.',
+      copy: 'A design concept for home service businesses — tap-to-call emergency banner, service cards, customer reviews, trust certifications, and a mobile-first lead form.',
       href: '../sample-sites/local-service/index.html',
       url: 'preview.asierinnovation.com/local-service',
-      frameTitle: 'Local service business sample preview'
+      frameTitle: 'Home services design concept preview'
     },
     {
-      meta: 'Consulting Brand',
+      meta: 'Professional Services — Design Concept',
       title: 'Northline Advisory',
-      copy: 'An authoritative site for a management consulting firm — editorial design, outcome-driven case studies, team profiles, and an engagement inquiry form.',
+      copy: 'A design concept for consulting and professional services — editorial layout, case study showcase, team profiles, and a high-trust engagement inquiry form.',
       href: '../sample-sites/consulting-studio/index.html',
       url: 'preview.asierinnovation.com/consulting',
-      frameTitle: 'Consulting studio sample preview'
+      frameTitle: 'Professional services design concept preview'
     },
     {
-      meta: 'Hospitality Launch',
+      meta: 'Hospitality & Dining — Design Concept',
       title: 'Solstice Table',
-      copy: 'A dark, atmospheric site for a fine dining restaurant — seasonal menu with tab navigation, a reservation form, and an immersive full-viewport hero.',
+      copy: 'A design concept for restaurants and hospitality — immersive full-screen hero, tabbed menu navigation, online reservation form, and tap-to-call integration.',
       href: '../sample-sites/restaurant-launch/index.html',
       url: 'preview.asierinnovation.com/restaurant',
-      frameTitle: 'Restaurant launch sample preview'
+      frameTitle: 'Hospitality and dining design concept preview'
     },
     {
-      meta: 'Creative Studio',
+      meta: 'Creative Studio — Design Concept',
       title: 'Axiom Tattoo Co.',
-      copy: 'A dark, editorial site for a custom tattoo artist — SVG gallery artwork, style specialties, consultation booking form, and a sticky mobile CTA.',
+      copy: 'A design concept for creative studios and artists — portfolio gallery, multi-step booking flow, FAQ accordion, and a sticky mobile book/call bar.',
       href: '../sample-sites/tattoo-studio/index.html',
       url: 'preview.asierinnovation.com/tattoo',
-      frameTitle: 'Tattoo studio sample preview'
+      frameTitle: 'Creative studio design concept preview'
     }
   ];
 
@@ -1198,5 +1254,11 @@
 <!-- Calendly badge widget -->
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/asierdevteam/30min', text: 'Schedule time with me', color: '#c0c0c0', textColor: '#1a1a1a', branding: true }); }</script>
+
+<!-- ─── STICKY MOBILE CTA BAR ─── -->
+<div class="mobile-cta-bar">
+  <a href="#contact" class="mobile-cta-bar-book">Book a free consult</a>
+  <a href="tel:5555550100" class="mobile-cta-bar-call" aria-label="Call us">📞</a>
+</div>
 </body>
 </html>
